@@ -1,0 +1,34 @@
+.root {
+}
+
+.root:focus-within {
+}
+
+.root input {
+  caret-color: blue;
+  appearance: none;
+  font-family: inherit;
+  font-size: max(16px, 1rem);
+  min-width: 0;
+  flex-grow: 1;
+  min-height: max(44px, 2em);
+  padding: 0 0.8em;
+  border: 4px solid currentColor;
+}
+
+.root input:focus {
+  border-radius: 0;
+  outline: 4px solid currentColor;
+  outline-offset: calc(4px * 1.1);
+}
+.root input::-webkit-input-placeholder {
+  color: grey;
+}
+.root input::-ms-input-placeholder {
+  color: grey;
+}
+
+.root label::after {
+  content: "\A";
+  white-space: pre;
+}

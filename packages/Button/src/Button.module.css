@@ -1,0 +1,68 @@
+.root {
+  display: inline-flex;
+  align-self: start;
+  align-items: center;
+
+  min-height: max(44px, 2em);
+  padding: 0 0.8em;
+  background-color: #f9f9f9;
+  border: 4px solid currentColor;
+  outline: none;
+
+  color: inherit;
+  font: inherit;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: inherit;
+
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+.root.icon {
+  height: max(44px, 2em);
+  width: max(44px, 2em);
+  padding: 0;
+}
+
+.stretch {
+  width: 100%;
+}
+
+.root:focus,
+.root.ring,
+.root:focus-visible {
+  outline: 4px solid currentColor;
+  outline-offset: calc(4px * 1.1);
+}
+
+.root:disabled,
+.root[disabled] {
+  opacity: 0.8;
+  cursor: no-drop;
+}
+
+.root.text {
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border: none;
+  font-weight: bold;
+}
+.root.text.ring,
+.root.text:focus-visible {
+  outline-color: transparent !important;
+}
+
+@media screen and (forced-colors: active) {
+  /* https://blogs.windows.com/msedgedev/2020/09/17/styling-for-windows-high-contrast-with-new-standards-for-forced-colors/ */
+  .root {
+    forced-color-adjust: none;
+    color: CanvasText;
+  }
+}
+
+.root svg {
+  pointer-events: none;
+}

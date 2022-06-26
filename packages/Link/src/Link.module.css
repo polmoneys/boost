@@ -1,0 +1,54 @@
+.root {
+  display: inline-flex;
+  align-self: start;
+  align-items: center;
+
+  color: inherit;
+  font: inherit;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: inherit;
+  letter-spacing: inherit;
+
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+a:is(:not([class]), :not:visited, :not:hover) {
+  hyphens: none;
+  text-decoration: underline;
+  text-decoration-skip-ink: auto;
+  text-decoration-thickness: 0.04em;
+  text-underline-offset: 0.03em;
+}
+a:is(:visited, :hover) {
+  /* color: var(--color); */
+  touch-action: manipulation;
+}
+@media (prefers-color-scheme: dark) {
+  @supports (-webkit-hyphens: none) {
+    a[href] {
+      /* color: var(--color); */
+    }
+  }
+}
+a:focus {
+  outline: none;
+}
+
+.root.button:focus,
+.root.button.ring,
+.root.button:focus-visible {
+  outline: 4px solid currentColor;
+  outline-offset: calc(4px * 1.1);
+}
+
+.root.button {
+  min-height: max(44px, 2em);
+  outline: none;
+  border: 4px solid currentColor;
+  padding: 0 0.8em;
+  text-decoration: none;
+  background-color: #f9f9f9;
+}

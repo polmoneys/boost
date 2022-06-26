@@ -1,0 +1,17 @@
+(function(s,u){typeof exports=="object"&&typeof module!="undefined"?u(exports,require("react")):typeof define=="function"&&define.amd?define(["exports","react"],u):(s=typeof globalThis!="undefined"?globalThis:s||self,u(s.Input={},s.React))})(this,function(s,u){"use strict";function R(o){return o&&typeof o=="object"&&"default"in o?o:{default:o}}var v=R(u),h={exports:{}},d={};/**
+ * @license React
+ * react-jsx-runtime.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */var T=v.default,I=Symbol.for("react.element"),w=Symbol.for("react.fragment"),E=Object.prototype.hasOwnProperty,S=T.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.ReactCurrentOwner,k={key:!0,ref:!0,__self:!0,__source:!0};function O(o,r,l){var e,n={},i=null,t=null;l!==void 0&&(i=""+l),r.key!==void 0&&(i=""+r.key),r.ref!==void 0&&(t=r.ref);for(e in r)E.call(r,e)&&!k.hasOwnProperty(e)&&(n[e]=r[e]);if(o&&o.defaultProps)for(e in r=o.defaultProps,r)n[e]===void 0&&(n[e]=r[e]);return{$$typeof:I,type:o,key:i,ref:t,props:n,_owner:S.current}}d.Fragment=w,d.jsx=O,d.jsxs=O,h.exports=d;const C=h.exports.jsx;function N(o){const{children:r,as:l,gap:e="1em",size:n="320px",css:i="flex",options:t,DONOTUse:a,...m}=o,f=i==="flex",x=u.useMemo(()=>{var _;return f?{display:"flex",gap:e,flexDirection:(_=t==null?void 0:t.direction)!=null?_:"row",...(t==null?void 0:t.stretch)&&{width:"100%"},...(t==null?void 0:t.alignItems)&&{alignItems:t==null?void 0:t.alignItems},...(t==null?void 0:t.justifyContent)&&{justifyContent:t==null?void 0:t.justifyContent},...(t==null?void 0:t.wrap)&&{flexWrap:t.wrap},...n!=="320px"&&{flex:`1 0 ${n}`}}:{display:"grid",gap:e,gridTemplateColumns:`repeat(auto-fit, minmax(min(100%,${n}), 1fr))`,...(t==null?void 0:t.stretch)&&{width:"100%"}}},[f]);return C(l||"div",{...m,style:{...a!==void 0&&{...a.DONOTStyle},...x},children:r})}var P={root:"rv"},y={exports:{}},p={};/**
+ * @license React
+ * react-jsx-runtime.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */var D=v.default,F=Symbol.for("react.element"),L=Symbol.for("react.fragment"),U=Object.prototype.hasOwnProperty,M=D.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.ReactCurrentOwner,q={key:!0,ref:!0,__self:!0,__source:!0};function j(o,r,l){var e,n={},i=null,t=null;l!==void 0&&(i=""+l),r.key!==void 0&&(i=""+r.key),r.ref!==void 0&&(t=r.ref);for(e in r)U.call(r,e)&&!q.hasOwnProperty(e)&&(n[e]=r[e]);if(o&&o.defaultProps)for(e in r=o.defaultProps,r)n[e]===void 0&&(n[e]=r[e]);return{$$typeof:F,type:o,key:i,ref:t,props:n,_owner:M.current}}p.Fragment=L,p.jsx=j,p.jsxs=j,y.exports=p;const g=y.exports.jsx,W=y.exports.jsxs;function A(o){const{children:r,autoFocus:l,onChange:e,value:n,autocomplete:i="off",enterkeyhint:t="next",inputmode:a="text",type:m="text",placeholder:f="Type ",errorElementId:x="",onChangeValue:c,id:_,label:B,...J}=o,Y=$=>{const b=$.target.value;b.length>2&&(c==null||c(b),e==null||e($))};return W(N,{as:"div",options:{direction:"column",alignItems:"flex-start"},className:P.root,children:[g("label",{htmlFor:_,children:B}),g("input",{type:m,defaultValue:n,autoComplete:i,enterKeyHint:t,inputMode:a,"aria-describedby":x,onChange:Y,...f&&{placeholder:f},...J})]})}s.Input=A,Object.defineProperties(s,{__esModule:{value:!0},[Symbol.toStringTag]:{value:"Module"}})});

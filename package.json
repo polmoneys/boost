@@ -1,0 +1,10 @@
+{
+  "name": "template-react",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "packages/*",
+      "demo"
+    ]
+  }
+}
