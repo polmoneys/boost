@@ -1,6 +1,6 @@
 import { useState, Fragment, useEffect } from "react";
 import { Sticky } from "sticky-react";
-import { Unit } from "unit-react";
+import { Shape } from "shape-react";
 import { Fence } from "fence-react";
 import { Group } from "group-react";
 import { Link } from "link-react";
@@ -117,10 +117,10 @@ function App() {
             justifyContent: "center",
           }}
         >
-          <div className="circle" />
-          <div className="circle" />
-          <div className="circle" />
-          <div className="circle" />
+          <Shape.Triangle />
+          <Shape.Circle />
+          <Shape.Square />
+          <Shape sides={5} />
         </Group>
 
         <li className="white-space"></li>
@@ -165,14 +165,7 @@ function App() {
               justifyContent: "center",
             }}
           >
-            <svg viewBox="0 0 200 200" width="200" height="200">
-              <circle
-                cx={"50%"}
-                cy={"50%"}
-                r={100}
-                fill={hasExploded ? "#212121" : "#f1e9bf"}
-              />
-            </svg>
+            <Shape sides={hasExploded ? 5 : 3} size={200} />
           </Group>
         </Fence>
       </Group>

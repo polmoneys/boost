@@ -88,7 +88,6 @@ li {
   padding: 3.5em var(--gap-3) var(--gap-3) var(--gap-3);
 }
 
-.circle,
 .badge {
   width: 50px;
   aspect-ratio: 1;
