@@ -1,0 +1,1 @@
+._7-{display:grid;grid-template-areas:"stack";width:fit-content;place-items:center}._7-.Ix{place-items:start}._7-._3V{place-items:end}._7->*{grid-area:stack}._7->*:first-child{position:relative}._7->*[aria-hidden=true]{visibility:hidden!important}

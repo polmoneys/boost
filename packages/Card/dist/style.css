@@ -1,0 +1,1 @@
+.iR{border:2px solid currentColor;word-break:break-word;hyphens:auto;--card-ratio: 9/16;position:relative;padding-top:calc((1 / (var(--card-ratio))) * 100%)}@supports (aspect-ratio: 1){.iR{aspect-ratio:var(--card-ratio);padding-top:initial}}
