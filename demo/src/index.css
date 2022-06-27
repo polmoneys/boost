@@ -54,6 +54,9 @@ h1 {
   letter-spacing: 0em;
   color: var(--strong);
 }
+h2 {
+  padding: var(--gap-1) var(--gap-1) 0 var(--gap-1);
+}
 main {
   font-family: sans-serif;
   text-align: center;
@@ -109,4 +112,8 @@ li {
 .accent-bg {
   background-color: var(--strong);
   color: #f1e9bf;
+}
+
+.full-width {
+  width: 100%;
 }

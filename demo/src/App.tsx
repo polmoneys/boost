@@ -7,12 +7,20 @@ import { Link } from "link-react";
 import { Button } from "button-react";
 import { Trap } from "trap-react";
 import { Input } from "input-react";
+import { Card } from "card-react";
+import { Layers } from "layers-react";
+
 import "../../packages/Input/dist/style.css";
 import "../../packages/Button/dist/style.css";
 import "../../packages/Link/dist/style.css";
+import "../../packages/Link/dist/style.css";
+import "../../packages/Card/dist/style.css";
+import "../../packages/CardMedia/dist/style.css";
+import "../../packages/Layers/dist/style.css";
 
 function App() {
   const [hasExploded, setDetonation] = useState(false);
+  const [tab, setTab] = useState(true);
   const [isOpen, setOpen] = useState(false);
   const [inputValue, setInput] = useState("");
 
@@ -122,9 +130,26 @@ function App() {
           <Shape.Square />
           <Shape sides={5} />
         </Group>
-
-        <li className="white-space"></li>
-        <li className="white-space"></li>
+        <Layers as="li" className="full-width">
+          <Group
+            as="div"
+            gap="2em"
+            options={{ direction: "column", alignItems: "center" }}
+            aria-hidden={tab ? false : true}
+          >
+            <Button onClick={() => setTab(prev => !prev)}>Show Circle</Button>
+            <Shape.Triangle />
+          </Group>
+          <Group
+            as="div"
+            gap="2em"
+            options={{ direction: "column", alignItems: "center" }}
+            aria-hidden={!tab ? false : true}
+          >
+            <Button onClick={() => setTab(prev => !prev)}>Show Triangle</Button>
+            <Shape.Circle />
+          </Group>
+        </Layers>
         <Group
           as="li"
           options={{
@@ -141,6 +166,63 @@ function App() {
             pantocrator. Lorem anae shandy cante oremus.
           </p>
         </Group>
+        <li className="white-space"></li>
+
+        <Group as="li" css="grid" size="250px">
+          <Card as="article" ratio="square">
+            <h2>Card Title</h2>
+            <Card.Media
+              src="https://images.unsplash.com/34/BA1yLjNnQCI1yisIZGEi_2013-07-16_1922_IMG_9873.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
+              height="100%"
+              alt=""
+            />
+          </Card>
+          <Card as="article" ratio="square">
+            <h2>Card Title</h2>
+            <Card.Media
+              src="https://images.unsplash.com/34/BA1yLjNnQCI1yisIZGEi_2013-07-16_1922_IMG_9873.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
+              height="100%"
+              alt=""
+            />
+          </Card>
+        </Group>
+        <Group as="li" css="grid" size="250px">
+          <Card as="article" ratio="landscape">
+            <h2>Card Title</h2>
+            <Card.Media
+              src="https://images.unsplash.com/34/BA1yLjNnQCI1yisIZGEi_2013-07-16_1922_IMG_9873.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
+              height="100%"
+              alt=""
+            />
+          </Card>
+          <Card as="article" ratio="landscape">
+            <h2>Card Title</h2>
+            <Card.Media
+              src="https://images.unsplash.com/34/BA1yLjNnQCI1yisIZGEi_2013-07-16_1922_IMG_9873.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
+              height="100%"
+              alt=""
+            />
+          </Card>
+        </Group>
+        <Group as="li" css="grid" size="250px">
+          <Card as="article" ratio="portrait">
+            <h2>Card Title</h2>
+            <Card.Media
+              src="https://images.unsplash.com/34/BA1yLjNnQCI1yisIZGEi_2013-07-16_1922_IMG_9873.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
+              height="100%"
+              alt=""
+            />
+          </Card>
+          <Card as="article" ratio="portrait">
+            <h2>Card Title</h2>
+            <Card.Media
+              src="https://images.unsplash.com/34/BA1yLjNnQCI1yisIZGEi_2013-07-16_1922_IMG_9873.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
+              height="100%"
+              alt=""
+            />
+          </Card>
+        </Group>
+
         <li className="white-space"></li>
         <li className="white-space"></li>
 
