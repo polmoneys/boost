@@ -1,0 +1,38 @@
+import Options from "./Interfaces/Options";
+declare class Scroller {
+    options: Options;
+    containerTag: HTMLElement;
+    sliderTag: HTMLElement;
+    sliderTagLeft: number;
+    sliderTagRight: number;
+    dragSpeed: number;
+    smoothAmount: number;
+    down: boolean;
+    startX: number;
+    scrollLeft: number;
+    isAnimating: boolean;
+    x: number;
+    dist: number;
+    scrollAmount: number;
+    stopAnimation: boolean;
+    animationRef: any;
+    scrollWidth: number;
+    constructor(options: Options);
+    getScrollWidth: () => number;
+    callCallback: (type: string, value: number | null) => void;
+    getEvent: (event: any) => MouseEvent;
+    checkCallbackType: (option: any) => boolean;
+    mousedown: (e: Event) => void;
+    mouseleave: () => void;
+    mouseup: () => void;
+    mousemove: (e: Event) => void;
+    transformElement: () => void;
+    map: (value: number, x1: number, y1: number, x2: number, y2: number) => number;
+    getFloatNumber: (value: any, defaultValue: number, min: number, max: number) => number;
+    anime: () => void;
+    lerp: (start: number, end: number, alpha: number) => number;
+    setRelativePosition: (x: number) => void;
+    init: () => void;
+    destroy: () => void;
+}
+export default Scroller;

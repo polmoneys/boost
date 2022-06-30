@@ -1,0 +1,18 @@
+.root {
+  width: 100%;
+  overflow-x: hidden;
+}
+.scrolling {
+  --brightness: 0.95;
+  --saturate: 1.25;
+  filter: brightness(var(--brightness)) saturate(var(--saturate));
+  opacity: 0.9;
+}
+
+.viewport {
+  display: flex;
+  backface-visibility: hidden;
+  -webkit-overflow-scrolling: touch;
+  cursor: grab;
+  user-select: none;
+}
