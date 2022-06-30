@@ -1,4 +1,11 @@
-import { useState, Fragment, useEffect } from "react";
+import {
+  useState,
+  Fragment,
+  useEffect,
+  useMemo,
+  useCallback,
+  ChangeEvent,
+} from "react";
 import { Sticky } from "sticky-react";
 import { Shape } from "shape-react";
 import { Fence } from "fence-react";
@@ -9,6 +16,7 @@ import { Trap } from "trap-react";
 import { Input } from "input-react";
 import { Card } from "card-react";
 import { Layers } from "layers-react";
+import { Track } from "track-react";
 
 import "../../packages/Input/dist/style.css";
 import "../../packages/Button/dist/style.css";
@@ -17,6 +25,7 @@ import "../../packages/Link/dist/style.css";
 import "../../packages/Card/dist/style.css";
 import "../../packages/CardMedia/dist/style.css";
 import "../../packages/Layers/dist/style.css";
+import "../../packages/Track/dist/style.css";
 
 function App() {
   const [hasExploded, setDetonation] = useState(false);
@@ -27,6 +36,9 @@ function App() {
   // useEffect(() => {
   //   console.log({ usefx: inputValue });
   // }, [inputValue]);
+  // useEffect(() => {
+  //   console.log({ usefx: checkboxValue });
+  // }, [checkboxValue]);
 
   return (
     <main>
@@ -72,10 +84,8 @@ function App() {
           <Group
             as="form"
             gap="var(--gap-3)"
-            size="400px"
             options={{
-              wrap: "wrap",
-              alignItems: "flex-end",
+              direction: "column",
             }}
           >
             <Input
@@ -168,60 +178,131 @@ function App() {
         </Group>
         <li className="white-space"></li>
 
-        <Group as="li" css="grid" size="250px">
-          <Card as="article" ratio="square">
-            <h2>Card Title</h2>
-            <Card.Media
-              src="https://images.unsplash.com/34/BA1yLjNnQCI1yisIZGEi_2013-07-16_1922_IMG_9873.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
-              height="100%"
-              alt=""
-            />
-          </Card>
-          <Card as="article" ratio="square">
-            <h2>Card Title</h2>
-            <Card.Media
-              src="https://images.unsplash.com/34/BA1yLjNnQCI1yisIZGEi_2013-07-16_1922_IMG_9873.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
-              height="100%"
-              alt=""
-            />
-          </Card>
-        </Group>
-        <Group as="li" css="grid" size="250px">
-          <Card as="article" ratio="landscape">
-            <h2>Card Title</h2>
-            <Card.Media
-              src="https://images.unsplash.com/34/BA1yLjNnQCI1yisIZGEi_2013-07-16_1922_IMG_9873.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
-              height="100%"
-              alt=""
-            />
-          </Card>
-          <Card as="article" ratio="landscape">
-            <h2>Card Title</h2>
-            <Card.Media
-              src="https://images.unsplash.com/34/BA1yLjNnQCI1yisIZGEi_2013-07-16_1922_IMG_9873.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
-              height="100%"
-              alt=""
-            />
-          </Card>
-        </Group>
-        <Group as="li" css="grid" size="250px">
-          <Card as="article" ratio="portrait">
-            <h2>Card Title</h2>
-            <Card.Media
-              src="https://images.unsplash.com/34/BA1yLjNnQCI1yisIZGEi_2013-07-16_1922_IMG_9873.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
-              height="100%"
-              alt=""
-            />
-          </Card>
-          <Card as="article" ratio="portrait">
-            <h2>Card Title</h2>
-            <Card.Media
-              src="https://images.unsplash.com/34/BA1yLjNnQCI1yisIZGEi_2013-07-16_1922_IMG_9873.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
-              height="100%"
-              alt=""
-            />
-          </Card>
-        </Group>
+        <li>
+          <Track as="div" maskSize="1400px">
+            <Card as="article" ratio="square">
+              <h2>Card Title</h2>
+              <Card.Media
+                src="https://images.unsplash.com/34/BA1yLjNnQCI1yisIZGEi_2013-07-16_1922_IMG_9873.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
+                height="100%"
+                alt=""
+              />
+            </Card>
+            <Card as="article" ratio="square">
+              <h2>Card Title</h2>
+              <Card.Media
+                src="https://images.unsplash.com/34/BA1yLjNnQCI1yisIZGEi_2013-07-16_1922_IMG_9873.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
+                height="100%"
+                alt=""
+              />
+            </Card>
+            <Card as="article" ratio="square">
+              <h2>Card Title</h2>
+              <Card.Media
+                src="https://images.unsplash.com/34/BA1yLjNnQCI1yisIZGEi_2013-07-16_1922_IMG_9873.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
+                height="100%"
+                alt=""
+              />
+            </Card>
+            <Card as="article" ratio="square">
+              <h2>Card Title</h2>
+              <Card.Media
+                src="https://images.unsplash.com/34/BA1yLjNnQCI1yisIZGEi_2013-07-16_1922_IMG_9873.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
+                height="100%"
+                alt=""
+              />
+            </Card>
+            <Card as="article" ratio="square">
+              <h2>Card Title</h2>
+              <Card.Media
+                src="https://images.unsplash.com/34/BA1yLjNnQCI1yisIZGEi_2013-07-16_1922_IMG_9873.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
+                height="100%"
+                alt=""
+              />
+            </Card>
+            <Card as="article" ratio="square">
+              <h2>Card Title</h2>
+              <Card.Media
+                src="https://images.unsplash.com/34/BA1yLjNnQCI1yisIZGEi_2013-07-16_1922_IMG_9873.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
+                height="100%"
+                alt=""
+              />
+            </Card>
+          </Track>
+        </li>
+        <li>
+          <Track as="div" maskSize="1400px">
+            <Card as="article" ratio="landscape">
+              <h2>Card Title</h2>
+              <Card.Media
+                src="https://images.unsplash.com/34/BA1yLjNnQCI1yisIZGEi_2013-07-16_1922_IMG_9873.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
+                height="100%"
+                alt=""
+              />
+            </Card>
+            <Card as="article" ratio="landscape">
+              <h2>Card Title</h2>
+              <Card.Media
+                src="https://images.unsplash.com/34/BA1yLjNnQCI1yisIZGEi_2013-07-16_1922_IMG_9873.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
+                height="100%"
+                alt=""
+              />
+            </Card>
+
+            <Card as="article" ratio="landscape">
+              <h2>Card Title</h2>
+              <Card.Media
+                src="https://images.unsplash.com/34/BA1yLjNnQCI1yisIZGEi_2013-07-16_1922_IMG_9873.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
+                height="100%"
+                alt=""
+              />
+            </Card>
+            <Card as="article" ratio="landscape">
+              <h2>Card Title</h2>
+              <Card.Media
+                src="https://images.unsplash.com/34/BA1yLjNnQCI1yisIZGEi_2013-07-16_1922_IMG_9873.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
+                height="100%"
+                alt=""
+              />
+            </Card>
+          </Track>
+        </li>
+        <li>
+          <Track as="div" maskSize="1400px">
+            <Card as="article" ratio="portrait">
+              <h2>Card Title</h2>
+              <Card.Media
+                src="https://images.unsplash.com/34/BA1yLjNnQCI1yisIZGEi_2013-07-16_1922_IMG_9873.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
+                height="100%"
+                alt=""
+              />
+            </Card>
+            <Card as="article" ratio="portrait">
+              <h2>Card Title</h2>
+              <Card.Media
+                src="https://images.unsplash.com/34/BA1yLjNnQCI1yisIZGEi_2013-07-16_1922_IMG_9873.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
+                height="100%"
+                alt=""
+              />
+            </Card>
+            <Card as="article" ratio="portrait">
+              <h2>Card Title</h2>
+              <Card.Media
+                src="https://images.unsplash.com/34/BA1yLjNnQCI1yisIZGEi_2013-07-16_1922_IMG_9873.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
+                height="100%"
+                alt=""
+              />
+            </Card>
+            <Card as="article" ratio="portrait">
+              <h2>Card Title</h2>
+              <Card.Media
+                src="https://images.unsplash.com/34/BA1yLjNnQCI1yisIZGEi_2013-07-16_1922_IMG_9873.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
+                height="100%"
+                alt=""
+              />
+            </Card>
+          </Track>
+        </li>
 
         <li className="white-space"></li>
         <li className="white-space"></li>

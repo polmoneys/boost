@@ -117,3 +117,7 @@ li {
 .full-width {
   width: 100%;
 }
+
+.track {
+  width: 1200px;
+}

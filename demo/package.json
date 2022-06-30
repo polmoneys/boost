@@ -20,7 +20,8 @@
     "shape-react": "*",
     "layers-react": "*",
     "card-react": "*",
-    "card-media-react": "*"
+    "card-media-react": "*",
+    "track-react": "*"
   },
   "devDependencies": {
     "@types/react": "^18.0.0",
