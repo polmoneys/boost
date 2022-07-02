@@ -11,11 +11,12 @@ export default defineConfig({
       fileName: format => `unit-react.${format}.js`,
     },
     rollupOptions: {
-      external: ["react", "react-dom"],
+      external: ["react", "react-dom", "@react-aria/focus"],
       output: {
         globals: {
           react: "React",
           "react-dom": "ReactDOM",
+          "@react-aria/focus": "ReactAriaFocus",
         },
       },
     },

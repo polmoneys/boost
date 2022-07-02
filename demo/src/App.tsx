@@ -6,6 +6,7 @@ import {
   useCallback,
   ChangeEvent,
 } from "react";
+import { FiMinus, FiCheck } from "react-icons/fi";
 import { Sticky } from "sticky-react";
 import { Shape } from "shape-react";
 import { Fence } from "fence-react";
@@ -17,6 +18,7 @@ import { Input } from "input-react";
 import { Card } from "card-react";
 import { Layers } from "layers-react";
 import { Track } from "track-react";
+import { Radio } from "radio-react";
 
 import "../../packages/Input/dist/style.css";
 import "../../packages/Button/dist/style.css";
@@ -26,12 +28,23 @@ import "../../packages/Card/dist/style.css";
 import "../../packages/CardMedia/dist/style.css";
 import "../../packages/Layers/dist/style.css";
 import "../../packages/Track/dist/style.css";
+import "../../packages/Radio/dist/style.css";
 
+type StatusMachine = "draft" | "live" | "unknown" | "publishe";
 function App() {
   const [hasExploded, setDetonation] = useState(false);
   const [tab, setTab] = useState(true);
   const [isOpen, setOpen] = useState(false);
   const [inputValue, setInput] = useState("");
+  const [publishStatus, setStatus] = useState<StatusMachine>("draft");
+  const [publishStatusMultiple, setStatusMultiple] = useState<
+    Array<"draft" | "live" | "unknown" | "none">
+  >([]);
+
+  const onStatusChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
+    setStatus(value as "draft" | "live" | "unknown");
+  };
 
   // useEffect(() => {
   //   console.log({ usefx: inputValue });
@@ -102,6 +115,60 @@ function App() {
             />
           </Group>
         </li>
+        <li>
+          <Radio.Group
+            initial={publishStatus}
+            onChange={(selection: string) =>
+              setStatus(selection as StatusMachine)
+            }
+            gap=".4em"
+            renderLabel={({
+              checked,
+              checkboxLabel,
+            }: {
+              checked: boolean;
+              checkboxLabel: string;
+            }) => (
+              <Fragment>
+                {checked ? <FiCheck size={48} /> : <FiMinus size={48} />}
+                {checkboxLabel}
+              </Fragment>
+            )}
+          >
+            <Radio name="draft" value="draft" id="radio-draft" />
+            <Radio name="live" value="live" id="radio-live" />
+            <Radio name="unknown" value="unknown" id="radio-unknown" />
+            <Radio name="published" value="published" id="radio-published" />
+          </Radio.Group>
+        </li>
+        <li>
+          <Radio.Group
+            checkboxSize={"200px"}
+            initial={publishStatus}
+            gap=".4em"
+            onChange={(selection: string) =>
+              setStatus(selection as StatusMachine)
+            }
+            renderLabel={({
+              checked,
+              checkboxLabel,
+            }: {
+              checked: boolean;
+              checkboxLabel: string;
+            }) => (
+              <Fragment>
+                {checked ? <FiCheck size={48} /> : <FiMinus size={48} />}
+                {checkboxLabel}
+              </Fragment>
+            )}
+          >
+            <Radio name="draft" value="draft" id="radio-draft" />
+            <Radio name="live" value="live" id="radio-live" />
+            <Radio name="unknown" value="unknown" id="radio-unknown" />
+            <Radio name="published" value="published" id="radio-published" />
+          </Radio.Group>
+        </li>
+
         <Group
           as="li"
           options={{

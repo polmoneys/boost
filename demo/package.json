@@ -8,20 +8,22 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "unit-react": "*",
+    "button-react": "*",
+    "card-media-react": "*",
+    "card-react": "*",
     "fence-react": "*",
     "group-react": "*",
-    "link-react": "*",
-    "button-react": "*",
     "input-react": "*",
-    "sticky-react": "*",
-    "shape-react": "*",
     "layers-react": "*",
-    "card-react": "*",
-    "card-media-react": "*",
-    "track-react": "*"
+    "link-react": "*",
+    "radio-react": "*",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-icons": "^4.4.0",
+    "shape-react": "*",
+    "sticky-react": "*",
+    "track-react": "*",
+    "unit-react": "*"
   },
   "devDependencies": {
     "@types/react": "^18.0.0",
