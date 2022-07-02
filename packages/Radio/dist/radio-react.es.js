@@ -166,7 +166,7 @@ function RadioGroup(props) {
   });
 }
 function Radio(props) {
-  var _a;
+  var _a, _b;
   if (props === void 0)
     return /* @__PURE__ */ jsx(Fragment, {});
   const {
@@ -183,7 +183,7 @@ function Radio(props) {
     children: label
   }) : renderLabel == null ? void 0 : renderLabel({
     checked: (_a = props == null ? void 0 : props.checked) != null ? _a : false,
-    checkboxLabel: props.label
+    checkboxLabel: (_b = props.label) != null ? _b : ""
   });
   const classNames = [styles.radio, checked2 && styles.checked].filter(Boolean).join(" ");
   return /* @__PURE__ */ jsx(Group, {

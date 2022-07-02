@@ -4,7 +4,7 @@ import RadioGroup from "./RadioGroup";
 export interface RadioProps extends ComponentProps<"input"> {
     onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
     id: string;
-    label: string;
+    label?: string;
     renderLabel?: RenderProp<{
         checked: boolean;
         checkboxLabel: string;

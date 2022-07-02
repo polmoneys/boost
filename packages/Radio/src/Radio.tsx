@@ -8,7 +8,7 @@ import RadioGroup from "./RadioGroup";
 export interface RadioProps extends ComponentProps<"input"> {
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   id: string;
-  label: string;
+  label?: string;
   renderLabel?: RenderProp<
     { checked: boolean; checkboxLabel: string },
     HTMLElement
@@ -37,7 +37,7 @@ function Radio(props?: RadioProps) {
     ) : (
       renderLabel?.({
         checked: props?.checked ?? false,
-        checkboxLabel: props.label,
+        checkboxLabel: props.label ?? "",
       })
     );
 
