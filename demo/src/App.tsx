@@ -6,7 +6,14 @@ import {
   useCallback,
   ChangeEvent,
 } from "react";
-import { FiMinus, FiCheck } from "react-icons/fi";
+import {
+  FiMinus,
+  FiCheck,
+  FiX,
+  FiGitBranch,
+  FiGitCommit,
+  FiGitMerge,
+} from "react-icons/fi";
 import { Sticky } from "sticky-react";
 import { Shape } from "shape-react";
 import { Fence } from "fence-react";
@@ -19,6 +26,7 @@ import { Card } from "card-react";
 import { Layers } from "layers-react";
 import { Track } from "track-react";
 import { Radio } from "radio-react";
+import { Options } from "options-react";
 
 import "../../packages/Input/dist/style.css";
 import "../../packages/Button/dist/style.css";
@@ -29,8 +37,10 @@ import "../../packages/CardMedia/dist/style.css";
 import "../../packages/Layers/dist/style.css";
 import "../../packages/Track/dist/style.css";
 import "../../packages/Radio/dist/style.css";
+import "../../packages/Options/dist/style.css";
+import "@szhsin/react-menu/dist/index.css";
 
-type StatusMachine = "draft" | "live" | "unknown" | "publishe";
+type StatusMachine = "draft" | "live" | "unknown" | "published";
 function App() {
   const [hasExploded, setDetonation] = useState(false);
   const [tab, setTab] = useState(true);
@@ -56,7 +66,7 @@ function App() {
   return (
     <main>
       <h1>Attempt #5872046752 </h1>
-      <Group as="ul" gap="2em" css="grid" size="480px">
+      <Group as="ul" gap="2em" css="grid" size="480px" className="demo">
         <Group
           as="li"
           gap="var(--gap-3)"
@@ -91,6 +101,26 @@ function App() {
               <path d="M72 6.926a29.512 29.512 0 01-8.484 2.326 14.816 14.816 0 006.495-8.172 29.572 29.572 0 01-9.38 3.584A14.752 14.752 0 0049.847 0C40.314 0 33.304 8.898 35.46 18.138 23.183 17.522 12.298 11.64 5.013 2.704c-3.87 6.638-2.008 15.325 4.57 19.721a14.706 14.706 0 01-6.69-1.847c-.16 6.843 4.744 13.243 11.848 14.67a14.8 14.8 0 01-6.67.253c1.879 5.868 7.334 10.14 13.798 10.258C15.66 50.626 7.837 52.8 0 51.876a41.811 41.811 0 0022.643 6.637c27.426 0 42.92-23.164 41.986-43.94A30.009 30.009 0 0072 6.926z"></path>
             </svg>
           </Button>
+          <Options
+            options={[
+              {
+                id: "0",
+                value: "draft",
+              },
+              {
+                id: "1",
+                value: "live",
+              },
+              {
+                id: "2",
+                value: "unknown",
+              },
+              {
+                id: "3",
+                value: "published",
+              },
+            ]}
+          />
         </Group>
 
         <li>
@@ -172,12 +202,12 @@ function App() {
         <Group
           as="li"
           options={{
-            alignItems: "center",
+            alignItems: "flex-start",
             justifyContent: "flex-start",
             direction: "column",
           }}
         >
-          <Button onClick={() => setOpen(true)}>Open</Button>
+          <Button onClick={() => setOpen(true)}>Open trap</Button>
 
           <Trap initial={isOpen}>
             {isOpen && (
@@ -186,11 +216,21 @@ function App() {
                 gap="var(--gap-3)"
                 options={{
                   alignItems: "flex-start",
+                  justifyContent: "flex-start",
                 }}
               >
-                <Button onClick={() => setOpen(false)}>Close</Button>
-                <Button onClick={() => setOpen(false)}>Same</Button>
-                <Button onClick={() => setOpen(false)}>Same</Button>
+                <Button onClick={() => setOpen(false)}>
+                  <FiGitBranch />
+                </Button>
+                <Button onClick={() => setOpen(false)}>
+                  <FiGitCommit />
+                </Button>
+                <Button onClick={() => setOpen(false)}>
+                  <FiGitMerge />
+                </Button>
+                <Button onClick={() => setOpen(false)}>
+                  <FiX />
+                </Button>
               </Group>
             )}
           </Trap>
@@ -395,7 +435,11 @@ function App() {
               justifyContent: "center",
             }}
           >
-            <Shape sides={hasExploded ? 5 : 3} size={200} />
+            <Shape
+              sides={hasExploded ? 5 : 3}
+              size={200}
+              transforms="translateY(10px)"
+            />
           </Group>
         </Fence>
       </Group>

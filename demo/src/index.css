@@ -70,15 +70,19 @@ main > * + * {
 ul {
   list-style: none;
 }
-li {
+.demo > li {
   background-color: var(--bg);
   min-height: 40vh;
   position: relative;
   padding: var(--gap-4);
   border-radius: var(--gap-1);
 }
+.demo > li:last-of-type div {
+  height: 100%;
+}
+
 .white-space {
-  background-color: var(--color);
+  background-color: var(--color) !important;
 }
 
 .sticky-bg {
