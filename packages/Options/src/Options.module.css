@@ -1,0 +1,41 @@
+.menu {
+}
+
+.menuOpen {
+}
+
+.menuClose {
+}
+
+.item {
+}
+.itemHover {
+}
+
+.button {
+  display: inline-flex;
+  align-self: start;
+  align-items: center;
+
+  min-height: max(44px, 2em);
+  padding: 0 0.8em;
+  background-color: #f9f9f9;
+  border: 4px solid currentColor;
+  outline: none;
+
+  color: inherit;
+  font: inherit;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: inherit;
+
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+.button:focus {
+  outline: 4px solid currentColor;
+  outline-offset: calc(4px * 1.1);
+}

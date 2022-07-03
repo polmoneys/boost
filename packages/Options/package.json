@@ -1,0 +1,41 @@
+{
+  "name": "options-react",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@react-aria/focus": "^3.6.1",
+    "@szhsin/react-menu": "^3.1.1",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "@vitejs/plugin-react": "^1.3.0",
+    "json": "^11.0.0",
+    "typescript": "^4.6.3",
+    "vite": "^2.9.9",
+    "vite-plugin-dts": "^1.2.0"
+  },
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/options-react.umd.js",
+  "module": "./dist/options-react.es.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/options-react.es.js",
+      "require": "./dist/options-react.umd.js"
+    }
+  }
+}
