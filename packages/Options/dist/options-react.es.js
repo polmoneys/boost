@@ -82,6 +82,9 @@ function Options(props) {
     children: options == null ? void 0 : options.map((option) => /* @__PURE__ */ jsx(MenuItem, {
       className: menuItemClassName,
       value: option.value,
+      ...(option == null ? void 0 : option.href) !== void 0 && {
+        href: option == null ? void 0 : option.href
+      },
       children: option.value.charAt(0).toUpperCase() + option.value.slice(1)
     }, option.id))
   });

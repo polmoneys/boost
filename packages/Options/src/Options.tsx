@@ -52,9 +52,9 @@ function Options(props: Props) {
           key={option.id}
           className={menuItemClassName}
           value={option.value}
-          // {...(option?.href !== undefined && {
-          //   href:{ option?.href }
-          //  } )}
+          {...(option?.href !== undefined && {
+            href: option?.href,
+          })}
         >
           {option.value.charAt(0).toUpperCase() + option.value.slice(1)}
         </MenuItem>
