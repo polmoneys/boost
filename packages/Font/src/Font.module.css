@@ -1,0 +1,104 @@
+/* 
+@font-face {
+  font-family: 'my-font';
+  font-display: optional;
+  src: url(my-font.woff2) format('woff2');
+} 
+*/
+
+/* FAMILIES */
+
+.helveticaNeue {
+  font-family: "Helvetica Neue LT Std", "Helvetica", "sans-serif";
+  font-weight: 400;
+  font-style: normal;
+}
+
+.medium {
+  font-family: "Helvetica Neue LT Std", "Helvetica", "sans-serif";
+  font-weight: 500;
+  font-style: normal;
+}
+.bold {
+  font-family: "Helvetica Neue LT Std", "Helvetica", "sans-serif";
+  font-weight: 600;
+  font-style: bold;
+}
+
+.thin {
+  font-family: "Helvetica Neue LT Std", "Helvetica", "sans-serif";
+  font-weight: 300;
+  font-style: normal;
+}
+
+.grotesk {
+  font-family: "HKGrotesk Black";
+  font-weight: 600;
+}
+
+/* SIZES */
+:root {
+  --font-size-0: 0.75em;
+  --font-size-1: 1em;
+  --font-size-2: 1.25em;
+  --font-size-3: 1.6em;
+  --font-size-4: 2.5em;
+  --font-size-fluid-1: clamp(2rem, 9vw, 3.5rem);
+}
+.xs {
+  font-size: var(--font-size-0);
+}
+.s {
+  font-size: var(--font-size-1);
+}
+.r {
+  font-size: var(--font-size-2);
+}
+.l {
+  font-size: var(--font-size-3);
+}
+.xl {
+  font-size: var(--font-size-4);
+}
+
+:is(.xl, .l) {
+  line-height: 1;
+  overflow-wrap: break-word;
+}
+
+:is(.xl, .l)::first-letter {
+  text-transform: var(--casing);
+}
+
+.xl:has(span, b),
+.l:has(span, b),
+.r:has(span, b),
+.s:has(span, b) {
+  font-size: inherit;
+}
+
+.numeric {
+  font-variant-numeric: tabular-nums;
+}
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  min-width: 0;
+}
+
+.break {
+  word-wrap: break-word !important;
+  word-break: break-word !important;
+}
+/* 
+https://github.com/polmoneys/css/blob/master/library/hyphens.css
+*/
+
+.hyphenate {
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
