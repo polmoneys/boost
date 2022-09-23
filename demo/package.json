@@ -24,7 +24,9 @@
     "sticky-react": "*",
     "track-react": "*",
     "unit-react": "*",
-    "options-react": "*"
+    "options-react": "*",
+    "font-react": "*",
+    "icon-react": "*"
   },
   "devDependencies": {
     "@types/react": "^18.0.0",

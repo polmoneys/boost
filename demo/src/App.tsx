@@ -27,6 +27,12 @@ import { Layers } from "layers-react";
 import { Track } from "track-react";
 import { Radio } from "radio-react";
 import { Options } from "options-react";
+import {
+  HelveticaNeue,
+  HelveticaNeueBoldXL,
+  HelveticaNeueBoldS,
+} from "font-react";
+import { IconCheck } from "icon-react";
 
 import "../../packages/Input/dist/style.css";
 import "../../packages/Button/dist/style.css";
@@ -38,6 +44,9 @@ import "../../packages/Layers/dist/style.css";
 import "../../packages/Track/dist/style.css";
 import "../../packages/Radio/dist/style.css";
 import "../../packages/Options/dist/style.css";
+import "../../packages/Font/dist/style.css";
+import "../../packages/Icon/dist/style.css";
+
 import "@szhsin/react-menu/dist/index.css";
 
 type StatusMachine = "draft" | "live" | "unknown" | "published";
@@ -66,6 +75,7 @@ function App() {
   return (
     <main>
       <h1>Attempt #5872046752 </h1>
+
       <Group as="ul" gap="2em" css="grid" size="480px" className="demo">
         <Group
           as="li"
@@ -283,7 +293,27 @@ function App() {
             pantocrator. Lorem anae shandy cante oremus.
           </p>
         </Group>
-        <li className="white-space"></li>
+
+        <Group
+          as="li"
+          gap="var(--gap-3)"
+          options={{
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <IconCheck size="sm" />
+          <IconCheck />
+          <IconCheck size="lg" />
+
+          <IconCheck size="sm" variant="outline" />
+          <IconCheck variant="outline" />
+          <IconCheck size="lg" variant="outline" />
+
+          <IconCheck size="sm" variant="solid" />
+          <IconCheck variant="solid" />
+          <IconCheck size="lg" variant="solid" />
+        </Group>
 
         <li>
           <Track as="div" maskSize="1400px">
@@ -443,7 +473,6 @@ function App() {
           </Group>
         </Fence>
       </Group>
-
       <div className="white-space"></div>
     </main>
   );
