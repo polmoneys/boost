@@ -1,0 +1,22 @@
+declare const iconPaths: {
+    dotsX: string;
+    dotsY: string;
+    minus: string;
+    plus: string;
+    cross: string;
+    check: string;
+    dash: string;
+    slash: string;
+    arrowUp: string;
+    arrowDown: string;
+    caretUp: string;
+    caretDown: string;
+    caretRight: string;
+    caretLeft: string;
+    chevronUp: string;
+    chevronDown: string;
+    chevronRight: string;
+    chevronLeft: string;
+};
+export default iconPaths;
+export declare type IconName = "dotsX" | "dotsY" | "minus" | "plus" | "cross" | "check" | "dash" | "slash" | "arrowUp" | "arrowDown" | "caretUp" | "caretDown" | "caretRight" | "caretLeft" | "chevronUp" | "chevronDown" | "chevronRight" | "chevronLeft";
