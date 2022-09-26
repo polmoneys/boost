@@ -1,3 +1,4 @@
 node_modules
 packages/Stitches/*
+packages/Utils
 demo/dist
