@@ -28,6 +28,7 @@
     "font-react": "*",
     "icon-react": "*",
     "dialog-react": "*",
+    "select-react": "*",
     "hooks-react": "*"
   },
   "devDependencies": {
