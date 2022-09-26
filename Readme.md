@@ -1,6 +1,6 @@
 ### TLDR
 
-Attempt #5872046752 at extensible React TS components. [Demo](https://polmoneys.github.io/boost/).
+Attempt #5872046752 at extensible React TS components. [Demo](https://polmoneys.github.io/boost/). 
 
 ### Getting started
 
@@ -18,7 +18,9 @@ Add a folder under **packages** and configure both **vite.config.ts** and **pack
 
 To use it on **demo** you must add it to **package.json** dependencies and import it on **App.tsx**.
 
+### Related 
 
+Pick [CSS](https://github.com/polmoneys/how-to-CSS) that plays well with it. 
 ### Troubleshooting
 
 In workspace root folder:
