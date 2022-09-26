@@ -26,7 +26,9 @@
     "unit-react": "*",
     "options-react": "*",
     "font-react": "*",
-    "icon-react": "*"
+    "icon-react": "*",
+    "dialog-react": "*",
+    "hooks-react": "*"
   },
   "devDependencies": {
     "@types/react": "^18.0.0",

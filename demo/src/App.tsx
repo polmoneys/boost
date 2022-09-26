@@ -27,12 +27,14 @@ import { Layers } from "layers-react";
 import { Track } from "track-react";
 import { Radio } from "radio-react";
 import { Options } from "options-react";
+import { Dialog } from "dialog-react";
 import {
   HelveticaNeue,
   HelveticaNeueBoldXL,
   HelveticaNeueBoldS,
 } from "font-react";
-import { IconCheck } from "icon-react";
+import { IconCheck, IconCross, IconCaretUp } from "icon-react";
+import { useBinary } from "hooks-react";
 
 import "../../packages/Input/dist/style.css";
 import "../../packages/Button/dist/style.css";
@@ -46,6 +48,7 @@ import "../../packages/Radio/dist/style.css";
 import "../../packages/Options/dist/style.css";
 import "../../packages/Font/dist/style.css";
 import "../../packages/Icon/dist/style.css";
+import "../../packages/Dialog/dist/style.css";
 
 import "@szhsin/react-menu/dist/index.css";
 
@@ -64,6 +67,10 @@ function App() {
     const { value } = event.target;
     setStatus(value as "draft" | "live" | "unknown");
   };
+
+  const { state: landscapeState, actions: landscapeActions } = useBinary("off");
+  const { state: portraitState, actions: portraitActions } = useBinary("off");
+  const { state: trayState, actions: trayActions } = useBinary("off");
 
   // useEffect(() => {
   //   console.log({ usefx: inputValue });
@@ -133,6 +140,16 @@ function App() {
           />
         </Group>
 
+        <Group as="li" gap="2em">
+          <Button onClick={() => portraitActions.on()}>Dialog portrait</Button>
+          <Button onClick={() => landscapeActions.on()}>
+            Dialog landscape
+          </Button>
+
+          <Button onClick={() => trayActions.on()} variant="icon">
+            <IconCaretUp size="lg" />
+          </Button>
+        </Group>
         <li>
           <Group
             as="form"
@@ -314,134 +331,134 @@ function App() {
           <IconCheck variant="solid" />
           <IconCheck size="lg" variant="solid" />
         </Group>
-
-        <li>
-          <Track as="div" maskSize="1400px">
-            <Card as="article" ratio="square">
-              <h2>Card Title</h2>
-              <Card.Media
-                src="https://images.unsplash.com/34/BA1yLjNnQCI1yisIZGEi_2013-07-16_1922_IMG_9873.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
-                height="100%"
-                alt=""
-              />
-            </Card>
-            <Card as="article" ratio="square">
-              <h2>Card Title</h2>
-              <Card.Media
-                src="https://images.unsplash.com/34/BA1yLjNnQCI1yisIZGEi_2013-07-16_1922_IMG_9873.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
-                height="100%"
-                alt=""
-              />
-            </Card>
-            <Card as="article" ratio="square">
-              <h2>Card Title</h2>
-              <Card.Media
-                src="https://images.unsplash.com/34/BA1yLjNnQCI1yisIZGEi_2013-07-16_1922_IMG_9873.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
-                height="100%"
-                alt=""
-              />
-            </Card>
-            <Card as="article" ratio="square">
-              <h2>Card Title</h2>
-              <Card.Media
-                src="https://images.unsplash.com/34/BA1yLjNnQCI1yisIZGEi_2013-07-16_1922_IMG_9873.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
-                height="100%"
-                alt=""
-              />
-            </Card>
-            <Card as="article" ratio="square">
-              <h2>Card Title</h2>
-              <Card.Media
-                src="https://images.unsplash.com/34/BA1yLjNnQCI1yisIZGEi_2013-07-16_1922_IMG_9873.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
-                height="100%"
-                alt=""
-              />
-            </Card>
-            <Card as="article" ratio="square">
-              <h2>Card Title</h2>
-              <Card.Media
-                src="https://images.unsplash.com/34/BA1yLjNnQCI1yisIZGEi_2013-07-16_1922_IMG_9873.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
-                height="100%"
-                alt=""
-              />
-            </Card>
-          </Track>
-        </li>
-        <li>
-          <Track as="div" maskSize="1400px">
-            <Card as="article" ratio="landscape">
-              <h2>Card Title</h2>
-              <Card.Media
-                src="https://images.unsplash.com/34/BA1yLjNnQCI1yisIZGEi_2013-07-16_1922_IMG_9873.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
-                height="100%"
-                alt=""
-              />
-            </Card>
-            <Card as="article" ratio="landscape">
-              <h2>Card Title</h2>
-              <Card.Media
-                src="https://images.unsplash.com/34/BA1yLjNnQCI1yisIZGEi_2013-07-16_1922_IMG_9873.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
-                height="100%"
-                alt=""
-              />
-            </Card>
-
-            <Card as="article" ratio="landscape">
-              <h2>Card Title</h2>
-              <Card.Media
-                src="https://images.unsplash.com/34/BA1yLjNnQCI1yisIZGEi_2013-07-16_1922_IMG_9873.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
-                height="100%"
-                alt=""
-              />
-            </Card>
-            <Card as="article" ratio="landscape">
-              <h2>Card Title</h2>
-              <Card.Media
-                src="https://images.unsplash.com/34/BA1yLjNnQCI1yisIZGEi_2013-07-16_1922_IMG_9873.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
-                height="100%"
-                alt=""
-              />
-            </Card>
-          </Track>
-        </li>
-        <li>
-          <Track as="div" maskSize="1400px">
-            <Card as="article" ratio="portrait">
-              <h2>Card Title</h2>
-              <Card.Media
-                src="https://images.unsplash.com/34/BA1yLjNnQCI1yisIZGEi_2013-07-16_1922_IMG_9873.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
-                height="100%"
-                alt=""
-              />
-            </Card>
-            <Card as="article" ratio="portrait">
-              <h2>Card Title</h2>
-              <Card.Media
-                src="https://images.unsplash.com/34/BA1yLjNnQCI1yisIZGEi_2013-07-16_1922_IMG_9873.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
-                height="100%"
-                alt=""
-              />
-            </Card>
-            <Card as="article" ratio="portrait">
-              <h2>Card Title</h2>
-              <Card.Media
-                src="https://images.unsplash.com/34/BA1yLjNnQCI1yisIZGEi_2013-07-16_1922_IMG_9873.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
-                height="100%"
-                alt=""
-              />
-            </Card>
-            <Card as="article" ratio="portrait">
-              <h2>Card Title</h2>
-              <Card.Media
-                src="https://images.unsplash.com/34/BA1yLjNnQCI1yisIZGEi_2013-07-16_1922_IMG_9873.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
-                height="100%"
-                alt=""
-              />
-            </Card>
-          </Track>
-        </li>
-
         <li className="white-space"></li>
+
+        <li>
+          <Track as="div" maskSize="1400px">
+            <Card as="article" ratio="square">
+              <h2>Card Title</h2>
+              <Card.Media
+                src="https://images.unsplash.com/34/BA1yLjNnQCI1yisIZGEi_2013-07-16_1922_IMG_9873.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
+                height="100%"
+                alt=""
+              />
+            </Card>
+            <Card as="article" ratio="square">
+              <h2>Card Title</h2>
+              <Card.Media
+                src="https://images.unsplash.com/34/BA1yLjNnQCI1yisIZGEi_2013-07-16_1922_IMG_9873.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
+                height="100%"
+                alt=""
+              />
+            </Card>
+            <Card as="article" ratio="square">
+              <h2>Card Title</h2>
+              <Card.Media
+                src="https://images.unsplash.com/34/BA1yLjNnQCI1yisIZGEi_2013-07-16_1922_IMG_9873.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
+                height="100%"
+                alt=""
+              />
+            </Card>
+            <Card as="article" ratio="square">
+              <h2>Card Title</h2>
+              <Card.Media
+                src="https://images.unsplash.com/34/BA1yLjNnQCI1yisIZGEi_2013-07-16_1922_IMG_9873.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
+                height="100%"
+                alt=""
+              />
+            </Card>
+            <Card as="article" ratio="square">
+              <h2>Card Title</h2>
+              <Card.Media
+                src="https://images.unsplash.com/34/BA1yLjNnQCI1yisIZGEi_2013-07-16_1922_IMG_9873.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
+                height="100%"
+                alt=""
+              />
+            </Card>
+            <Card as="article" ratio="square">
+              <h2>Card Title</h2>
+              <Card.Media
+                src="https://images.unsplash.com/34/BA1yLjNnQCI1yisIZGEi_2013-07-16_1922_IMG_9873.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
+                height="100%"
+                alt=""
+              />
+            </Card>
+          </Track>
+        </li>
+        <li>
+          <Track as="div" maskSize="1400px">
+            <Card as="article" ratio="landscape">
+              <h2>Card Title</h2>
+              <Card.Media
+                src="https://images.unsplash.com/34/BA1yLjNnQCI1yisIZGEi_2013-07-16_1922_IMG_9873.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
+                height="100%"
+                alt=""
+              />
+            </Card>
+            <Card as="article" ratio="landscape">
+              <h2>Card Title</h2>
+              <Card.Media
+                src="https://images.unsplash.com/34/BA1yLjNnQCI1yisIZGEi_2013-07-16_1922_IMG_9873.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
+                height="100%"
+                alt=""
+              />
+            </Card>
+
+            <Card as="article" ratio="landscape">
+              <h2>Card Title</h2>
+              <Card.Media
+                src="https://images.unsplash.com/34/BA1yLjNnQCI1yisIZGEi_2013-07-16_1922_IMG_9873.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
+                height="100%"
+                alt=""
+              />
+            </Card>
+            <Card as="article" ratio="landscape">
+              <h2>Card Title</h2>
+              <Card.Media
+                src="https://images.unsplash.com/34/BA1yLjNnQCI1yisIZGEi_2013-07-16_1922_IMG_9873.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
+                height="100%"
+                alt=""
+              />
+            </Card>
+          </Track>
+        </li>
+        <li>
+          <Track as="div" maskSize="1400px">
+            <Card as="article" ratio="portrait">
+              <h2>Card Title</h2>
+              <Card.Media
+                src="https://images.unsplash.com/34/BA1yLjNnQCI1yisIZGEi_2013-07-16_1922_IMG_9873.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
+                height="100%"
+                alt=""
+              />
+            </Card>
+            <Card as="article" ratio="portrait">
+              <h2>Card Title</h2>
+              <Card.Media
+                src="https://images.unsplash.com/34/BA1yLjNnQCI1yisIZGEi_2013-07-16_1922_IMG_9873.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
+                height="100%"
+                alt=""
+              />
+            </Card>
+            <Card as="article" ratio="portrait">
+              <h2>Card Title</h2>
+              <Card.Media
+                src="https://images.unsplash.com/34/BA1yLjNnQCI1yisIZGEi_2013-07-16_1922_IMG_9873.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
+                height="100%"
+                alt=""
+              />
+            </Card>
+            <Card as="article" ratio="portrait">
+              <h2>Card Title</h2>
+              <Card.Media
+                src="https://images.unsplash.com/34/BA1yLjNnQCI1yisIZGEi_2013-07-16_1922_IMG_9873.jpg?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
+                height="100%"
+                alt=""
+              />
+            </Card>
+          </Track>
+        </li>
+
         <li className="white-space"></li>
 
         <Fence
@@ -473,7 +490,86 @@ function App() {
           </Group>
         </Fence>
       </Group>
-      <div className="white-space"></div>
+
+      <Dialog
+        label="Landscape state"
+        closeButton={
+          <Button onClick={() => ({})} keyboard={false} nonKeyboard={false}>
+            Close <IconCross />
+          </Button>
+        }
+        onClose={() => landscapeActions.off()}
+        open={landscapeState === "on"}
+      >
+        <br />
+
+        <HelveticaNeue>
+          Lorem ipsum dolor sit amet, no veri erat accusamus vel, cu ubique
+          legere philosophia cum. Nisl vide ei eam, est at causae omnium,
+          veritus molestiae ex per. Usu noster vituperata ei, laoreet mentitum
+          cu nec, at euismod impedit pri. Choro nusquam incorrupte an eos, mundi
+          repudiare eum ei, vix in soleat epicurei moderatius. Odio saepe cu
+          cum, mea utamur deterruisset in, quem offendit sea ut. Per ne mazim
+          partem animal, pro corrumpit forensibus et.
+        </HelveticaNeue>
+        <br />
+
+        <Button onClick={() => portraitActions.on()}>
+          Trigger DialogPortrait
+        </Button>
+      </Dialog>
+      <Dialog
+        label="Portrait state"
+        closeButton={
+          <Button onClick={() => ({})} keyboard={false} nonKeyboard={false}>
+            Close <IconCross />
+          </Button>
+        }
+        ratio="portrait"
+        onClose={() => portraitActions.off()}
+        open={portraitState === "on"}
+      >
+        <br />
+
+        <HelveticaNeue>
+          Lorem ipsum dolor sit amet, no veri erat accusamus vel, cu ubique
+          legere philosophia cum. Nisl vide ei eam, est at causae omnium,
+          veritus molestiae ex per. Usu noster vituperata ei, laoreet mentitum
+          cu nec, at euismod impedit pri. Choro nusquam incorrupte an eos, mundi
+          repudiare eum ei, vix in soleat epicurei moderatius. Odio saepe cu
+          cum, mea utamur deterruisset in, quem offendit sea ut. Per ne mazim
+          partem animal, pro corrumpit forensibus et.
+        </HelveticaNeue>
+      </Dialog>
+      <Dialog.Tray
+        label="Tray state"
+        open={trayState === "on"}
+        closeButton={
+          <Button onClick={() => ({})} keyboard={false} nonKeyboard={false}>
+            Close <IconCross />
+          </Button>
+        }
+        onClose={() => trayActions.off()}
+      >
+        <br />
+        <HelveticaNeue>
+          Lorem ipsum dolor sit amet, no veri erat accusamus vel, cu ubique
+          legere philosophia cum. Nisl vide ei eam, est at causae omnium,
+          veritus molestiae ex per. Usu noster vituperata ei, laoreet mentitum
+          cu nec, at euismod impedit pri. Choro nusquam incorrupte an eos, mundi
+          repudiare eum ei, vix in soleat epicurei moderatius. Odio saepe cu
+          cum, mea utamur deterruisset in, quem offendit sea ut. Per ne mazim
+          partem animal, pro corrumpit forensibus et.
+        </HelveticaNeue>
+        <HelveticaNeue>
+          Lorem ipsum dolor sit amet, no veri erat accusamus vel, cu ubique
+          legere philosophia cum. Nisl vide ei eam, est at causae omnium,
+          veritus molestiae ex per. Usu noster vituperata ei, laoreet mentitum
+          cu nec, at euismod impedit pri. Choro nusquam incorrupte an eos,
+          mundi.
+        </HelveticaNeue>
+        <br />
+      </Dialog.Tray>
     </main>
   );
 }
