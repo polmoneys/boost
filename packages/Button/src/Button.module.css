@@ -25,6 +25,7 @@
   height: max(44px, 2em);
   width: max(44px, 2em);
   padding: 0;
+  place-content: center;
 }
 
 .stretch {

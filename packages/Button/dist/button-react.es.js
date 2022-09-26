@@ -2968,8 +2968,8 @@ function Button(props) {
   const isIcon = variant === "icon";
   const classNames = [className, styles.root, isText && styles.text, isIcon && styles.icon].filter(Boolean).join(" ");
   return /* @__PURE__ */ jsx(Unit, {
-    keyboard,
     autofocus: autoFocus,
+    keyboard,
     nonKeyboard,
     children: /* @__PURE__ */ jsx("button", {
       ...rest,
