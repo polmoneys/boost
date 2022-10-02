@@ -1,11 +1,19 @@
 import require$$0, { useState, useRef, useEffect, cloneElement, Fragment } from "react";
 import { DialogOverlay, DialogContent } from "@reach/dialog";
-const overlay$1 = "_overlay_4rmqc_1";
-const root$1 = "_root_4rmqc_17";
-const isOpen = "_isOpen_4rmqc_40";
-var styles$1 = {
-  overlay: overlay$1,
-  root: root$1,
+const overlay = "_overlay_jw3ma_10";
+const root = "_root_jw3ma_25";
+const portrait = "_portrait_jw3ma_39";
+const landscape = "_landscape_jw3ma_44";
+const overlayTray = "_overlayTray_jw3ma_57";
+const rootTray = "_rootTray_jw3ma_72";
+const isOpen = "_isOpen_jw3ma_95";
+var styles = {
+  overlay,
+  root,
+  portrait,
+  landscape,
+  overlayTray,
+  rootTray,
   isOpen
 };
 var jsxRuntime = { exports: {} };
@@ -51,17 +59,10 @@ const Tray = (props) => {
   const [height, setHeight] = useState(0);
   useRef();
   useEffect(() => {
-    var _a, _b, _c, _d;
+    var _a, _b;
     if (height !== 0)
       return;
     const newHeight = (_b = (_a = window == null ? void 0 : window.visualViewport) == null ? void 0 : _a.height) != null ? _b : window == null ? void 0 : window.innerHeight;
-    const short = height < 850;
-    const width = (_d = (_c = window == null ? void 0 : window.visualViewport) == null ? void 0 : _c.width) != null ? _d : window == null ? void 0 : window.innerWidth;
-    console.log({
-      newHeight,
-      short,
-      width
-    });
     setHeight(newHeight);
   }, [height]);
   const trayHeight = {
@@ -70,11 +71,11 @@ const Tray = (props) => {
   const trigger = cloneElement(closeButton, {
     onClick: onClose
   });
-  const contentStyles = [styles$1.root, className].filter(Boolean).join(" ");
+  const contentStyles = [styles.rootTray, className].filter(Boolean).join(" ");
   return /* @__PURE__ */ jsx(DialogOverlay, {
     isOpen: open,
     onDismiss: onClose,
-    className: styles$1.overlay,
+    className: styles.overlayTray,
     children: /* @__PURE__ */ jsx(DialogContent, {
       "aria-labelledby": "tray-dialog",
       className: contentStyles,
@@ -84,16 +85,6 @@ const Tray = (props) => {
       })
     })
   });
-};
-const overlay = "_overlay_147bk_10";
-const root = "_root_147bk_25";
-const portrait = "_portrait_147bk_39";
-const landscape = "_landscape_147bk_44";
-var styles = {
-  overlay,
-  root,
-  portrait,
-  landscape
 };
 function Dialog(props) {
   const {

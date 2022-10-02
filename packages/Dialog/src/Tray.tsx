@@ -8,7 +8,7 @@ import {
   Fragment,
 } from "react";
 import { DialogOverlay, DialogContent } from "@reach/dialog";
-import styles from "./Tray.module.css";
+import styles from "./Dialog.module.css";
 
 export interface Props {
   closeButton: ReactElement;
@@ -32,7 +32,6 @@ const Tray = (props: Props) => {
     const newHeight = window?.visualViewport?.height ?? window?.innerHeight;
     const short = height < 850;
     const width = window?.visualViewport?.width ?? window?.innerWidth;
-    console.log({ newHeight, short, width });
     setHeight(newHeight);
   }, [height]);
 
@@ -42,9 +41,13 @@ const Tray = (props: Props) => {
   const trigger = cloneElement(closeButton, {
     onClick: onClose,
   });
-  const contentStyles = [styles.root, className].filter(Boolean).join(" ");
+  const contentStyles = [styles.rootTray, className].filter(Boolean).join(" ");
   return (
-    <DialogOverlay isOpen={open} onDismiss={onClose} className={styles.overlay}>
+    <DialogOverlay
+      isOpen={open}
+      onDismiss={onClose}
+      className={styles.overlayTray}
+    >
       <DialogContent
         aria-labelledby={"tray-dialog"}
         className={contentStyles}
