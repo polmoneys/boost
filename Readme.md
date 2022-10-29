@@ -4,7 +4,7 @@ Attempt #5872046752 at extensible React TS components. [Demo](https://polmoneys.
 
 ### Get started 
 
-Components are meant to be used with CSS utility classNames for customization. 
+Components are meant to be used with CSS utility classNames for customization. Let's call a combination of color styles/theme a **surface**. 
 
 ```jsx
 
@@ -18,7 +18,7 @@ Components are meant to be used with CSS utility classNames for customization.
 
 ```
 
-If you are working on a design system level you can always take the primitive and add sugar to it:
+If you are working at 'design system' level you can always use the primitive and add sugar to it:
 
 ```jsx
 
@@ -35,7 +35,7 @@ Button.Success = SuccessButton;
 
 ```
 
-Some components require more complex **classNames** prop, an Input as example:
+Some components require more complex **classNames** prop, an Input: 
 
 
 ```jsx
@@ -72,7 +72,7 @@ To use it on **demo** you must add it to **package.json** dependencies and impor
 
 ### Author CSS
 
-Write CSS with POSTCSS sugar on any folder structure and import all files to **index.css**. A file **css.css** will be created in **/dist** directory. 
+Write CSS with PostCSS sugar on any folder structure and import all files to **index.css**. A file **css.css** will be created in **/dist** directory.
 
 
 ```bash
@@ -85,19 +85,10 @@ Write CSS with POSTCSS sugar on any folder structure and import all files to **i
 
 Picked tokens (check **postcss.config.cjs**) will be exported as **css-tokens.js** in **dist** folder so that you may consume it as **js**. 
 
-### Troubleshooting
-
-In workspace root folder:
-
-```bash
-
-   yarn install 
-
-```
-
 ### Tooling
 
 Yarn workspaces template for React TS library & app powered by [vite](https://vitejs.dev/). 
+
 [PostCSS +8](https://cssdb.org/) with [PresetEnv](https://github.com/csstools/postcss-plugins/tree/main/plugin-packs/postcss-preset-env) stage **0**. 
 
 ### Inspiration 💐
@@ -110,8 +101,9 @@ Yarn workspaces template for React TS library & app powered by [vite](https://vi
 
 Erik Gunnar Asplund on **Swedish Grace**.
 
-### Author 
+### Feedback 
 
-@polmoneys 
+[Twitter](https://twitter.com/polmoneys)
+[polmoneys.com](https://polmoneys.com)
 
 
