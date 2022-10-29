@@ -29,6 +29,7 @@
     "icon-react": "*",
     "dialog-react": "*",
     "select-react": "*",
+    "scroll-unit-react": "*",
     "hooks-react": "*"
   },
   "devDependencies": {

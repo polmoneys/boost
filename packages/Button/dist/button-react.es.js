@@ -2961,12 +2961,19 @@ function Button(props) {
     autoFocus = false,
     nonKeyboard = true,
     variant = "default",
+    surface = "",
     className,
     ...rest
   } = props;
   const isText = variant === "text";
   const isIcon = variant === "icon";
-  const classNames = [className, styles.root, isText && styles.text, isIcon && styles.icon].filter(Boolean).join(" ");
+  const classNames = [
+    className,
+    styles.root,
+    isText && styles.text,
+    isIcon && styles.icon,
+    surface !== void 0 && `surface-${surface}`
+  ].filter(Boolean).join(" ");
   return /* @__PURE__ */ jsx(Unit, {
     autofocus: autoFocus,
     keyboard,

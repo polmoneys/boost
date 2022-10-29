@@ -1,0 +1,36 @@
+/*
+    Shelf creates flex context.
+*/
+
+.shelf {
+  display: flex;
+  flex-wrap: nowrap;
+  width: 100%;
+
+  &.-column {
+    flex-direction: column;
+  }
+
+  &.-wrap {
+    flex-wrap: wrap;
+  }
+
+  &.-center {
+    align-items: center;
+  }
+
+  &.-grow {
+    flex-grow: 1;
+  }
+
+  /* Will fall into a new column if enough viewport space is available  */
+  &.-grid {
+    --min-content-width: 20rem;
+    display: flex;
+    flex-wrap: wrap;
+
+    & > * {
+      flex: 1 1 var(--min-content-width);
+    }
+  }
+}

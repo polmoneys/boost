@@ -10,6 +10,13 @@ export interface RadioProps extends ComponentProps<"input"> {
         checkboxLabel: string;
     }, HTMLElement>;
     checkboxSize?: string;
+    classNames?: {
+        root?: string;
+        label?: string;
+        input?: string;
+        checked?: string;
+    };
+    xl?: boolean;
 }
 declare function Radio(props?: RadioProps): JSX.Element;
 declare namespace Radio {

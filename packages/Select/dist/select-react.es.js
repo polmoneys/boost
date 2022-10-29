@@ -88,8 +88,10 @@ function Group(props) {
   });
 }
 const root = "tg";
+const select = "jk";
 var styles = {
-  root
+  root,
+  select
 };
 var jsxRuntime = { exports: {} };
 var reactJsxRuntime_production_min = {};
@@ -127,7 +129,8 @@ function Select(props) {
   const {
     options,
     value,
-    onChange
+    onChange,
+    classNames
   } = props;
   function handleOnChange(e) {
     const {
@@ -136,13 +139,15 @@ function Select(props) {
     const selectedOption = options[selectedIndex];
     onChange(selectedOption.value);
   }
+  const rootClassNames = [styles.root, classNames == null ? void 0 : classNames.root].filter(Boolean).join(" ");
+  const selectClassNames = [styles.select, classNames == null ? void 0 : classNames.select].filter(Boolean).join(" ");
   return /* @__PURE__ */ jsx(Group, {
     as: "label",
-    className: styles.root,
+    className: rootClassNames,
     children: /* @__PURE__ */ jsxs("select", {
       value,
       onChange: handleOnChange,
-      required: true,
+      className: selectClassNames,
       children: [/* @__PURE__ */ jsx("option", {
         value: "",
         hidden: true,

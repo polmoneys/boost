@@ -14,6 +14,13 @@ export interface RadioProps extends ComponentProps<"input"> {
     HTMLElement
   >;
   checkboxSize?: string;
+  classNames?: {
+    root?: string;
+    label?: string;
+    input?: string;
+    checked?: string;
+  };
+  xl?: boolean;
 }
 
 function Radio(props?: RadioProps) {
@@ -26,6 +33,8 @@ function Radio(props?: RadioProps) {
     name,
     checkboxSize,
     checked = false,
+    classNames,
+    ...rest
   } = props;
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) =>
@@ -41,14 +50,26 @@ function Radio(props?: RadioProps) {
       })
     );
 
-  const classNames = [styles.radio, checked && styles.checked]
+  const rootClassNames = [
+    styles.radio,
+    checked && styles.checked,
+    checked && classNames?.checked,
+    classNames?.root,
+    rest?.xl && styles.xl,
+  ]
+    .filter(Boolean)
+    .join(" ");
+  const labelClassNames = [styles.pinned, classNames?.label]
     .filter(Boolean)
     .join(" ");
 
+  const inputClassNames = [styles.input, classNames?.input]
+    .filter(Boolean)
+    .join(" ");
   return (
-    <Group as="div" className={classNames} size={checkboxSize}>
+    <Group as="div" className={rootClassNames} size={checkboxSize}>
       <label htmlFor={id}>
-        <div className={styles.pinned} aria-hidden="true">
+        <div className={labelClassNames} aria-hidden="true">
           {inputLabel}
         </div>
         <input
@@ -57,6 +78,7 @@ function Radio(props?: RadioProps) {
           name={name}
           value={name}
           checked={checked}
+          className={inputClassNames}
           onChange={handleChange}
         />
       </label>

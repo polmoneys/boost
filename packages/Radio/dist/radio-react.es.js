@@ -1,9 +1,11 @@
 import require$$0, { useMemo, cloneElement, Children, Fragment } from "react";
-const radio = "_radio_lbrh4_1";
-const checked = "_checked_lbrh4_33";
-const pinned = "_pinned_lbrh4_67";
+const radio = "_radio_1rbiy_1";
+const input = "_input_1rbiy_13";
+const checked = "_checked_1rbiy_60";
+const pinned = "_pinned_1rbiy_65";
 var styles = {
   radio,
+  input,
   checked,
   pinned
 };
@@ -176,7 +178,9 @@ function Radio(props) {
     label,
     name,
     checkboxSize,
-    checked: checked2 = false
+    checked: checked2 = false,
+    classNames,
+    ...rest
   } = props;
   const handleChange = (event) => onChange == null ? void 0 : onChange(event);
   const inputLabel = renderLabel === void 0 ? /* @__PURE__ */ jsx("span", {
@@ -185,15 +189,17 @@ function Radio(props) {
     checked: (_a = props == null ? void 0 : props.checked) != null ? _a : false,
     checkboxLabel: (_b = props.label) != null ? _b : ""
   });
-  const classNames = [styles.radio, checked2 && styles.checked].filter(Boolean).join(" ");
+  const rootClassNames = [styles.radio, checked2 && styles.checked, checked2 && (classNames == null ? void 0 : classNames.checked), classNames == null ? void 0 : classNames.root, (rest == null ? void 0 : rest.xl) && styles.xl].filter(Boolean).join(" ");
+  const labelClassNames = [styles.pinned, classNames == null ? void 0 : classNames.label].filter(Boolean).join(" ");
+  const inputClassNames = [styles.input, classNames == null ? void 0 : classNames.input].filter(Boolean).join(" ");
   return /* @__PURE__ */ jsx(Group, {
     as: "div",
-    className: classNames,
+    className: rootClassNames,
     size: checkboxSize,
     children: /* @__PURE__ */ jsxs("label", {
       htmlFor: id,
       children: [/* @__PURE__ */ jsx("div", {
-        className: styles.pinned,
+        className: labelClassNames,
         "aria-hidden": "true",
         children: inputLabel
       }), /* @__PURE__ */ jsx("input", {
@@ -202,6 +208,7 @@ function Radio(props) {
         name,
         value: name,
         checked: checked2,
+        className: inputClassNames,
         onChange: handleChange
       })]
     })

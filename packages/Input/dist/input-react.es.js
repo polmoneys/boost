@@ -88,8 +88,10 @@ function Group(props) {
   });
 }
 const root = "rv";
+const input = "Hv";
 var styles = {
-  root
+  root,
+  input
 };
 var jsxRuntime = { exports: {} };
 var reactJsxRuntime_production_min = {};
@@ -138,6 +140,7 @@ function Input(props) {
     onChangeValue,
     id,
     label,
+    classNames,
     ...rest
   } = props;
   const handleChange = (event) => {
@@ -147,17 +150,20 @@ function Input(props) {
       onChange == null ? void 0 : onChange(event);
     }
   };
+  const rootClassnames = [styles.root, classNames == null ? void 0 : classNames.root].filter(Boolean).join(" ");
+  const inputClassnames = [styles.input, classNames == null ? void 0 : classNames.input].filter(Boolean).join(" ");
   return /* @__PURE__ */ jsxs(Group, {
     as: "div",
     options: {
       direction: "column",
       alignItems: "flex-start"
     },
-    className: styles.root,
+    className: rootClassnames,
     children: [/* @__PURE__ */ jsx("label", {
       htmlFor: id,
       children: label
     }), /* @__PURE__ */ jsx("input", {
+      className: inputClassnames,
       type,
       defaultValue: value,
       autoComplete: autocomplete,

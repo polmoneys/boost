@@ -8,6 +8,11 @@ interface Props extends Omit<ComponentProps<"input">, "onChange"> {
     onChangeValue?: (value: string) => void;
     id: string;
     label: string;
+    classNames?: {
+        root?: string;
+        input?: string;
+        focusWithin?: string;
+    };
 }
 declare function Input(props: Props): JSX.Element;
 export default Input;

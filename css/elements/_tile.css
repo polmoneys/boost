@@ -1,0 +1,48 @@
+/*
+    Tile clamps amount of columns on orientation portrait
+*/
+
+.tile {
+  width: 100%;
+  display: grid;
+  align-items: start;
+  grid-template-columns: repeat(1, 1fr);
+  @media (--portrait) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  &.-xxl {
+    grid-template-columns: repeat(2, 1fr);
+    @media (--portrait) {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+  &.-xl {
+    grid-template-columns: repeat(3, 1fr);
+    @media (--portrait) {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+  &.-lg {
+    grid-template-columns: repeat(4, 1fr);
+    @media (--portrait) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  &.-md {
+    grid-template-columns: repeat(5, 1fr);
+    @media (--portrait) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  &.-sm {
+    grid-template-columns: repeat(6, 1fr);
+    @media (--portrait) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  &.-masonry {
+    align-items: baseline;
+    grid-auto-flow: dense;
+  }
+}

@@ -5,27 +5,13 @@ import {
   ReactElement,
   ReactNode,
 } from "react";
-
+import AsProps from "./Interfaces/As";
+import Sizes from "./Interfaces/Sizes";
 import styles from "./Font.module.css";
 
-type FontSizes = "xs" | "s" | "r" | "l" | "xl";
-interface Props extends AriaAttributes {
-  size?: FontSizes;
-  children: HTMLElement | ReactElement | ReactNode | Array<ReactNode> | string;
-  as?:
-    | "label"
-    | "span"
-    | "p"
-    | "b"
-    | "em"
-    | "strong"
-    | "time"
-    | "h1"
-    | "h2"
-    | "h3"
-    | "h4"
-    | "h5"
-    | "h6";
+interface Props extends AriaAttributes, AsProps {
+  size?: Sizes;
+  children: string;
   className?: string;
   /** truncate (px) */
   truncate?: number;
@@ -94,7 +80,7 @@ const Compose = (composeClassName: string) => (props: Props) => {
   );
   return <Font {...rest} className={css} />;
 };
-const ComposeSize = (Base: typeof Font, size: FontSizes) => (props: Props) =>
+const ComposeSize = (Base: typeof Font, size: Sizes) => (props: Props) =>
   <Base {...props} size={size} />;
 
 // Family variants

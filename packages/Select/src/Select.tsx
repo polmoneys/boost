@@ -1,28 +1,38 @@
 import { Group } from "group-react";
+import Value from "./Interfaces/Value";
+import Option from "./Interfaces/Option";
 import styles from "./Select.module.css";
 
-type OptionValue = string | number;
-type Option<T extends OptionValue> = {
-  value: T;
-  label: string;
-};
-
-type Props<T extends OptionValue> = {
+type Props<T extends Value> = {
   options: Option<T>[];
   value: T;
   onChange: (value: T) => void;
+  classNames?: {
+    root?: string;
+    select?: string;
+  };
 };
 
-function Select<T extends OptionValue>(props: Props<T>) {
-  const { options, value, onChange } = props;
+function Select<T extends Value>(props: Props<T>) {
+  const { options, value, onChange, classNames } = props;
   function handleOnChange(e: React.FormEvent<HTMLSelectElement>) {
     const { selectedIndex } = e.currentTarget;
     const selectedOption = options[selectedIndex];
     onChange(selectedOption.value);
   }
+  const rootClassNames = [styles.root, classNames?.root]
+    .filter(Boolean)
+    .join(" ");
+  const selectClassNames = [styles.select, classNames?.select]
+    .filter(Boolean)
+    .join(" ");
   return (
-    <Group as="label" className={styles.root}>
-      <select value={value} onChange={handleOnChange} required>
+    <Group as="label" className={rootClassNames}>
+      <select
+        value={value}
+        onChange={handleOnChange}
+        className={selectClassNames}
+      >
         <option value="" hidden>
           Example Placeholder
         </option>

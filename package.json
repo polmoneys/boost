@@ -5,7 +5,8 @@
     "packages": [
       "packages/*",
       "hooks",
-      "demo"
+      "demo",
+      "css"
     ]
   }
 }

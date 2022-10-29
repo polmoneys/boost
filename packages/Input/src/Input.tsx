@@ -31,6 +31,11 @@ interface Props extends Omit<ComponentProps<"input">, "onChange"> {
   onChangeValue?: (value: string) => void;
   id: string;
   label: string;
+  classNames?: {
+    root?: string;
+    input?: string;
+    focusWithin?: string;
+  };
 }
 
 function Input(props: Props) {
@@ -48,6 +53,7 @@ function Input(props: Props) {
     onChangeValue,
     id,
     label,
+    classNames,
     ...rest
   } = props;
 
@@ -59,14 +65,22 @@ function Input(props: Props) {
     }
   };
 
+  const rootClassnames = [styles.root, classNames?.root]
+    .filter(Boolean)
+    .join(" ");
+  const inputClassnames = [styles.input, classNames?.input]
+    .filter(Boolean)
+    .join(" ");
+
   return (
     <Group
       as="div"
       options={{ direction: "column", alignItems: "flex-start" }}
-      className={styles.root}
+      className={rootClassnames}
     >
       <label htmlFor={id}>{label}</label>
       <input
+        className={inputClassnames}
         type={type}
         defaultValue={value}
         autoComplete={autocomplete}

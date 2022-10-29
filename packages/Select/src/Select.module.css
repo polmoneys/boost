@@ -3,13 +3,9 @@
   display: inline-block;
 }
 
-.root:focus-within {
-  outline: 4px solid currentColor;
-  outline-offset: calc(4px * 1.1);
-}
+.select {
+  accent-color: var(--gray-2);
 
-.root select {
-  accent-color: blue;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -17,21 +13,20 @@
   font-size: max(16px, 1rem);
   min-width: 0;
   flex-grow: 1;
-  min-height: max(44px, 2em);
-  padding: 0 0.8em;
-  border: 4px solid currentColor;
-  background-color: #f5f5f7;
-  box-shadow: 0 0.2px 0.3px rgba(0, 0, 0, 0.024),
-    0 0.6px 0.9px rgba(0, 0, 0, 0.035), 0 1.5px 2.1px rgba(0, 0, 0, 0.046),
-    0 5px 7px rgba(0, 0, 0, 0.07);
-  outline: 0;
+  background-color: var(--transparent);
+  border: var(--border-width) solid var(--transparent);
+  min-height: var(--minHeightUserAction);
+  outline: none;
 }
 
-.root select::-ms-expand {
+.select:focus {
+  outline-color: var(--transparent) !important;
+}
+.select::-ms-expand {
   display: none;
 }
 
-.root select:-moz-focusring {
+.select:-moz-focusring {
   color: transparent;
   text-shadow: 0 0 0 #000;
 }
@@ -41,7 +36,7 @@
 }
 
 .root option::first-of-type {
-  color: grey;
+  color: var(--gray-2);
 }
 
 .root::after {

@@ -1,12 +1,13 @@
-declare type OptionValue = string | number;
-declare type Option<T extends OptionValue> = {
-    value: T;
-    label: string;
-};
-declare type Props<T extends OptionValue> = {
+import Value from "./Interfaces/Value";
+import Option from "./Interfaces/Option";
+declare type Props<T extends Value> = {
     options: Option<T>[];
     value: T;
     onChange: (value: T) => void;
+    classNames?: {
+        root?: string;
+        select?: string;
+    };
 };
-declare function Select<T extends OptionValue>(props: Props<T>): JSX.Element;
+declare function Select<T extends Value>(props: Props<T>): JSX.Element;
 export default Select;

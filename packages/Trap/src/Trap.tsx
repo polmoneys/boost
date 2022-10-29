@@ -1,20 +1,17 @@
 import { ReactNode } from "react";
 import { FocusScope } from "@react-aria/focus";
-
-const VariantOptions = ["autofocus", "restorefocus"] as const;
-type Variants = typeof VariantOptions[number];
-type ArrayProp = Array<Variants> | Variants;
+import OptionsProps from "./Interfaces/Options";
 
 interface Props {
   children: ReactNode;
   initial?: boolean;
-  options?: ArrayProp;
+  options?: OptionsProps;
 }
 
 function Trap(props: Props) {
   const { initial, children, options = ["restorefocus"] } = props;
   let config = {
-    contain: initial ? true : false,
+    contain: initial,
   };
   if (options !== undefined) {
     const items = Array.isArray(options) ? options : [options];

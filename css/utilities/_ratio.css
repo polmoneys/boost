@@ -1,0 +1,41 @@
+.circle {
+  aspect-ratio: 1;
+  border-radius: 50%;
+}
+
+.ratio {
+  --ratio-square: 1;
+  --ratio-portrait: 9/16;
+  --ratio-landscape: 16/9;
+  --ratio-ultrawide: 18/5;
+
+  --content-ratio: var(--ratio-square);
+  position: relative;
+  padding-top: calc((1 / (var(--content-ratio))) * 100%);
+  &.-portrait {
+    --content-ratio: var(--ratio-portrait);
+  }
+  &.-landscape {
+    --content-ratio: var(--ratio-landscape);
+  }
+  &.-ultrawide {
+    --content-ratio: var(--ratio-ultrawide);
+  }
+}
+
+@supports (aspect-ratio: 1) {
+  .ratio {
+    aspect-ratio: var(--content-ratio);
+    padding-top: initial;
+
+    &.-portrait {
+      --content-ratio: var(--ratio-portrait);
+    }
+    &.-landscape {
+      --content-ratio: var(--ratio-landscape);
+    }
+    &.-ultrawide {
+      --content-ratio: var(--ratio-ultrawide);
+    }
+  }
+}

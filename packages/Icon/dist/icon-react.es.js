@@ -59,7 +59,7 @@ function Icon(props) {
     d = "",
     disabled = false,
     variant,
-    fill = "#ffff55",
+    fill = "var(--accent-highlight)",
     stroke = "currentColor",
     strokeWidth = 2,
     size = "md"

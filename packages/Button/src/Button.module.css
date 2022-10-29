@@ -2,11 +2,9 @@
   display: inline-flex;
   align-self: start;
   align-items: center;
-
-  min-height: max(44px, 2em);
-  padding: 0 0.8em;
-  background-color: #f9f9f9;
-  border: 4px solid currentColor;
+  background-color: var(--transparent);
+  border: var(--border-width) solid var(--transparent);
+  min-height: var(--minHeightUserAction);
   outline: none;
 
   color: inherit;
@@ -22,8 +20,8 @@
 }
 
 .root.icon {
-  height: max(44px, 2em);
-  width: max(44px, 2em);
+  height: var(--minHeightUserAction);
+  width: var(--minHeightUserAction);
   padding: 0;
   place-content: center;
 }
@@ -35,20 +33,20 @@
 .root:focus,
 .root.ring,
 .root:focus-visible {
-  outline: 4px solid currentColor;
-  outline-offset: calc(4px * 1.1);
+  outline: var(--border-width) solid currentColor;
+  outline-offset: calc(var(--border-width) * 1.1);
 }
 
 .root:disabled,
 .root[disabled] {
-  opacity: 0.8;
+  opacity: var(--disabled);
   cursor: no-drop;
 }
 
 .root.text {
   background-color: transparent !important;
-  box-shadow: none !important;
-  border: none;
+  box-shadow: var(--none-override);
+  border: var(--none-override);
   font-weight: bold;
 }
 .root.text.ring,

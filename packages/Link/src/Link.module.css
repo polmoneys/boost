@@ -40,15 +40,32 @@ a:focus {
 .root.button:focus,
 .root.button.ring,
 .root.button:focus-visible {
-  outline: 4px solid currentColor;
-  outline-offset: calc(4px * 1.1);
+  outline: var(--border-width) solid currentColor;
+  outline-offset: calc(var(--border-width) * 1.1);
 }
 
 .root.button {
-  min-height: max(44px, 2em);
+  min-height: var(--minHeightUserAction);
+  background-color: var(--transparent);
+  border: var(--border-width) solid var(--transparent);
   outline: none;
-  border: 4px solid currentColor;
-  padding: 0 0.8em;
   text-decoration: none;
-  background-color: #f9f9f9;
+}
+
+.root:disabled,
+.root[disabled] {
+  opacity: var(--disabled);
+  cursor: no-drop;
+}
+
+@media screen and (forced-colors: active) {
+  /* https://blogs.windows.com/msedgedev/2020/09/17/styling-for-windows-high-contrast-with-new-standards-for-forced-colors/ */
+  .root {
+    forced-color-adjust: none;
+    color: CanvasText;
+  }
+}
+
+.root svg {
+  pointer-events: none;
 }

@@ -1,0 +1,43 @@
+/*
+  Roadmap: 
+  - &:focus-within 
+*/
+.surface {
+  background-color: var(--transparent);
+  border: var(--border-width) solid transparent;
+  shadow: var(--shadow);
+  border-radius: var(--border-radius);
+
+  &.fit-width {
+    width: fit-content;
+  }
+
+  &.fit-height {
+    height: fit-content;
+  }
+
+  &:focus {
+    outline-color: var(--transparent) !important;
+  }
+  &.-highlight {
+    background-color: var(--accent-highlight) !important;
+    border-color: var(--accent-highlight);
+    &:focus {
+      outline-color: var(--accent-highlight) !important;
+    }
+  }
+  &.-success {
+    background-color: var(--accent-success) !important;
+    border-color: var(--accent-success);
+    &:focus {
+      outline-color: var(--accent-success) !important;
+    }
+  }
+  &.-error {
+    background-color: var(--accent-error) !important;
+    border-color: var(--accent-error);
+    &:focus {
+      outline-color: var(--accent-error) !important;
+    }
+  }
+}

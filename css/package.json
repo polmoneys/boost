@@ -1,0 +1,36 @@
+{
+  "name": "css",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "build": "npm run framework",
+    "comment": "##### css-tokens.js is empty try 'npm run framework' #####",
+    "framework": "postcss ./index.css  --o ./dist/css.css",
+    "watch": "postcss ./index.css --no-map --o ./dist/css.css --watch --verbose"
+  },
+  "keywords": [
+    "CSS"
+  ],
+  "author": "pol moneys",
+  "license": "ISC",
+  "devDependencies": {
+    "cssnano": "^5.1.8",
+    "postcss": "^8.4.14",
+    "postcss-cli": "^9.1.0",
+    "postcss-combine-duplicated-selectors": "^10.0.3",
+    "postcss-export-vars": "^0.2.0",
+    "postcss-import": "^14.1.0",
+    "postcss-preset-env": "^7.6.0"
+  },
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/css-tokens.js",
+  "module": "./dist/css-tokens.js",
+  "exports": {
+    ".": {
+      "import": "./dist/css-tokens.js",
+      "require": "./dist/css-tokens.js"
+    }
+  }
+}

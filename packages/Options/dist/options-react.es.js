@@ -1,17 +1,15 @@
 import require$$0, { Fragment } from "react";
 import { Menu, MenuButton, MenuItem } from "@szhsin/react-menu";
-const menu = "_menu_1nxxz_1";
-const menuOpen = "_menuOpen_1nxxz_4";
-const menuClose = "_menuClose_1nxxz_7";
-const item = "_item_1nxxz_10";
-const itemHover = "_itemHover_1nxxz_12";
-const button = "_button_1nxxz_15";
+const menu = "_menu_g1l3v_1";
+const menuOpen = "_menuOpen_g1l3v_6";
+const menuClose = "_menuClose_g1l3v_9";
+const item = "_item_g1l3v_12";
+const button = "_button_g1l3v_20";
 var styles = {
   menu,
   menuOpen,
   menuClose,
   item,
-  itemHover,
   button
 };
 var jsxRuntime = { exports: {} };
@@ -47,10 +45,7 @@ reactJsxRuntime_production_min.jsxs = q;
 const jsx = jsxRuntime.exports.jsx;
 const menuClassName = ({
   state
-}) => state === "opening" ? styles.menuOpen : state === "closing" ? styles.menuClose : styles.menu;
-const menuItemClassName = ({
-  hover
-}) => hover ? styles.itemHover : styles.item;
+}) => state === "opening" ? styles.menuOpen : styles.menuClose;
 function Options(props) {
   const {
     triggerOn = "Close",
@@ -58,16 +53,20 @@ function Options(props) {
     options,
     onChange,
     ssr = false,
-    disabled = false
+    disabled = false,
+    classNames
   } = props;
   if (options.length === 0)
     return /* @__PURE__ */ jsx(Fragment, {});
+  const menuClassNames = [styles.menu, menuClassName, classNames == null ? void 0 : classNames.group].filter(Boolean).join(" ");
+  const buttonClassNames = [styles.button, classNames == null ? void 0 : classNames.button].filter(Boolean).join(" ");
+  const menuItemClassNames = [styles.item, classNames == null ? void 0 : classNames.item].filter(Boolean).join(" ");
   return /* @__PURE__ */ jsx(Menu, {
-    menuClassName,
+    menuClassName: menuClassNames,
     menuButton: ({
       open
     }) => /* @__PURE__ */ jsx(MenuButton, {
-      className: styles.button,
+      className: buttonClassNames,
       ...disabled && {
         disabled
       },
@@ -80,7 +79,7 @@ function Options(props) {
       initialMounted: true
     },
     children: options == null ? void 0 : options.map((option) => /* @__PURE__ */ jsx(MenuItem, {
-      className: menuItemClassName,
+      className: menuItemClassNames,
       value: option.value,
       ...(option == null ? void 0 : option.href) !== void 0 && {
         href: option == null ? void 0 : option.href

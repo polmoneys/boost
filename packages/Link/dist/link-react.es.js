@@ -1,7 +1,7 @@
 import require$$0, { useMemo } from "react";
-const root = "_root_1y58m_1";
-const button = "_button_1y58m_40";
-const ring = "_ring_1y58m_41";
+const root = "_root_1fs58_1";
+const button = "_button_1fs58_40";
+const ring = "_ring_1fs58_41";
 var styles = {
   root,
   button,

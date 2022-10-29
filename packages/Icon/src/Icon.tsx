@@ -1,6 +1,6 @@
 import { Fragment, useMemo } from "react";
 import styles from "./Icon.module.css";
-import iconPaths, { IconName } from "./icons";
+import iconPaths from "./icons";
 
 interface Props {
   disabled?: boolean;
@@ -17,7 +17,7 @@ function Icon(props: Props) {
     d = "",
     disabled = false,
     variant,
-    fill = "#ffff55",
+    fill = "var(--accent-highlight)",
     stroke = "currentColor",
     strokeWidth = 2,
     size = "md",
