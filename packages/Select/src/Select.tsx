@@ -11,10 +11,11 @@ type Props<T extends Value> = {
     root?: string;
     select?: string;
   };
+  placeholder: string;
 };
 
 function Select<T extends Value>(props: Props<T>) {
-  const { options, value, onChange, classNames } = props;
+  const { options, value, onChange, classNames, placeholder } = props;
   function handleOnChange(e: React.FormEvent<HTMLSelectElement>) {
     const { selectedIndex } = e.currentTarget;
     const selectedOption = options[selectedIndex];
@@ -34,7 +35,7 @@ function Select<T extends Value>(props: Props<T>) {
         className={selectClassNames}
       >
         <option value="" hidden>
-          Example Placeholder
+          {placeholder}
         </option>
         {options.map(option => (
           <option key={option.value} value={option.value}>

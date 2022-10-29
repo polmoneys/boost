@@ -8,6 +8,7 @@ declare type Props<T extends Value> = {
         root?: string;
         select?: string;
     };
+    placeholder: string;
 };
 declare function Select<T extends Value>(props: Props<T>): JSX.Element;
 export default Select;

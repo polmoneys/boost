@@ -130,7 +130,8 @@ function Select(props) {
     options,
     value,
     onChange,
-    classNames
+    classNames,
+    placeholder
   } = props;
   function handleOnChange(e) {
     const {
@@ -151,7 +152,7 @@ function Select(props) {
       children: [/* @__PURE__ */ jsx("option", {
         value: "",
         hidden: true,
-        children: "Example Placeholder"
+        children: placeholder
       }), options.map((option) => /* @__PURE__ */ jsx("option", {
         value: option.value,
         children: option.label

@@ -1103,27 +1103,18 @@ function ScrollUnit(props) {
   const {
     children,
     type = "auto",
-    config = {
-      rootStyles: {
-        width: "290px",
-        height: "200px",
-        border: "var(--border-width) solid currentColor"
-      },
-      viewportStyles: {
-        backgroundColor: "transparent"
-      },
-      dir: "ltr"
-    },
+    dir = "ltr",
+    classNames,
     ...rest
   } = props;
+  const rootClassnames = [styles.root, classNames == null ? void 0 : classNames.root].filter(Boolean).join(" ");
+  const viewportClassnames = [styles.viewport, classNames == null ? void 0 : classNames.viewport].filter(Boolean).join(" ");
   return /* @__PURE__ */ jsxs($57acba87d6e25586$export$be92b6f5f03c0fe9, {
-    className: styles.root,
-    style: config.rootStyles,
+    className: rootClassnames,
     type,
     ...rest,
     children: [/* @__PURE__ */ jsx($57acba87d6e25586$export$d5c6c08dc2d3ca7, {
-      className: styles.viewport,
-      style: config.viewportStyles,
+      className: viewportClassnames,
       children
     }), /* @__PURE__ */ jsx($57acba87d6e25586$export$9a4e88b92edfce6b, {
       orientation: "vertical",

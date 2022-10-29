@@ -1,24 +1,17 @@
 /*
   Roadmap: 
+  - &:hover
   - &:focus-within 
 */
 .surface {
   background-color: var(--transparent);
   border: var(--border-width) solid transparent;
-  shadow: var(--shadow);
   border-radius: var(--border-radius);
-
-  &.fit-width {
-    width: fit-content;
-  }
-
-  &.fit-height {
-    height: fit-content;
-  }
 
   &:focus {
     outline-color: var(--transparent) !important;
   }
+
   &.-highlight {
     background-color: var(--accent-highlight) !important;
     border-color: var(--accent-highlight);

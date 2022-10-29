@@ -14,6 +14,7 @@ interface Props {
   /** Aspect ratio of Dialog */
   ratio?: "portrait" | "landscape" | "tray";
   className?: string;
+  isLastDialogOpened?: boolean;
 }
 
 function Dialog(props: Props) {
@@ -25,6 +26,7 @@ function Dialog(props: Props) {
     open,
     onClose,
     ratio = "landscape",
+    isLastDialogOpened = false,
   } = props;
   const isPortrait = ratio === "portrait";
   const isLandscape = ratio === "landscape";
@@ -42,7 +44,13 @@ function Dialog(props: Props) {
     .join(" ");
   return (
     <DialogOverlay isOpen={open} onDismiss={onClose} className={styles.overlay}>
-      <DialogContent aria-label={label} className={classNames}>
+      <DialogContent
+        {...(isLastDialogOpened && {
+          blockScrollOnMount: false,
+        })}
+        aria-label={label}
+        className={classNames}
+      >
         <Fragment>
           {trigger}
           {children}

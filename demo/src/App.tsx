@@ -29,14 +29,22 @@ import { Radio } from "radio-react";
 import { Options } from "options-react";
 import { Dialog } from "dialog-react";
 import { Select } from "select-react";
+import { Accordion } from "accordion-react";
+import { ScrollUnit } from "scroll-unit-react";
 import {
   HelveticaNeue,
   HelveticaNeueBoldXL,
   HelveticaNeueBoldS,
 } from "font-react";
-import { IconCheck, IconCross, IconCaretUp } from "icon-react";
+import { IconCheck, IconCross, IconCaretUp, IconCaretDown } from "icon-react";
 import { useBinary } from "hooks-react";
+import { targets, tags, StatusMachine } from "./utils";
 
+// From CSS namespace
+import "../../css/dist/css.css";
+import "../../css/dist/css-tokens.js";
+
+// From packages namespace
 import "../../packages/Input/dist/style.css";
 import "../../packages/Button/dist/style.css";
 import "../../packages/Link/dist/style.css";
@@ -51,20 +59,14 @@ import "../../packages/Font/dist/style.css";
 import "../../packages/Icon/dist/style.css";
 import "../../packages/Select/dist/style.css";
 import "../../packages/Dialog/dist/style.css";
+import "../../packages/ScrollUnit/dist/style.css";
+import "../../packages/Accordion/dist/style.css";
 
-import "@szhsin/react-menu/dist/index.css";
+// import "@szhsin/react-menu/dist/index.css";
 
-const targets = [
-  { value: "es3", label: "ECMAScript 3" },
-  { value: "es5", label: "ECMAScript 5" },
-  { value: "es2015", label: "ECMAScript 2015" },
-  { value: "es2016", label: "ECMAScript 2016" },
-  { value: "es2017", label: "ECMAScript 2017" },
-  { value: "es2018", label: "ECMAScript 2018" },
-  { value: "es2019", label: "ECMAScript 2019" },
-];
+// DEMO
+import "./app.css";
 
-type StatusMachine = "draft" | "live" | "unknown" | "published";
 function App() {
   const [hasExploded, setDetonation] = useState(false);
   const [tab, setTab] = useState(true);
@@ -124,19 +126,26 @@ function App() {
             href="https://Google.com"
             data-tooltip="Search on google"
             variant="button"
+            className="surface -highlight px $$"
           >
             Link as Button
           </Link>
         </Group>
 
         <Group as="li" gap="2em">
-          <Button>Tweet</Button>
-          <Button variant="icon">
+          <Button className="surface -highlight px $$">Tweet</Button>
+          <Button variant="icon" className="surface -highlight px $$">
             <svg viewBox="-32 -32 144 120" width="73" height="60">
               <path d="M72 6.926a29.512 29.512 0 01-8.484 2.326 14.816 14.816 0 006.495-8.172 29.572 29.572 0 01-9.38 3.584A14.752 14.752 0 0049.847 0C40.314 0 33.304 8.898 35.46 18.138 23.183 17.522 12.298 11.64 5.013 2.704c-3.87 6.638-2.008 15.325 4.57 19.721a14.706 14.706 0 01-6.69-1.847c-.16 6.843 4.744 13.243 11.848 14.67a14.8 14.8 0 01-6.67.253c1.879 5.868 7.334 10.14 13.798 10.258C15.66 50.626 7.837 52.8 0 51.876a41.811 41.811 0 0022.643 6.637c27.426 0 42.92-23.164 41.986-43.94A30.009 30.009 0 0072 6.926z"></path>
             </svg>
           </Button>
           <Options
+            classNames={{
+              button: "surface -highlight px $$",
+              group: "surface -highlight p $",
+              item: "p $",
+            }}
+            onChange={opt => console.log(opt)}
             options={[
               {
                 id: "0",
@@ -158,16 +167,6 @@ function App() {
           />
         </Group>
 
-        <Group as="li" gap="2em">
-          <Button onClick={() => portraitActions.on()}>Dialog portrait</Button>
-          <Button onClick={() => landscapeActions.on()}>
-            Dialog landscape
-          </Button>
-
-          <Button onClick={() => trayActions.on()} variant="icon">
-            <IconCaretUp size="lg" />
-          </Button>
-        </Group>
         <li>
           <Group
             as="form"
@@ -187,9 +186,11 @@ function App() {
               label="Input label"
               placeholder="Type friend"
               onChangeValue={val => console.log(val)}
+              classNames={{ input: "surface -highlight px $$" }}
             />
           </Group>
         </li>
+
         <li>
           <Radio.Group
             initial={publishStatus}
@@ -210,43 +211,72 @@ function App() {
               </Fragment>
             )}
           >
-            <Radio name="draft" value="draft" id="radio-draft" />
-            <Radio name="live" value="live" id="radio-live" />
-            <Radio name="unknown" value="unknown" id="radio-unknown" />
-            <Radio name="published" value="published" id="radio-published" />
-          </Radio.Group>
-        </li>
-        <li>
-          <Radio.Group
-            checkboxSize={"200px"}
-            initial={publishStatus}
-            gap=".4em"
-            onChange={(selection: string) =>
-              setStatus(selection as StatusMachine)
-            }
-            renderLabel={({
-              checked,
-              checkboxLabel,
-            }: {
-              checked: boolean;
-              checkboxLabel: string;
-            }) => (
-              <Fragment>
-                {checked ? <FiCheck size={48} /> : <FiMinus size={48} />}
-                {checkboxLabel}
-              </Fragment>
-            )}
-          >
-            <Radio name="draft" value="draft" id="radio-draft" />
-            <Radio name="live" value="live" id="radio-live" />
-            <Radio name="unknown" value="unknown" id="radio-unknown" />
-            <Radio name="published" value="published" id="radio-published" />
+            <Radio
+              name="draft"
+              value="draft"
+              id="radio-draft"
+              classNames={{
+                checked: "surface -success",
+              }}
+            />
+            <Radio
+              name="live"
+              value="live"
+              id="radio-live"
+              classNames={{
+                checked: "surface -highlight",
+              }}
+            />
+            <Radio
+              name="unknown"
+              value="unknown"
+              id="radio-unknown"
+              classNames={{
+                checked: "surface -highlight",
+              }}
+            />
+            <Radio
+              name="published"
+              value="published"
+              id="radio-published"
+              classNames={{
+                checked: "surface -error",
+              }}
+            />
           </Radio.Group>
         </li>
 
         <li>
-          <Select options={targets} value={target} onChange={setTarget} />
+          <Select
+            placeholder="Choose favorite "
+            options={targets}
+            value={target}
+            onChange={setTarget}
+            classNames={{ root: "surface -highlight", select: "px $$$" }}
+          />
         </li>
+        <Group
+          as="li"
+          gap="var(--gap-3)"
+          options={{
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <ScrollUnit
+            type="hover"
+            classNames={{
+              root: "scroll",
+              viewport: "surface -highlight p $$",
+            }}
+          >
+            {tags.map(tag => (
+              <HelveticaNeue className="tag" key={tag}>
+                {tag}
+              </HelveticaNeue>
+            ))}
+          </ScrollUnit>
+        </Group>
         <Group
           as="li"
           options={{
@@ -255,7 +285,12 @@ function App() {
             direction: "column",
           }}
         >
-          <Button onClick={() => setOpen(true)}>Open trap</Button>
+          <Button
+            className="surface -highlight px $$"
+            onClick={() => setOpen(true)}
+          >
+            Open trap
+          </Button>
 
           <Trap initial={isOpen}>
             {isOpen && (
@@ -267,21 +302,83 @@ function App() {
                   justifyContent: "flex-start",
                 }}
               >
-                <Button onClick={() => setOpen(false)}>
+                <Button
+                  variant="icon"
+                  className="surface -success px $$"
+                  onClick={() => setOpen(false)}
+                >
                   <FiGitBranch />
                 </Button>
-                <Button onClick={() => setOpen(false)}>
+                <Button
+                  variant="icon"
+                  className="surface -success px $$"
+                  onClick={() => setOpen(false)}
+                >
                   <FiGitCommit />
                 </Button>
-                <Button onClick={() => setOpen(false)}>
+                <Button
+                  variant="icon"
+                  className="surface -success px $$"
+                  onClick={() => setOpen(false)}
+                >
                   <FiGitMerge />
                 </Button>
-                <Button onClick={() => setOpen(false)}>
+
+                <Button
+                  variant="icon"
+                  className="surface -error px $$"
+                  onClick={() => setOpen(false)}
+                >
                   <FiX />
                 </Button>
               </Group>
             )}
           </Trap>
+        </Group>
+        <Group as="li" gap="2em">
+          <Button
+            className="surface -success px $$"
+            onClick={() => portraitActions.on()}
+          >
+            Dialog portrait
+          </Button>
+          <Button
+            className="surface -success px $$"
+            onClick={() => landscapeActions.on()}
+          >
+            Dialog landscape
+          </Button>
+
+          <Button
+            className="surface -success px $$"
+            onClick={() => trayActions.on()}
+            variant="icon"
+          >
+            {trayState === "on" ? (
+              <IconCaretDown size="lg" />
+            ) : (
+              <IconCaretUp size="lg" />
+            )}{" "}
+          </Button>
+        </Group>
+
+        <li className="white-space"></li>
+        <Group
+          as="li"
+          css="flex"
+          options={{
+            alignItems: "center",
+            justifyContent: "flex-start",
+            direction: "column",
+          }}
+        >
+          <Sticky as="div" className="surface -highlight p $$">
+            <h1>I will stick to the top</h1>
+          </Sticky>
+          <p style={{ maxWidth: "75%" }}>
+            Lorem ipsun dolor sit amet indisciplinctur gloria at rosae
+            pantocrator. Lorem anae shandy cante oremus.
+          </p>
         </Group>
         <Group
           as="li"
@@ -294,42 +391,6 @@ function App() {
           <Shape.Circle />
           <Shape.Square />
           <Shape sides={5} />
-        </Group>
-        <Layers as="li" className="full-width">
-          <Group
-            as="div"
-            gap="2em"
-            options={{ direction: "column", alignItems: "center" }}
-            aria-hidden={tab ? false : true}
-          >
-            <Button onClick={() => setTab(prev => !prev)}>Show Circle</Button>
-            <Shape.Triangle />
-          </Group>
-          <Group
-            as="div"
-            gap="2em"
-            options={{ direction: "column", alignItems: "center" }}
-            aria-hidden={!tab ? false : true}
-          >
-            <Button onClick={() => setTab(prev => !prev)}>Show Triangle</Button>
-            <Shape.Circle />
-          </Group>
-        </Layers>
-        <Group
-          as="li"
-          options={{
-            alignItems: "center",
-            justifyContent: "flex-start",
-            direction: "column",
-          }}
-        >
-          <Sticky as="div" className="sticky-bg">
-            <h1>I will stick to the top</h1>
-          </Sticky>
-          <p style={{ maxWidth: "75%" }}>
-            Lorem ipsun dolor sit amet indisciplinctur gloria at rosae
-            pantocrator. Lorem anae shandy cante oremus.
-          </p>
         </Group>
 
         <Group
@@ -353,6 +414,36 @@ function App() {
           <IconCheck size="lg" variant="solid" />
         </Group>
 
+        <Layers as="li" className="full-width">
+          <Group
+            as="div"
+            gap="2em"
+            options={{ direction: "column", alignItems: "center" }}
+            aria-hidden={tab ? false : true}
+          >
+            <Button
+              className="surface -highlight px $$"
+              onClick={() => setTab(prev => !prev)}
+            >
+              Show Circle
+            </Button>
+            <Shape.Triangle />
+          </Group>
+          <Group
+            as="div"
+            gap="2em"
+            options={{ direction: "column", alignItems: "center" }}
+            aria-hidden={!tab ? false : true}
+          >
+            <Button
+              className="surface -error px $$"
+              onClick={() => setTab(prev => !prev)}
+            >
+              Show Triangle
+            </Button>
+            <Shape.Circle />
+          </Group>
+        </Layers>
         <Fence
           as="li"
           options={{
@@ -377,11 +468,10 @@ function App() {
             <Shape
               sides={hasExploded ? 5 : 3}
               size={200}
-              transforms="translateY(10px)"
+              transforms="translateY(50px)"
             />
           </Group>
         </Fence>
-        <li className="white-space"></li>
 
         <li>
           <Track as="div" maskSize="1400px">
@@ -434,8 +524,7 @@ function App() {
               />
             </Card>
           </Track>
-        </li>
-        <li>
+          <br />
           <Track as="div" maskSize="1400px">
             <Card as="article" ratio="landscape">
               <h2>Card Title</h2>
@@ -508,15 +597,19 @@ function App() {
             </Card>
           </Track>
         </li>
-
-        <li className="white-space"></li>
       </Group>
 
       <Dialog
         label="Landscape state"
         closeButton={
-          <Button onClick={() => ({})} keyboard={false} nonKeyboard={false}>
-            Close <IconCross />
+          <Button
+            variant="icon"
+            className="surface -highlight"
+            onClick={() => ({})}
+            keyboard={false}
+            nonKeyboard={false}
+          >
+            <IconCross />
           </Button>
         }
         onClose={() => landscapeActions.off()}
@@ -535,15 +628,25 @@ function App() {
         </HelveticaNeue>
         <br />
 
-        <Button onClick={() => portraitActions.on()}>
+        <Button
+          className="surface -highlight px $$"
+          onClick={() => portraitActions.on()}
+        >
           Trigger DialogPortrait
         </Button>
       </Dialog>
       <Dialog
         label="Portrait state"
+        isLastDialogOpened={portraitState === "on" && landscapeState === "on"}
         closeButton={
-          <Button onClick={() => ({})} keyboard={false} nonKeyboard={false}>
-            Close <IconCross />
+          <Button
+            variant="icon"
+            className="surface -highlight"
+            onClick={() => ({})}
+            keyboard={false}
+            nonKeyboard={false}
+          >
+            <IconCross />
           </Button>
         }
         ratio="portrait"
@@ -566,8 +669,14 @@ function App() {
         label="Tray state"
         open={trayState === "on"}
         closeButton={
-          <Button onClick={() => ({})} keyboard={false} nonKeyboard={false}>
-            Close <IconCross />
+          <Button
+            variant="icon"
+            className="surface -highlight"
+            onClick={() => ({})}
+            keyboard={false}
+            nonKeyboard={false}
+          >
+            <IconCross />
           </Button>
         }
         onClose={() => trayActions.off()}

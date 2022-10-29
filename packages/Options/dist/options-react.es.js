@@ -1,10 +1,10 @@
 import require$$0, { Fragment } from "react";
 import { Menu, MenuButton, MenuItem } from "@szhsin/react-menu";
-const menu = "_menu_g1l3v_1";
-const menuOpen = "_menuOpen_g1l3v_6";
-const menuClose = "_menuClose_g1l3v_9";
-const item = "_item_g1l3v_12";
-const button = "_button_g1l3v_20";
+const menu = "_menu_1tdmb_1";
+const menuOpen = "_menuOpen_1tdmb_6";
+const menuClose = "_menuClose_1tdmb_9";
+const item = "_item_1tdmb_12";
+const button = "_button_1tdmb_17";
 var styles = {
   menu,
   menuOpen,

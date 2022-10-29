@@ -1,10 +1,10 @@
 import { ReactNode } from "react";
 interface Props {
     children: ReactNode;
-    config?: {
-        viewportStyles?: Record<string, string>;
-        rootStyles?: Record<string, string>;
-        dir?: "ltr" | "rtl";
+    dir?: "ltr" | "rtl";
+    classNames?: {
+        root?: string;
+        viewport?: string;
     };
     type?: "auto" | "always" | "scroll" | "hover";
 }

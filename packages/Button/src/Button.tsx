@@ -3,7 +3,6 @@ import { Unit } from "unit-react";
 import styles from "./Button.module.css";
 
 type SurfaceTypes = "highlight" | "" | "success" | "error";
-type PaddingScale = 1 | 2 | 3 | 4 | 5;
 
 interface Props extends ComponentProps<"button"> {
   variant?: "text" | "icon" | "default";

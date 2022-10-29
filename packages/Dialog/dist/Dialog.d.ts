@@ -10,6 +10,7 @@ interface Props {
     /** Aspect ratio of Dialog */
     ratio?: "portrait" | "landscape" | "tray";
     className?: string;
+    isLastDialogOpened?: boolean;
 }
 declare function Dialog(props: Props): JSX.Element;
 declare namespace Dialog {

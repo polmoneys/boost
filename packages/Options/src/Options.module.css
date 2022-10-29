@@ -11,10 +11,7 @@
 
 .item {
   text-align: left;
-}
-.item:hover {
-  outline: var(--border-width) solid currentColor;
-  outline-offset: calc(var(--border-width) * 1.1);
+  cursor: pointer;
 }
 
 .button {

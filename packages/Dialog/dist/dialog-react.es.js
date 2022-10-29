@@ -94,7 +94,8 @@ function Dialog(props) {
     closeButton,
     open,
     onClose,
-    ratio = "landscape"
+    ratio = "landscape",
+    isLastDialogOpened = false
   } = props;
   const isPortrait = ratio === "portrait";
   const isLandscape = ratio === "landscape";
@@ -103,6 +104,9 @@ function Dialog(props) {
   });
   const classNames = [styles.root, isPortrait && styles.portrait, isLandscape && styles.landscape, className].filter(Boolean).join(" ");
   return /* @__PURE__ */ jsx(DialogOverlay, {
+    ...isLastDialogOpened && {
+      blockScrollOnMount: false
+    },
     isOpen: open,
     onDismiss: onClose,
     className: styles.overlay,

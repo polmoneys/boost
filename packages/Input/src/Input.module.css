@@ -28,6 +28,9 @@
   color: var(--gray-2);
 }
 
+.input:autofill {
+}
+
 .root label::after {
   content: "\A";
   white-space: pre;
