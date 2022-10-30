@@ -29,16 +29,17 @@ import { Radio } from "radio-react";
 import { Options } from "options-react";
 import { Dialog } from "dialog-react";
 import { Select } from "select-react";
-import { Accordion } from "accordion-react";
+import { Checkbox } from "checkbox-react";
 import { ScrollUnit } from "scroll-unit-react";
 import {
   HelveticaNeue,
   HelveticaNeueBoldXL,
   HelveticaNeueBoldS,
+  HelveticaNeueBold,
 } from "font-react";
 import { IconCheck, IconCross, IconCaretUp, IconCaretDown } from "icon-react";
-import { useBinary } from "hooks-react";
-import { targets, tags, StatusMachine } from "./utils";
+import { useBinary, useInput, useSelection } from "hooks-react";
+import { targets, tags, StatusMachine, USESELECTION_DEMO } from "./utils";
 
 // From CSS namespace
 import "../../css/dist/css.css";
@@ -60,7 +61,9 @@ import "../../packages/Icon/dist/style.css";
 import "../../packages/Select/dist/style.css";
 import "../../packages/Dialog/dist/style.css";
 import "../../packages/ScrollUnit/dist/style.css";
-import "../../packages/Accordion/dist/style.css";
+import "../../packages/Checkbox/dist/style.css";
+
+import { VALIDATE_USERNAME } from "../../hooks/src/useInput";
 
 // import "@szhsin/react-menu/dist/index.css";
 
@@ -72,6 +75,12 @@ function App() {
   const [tab, setTab] = useState(true);
   const [isOpen, setOpen] = useState(false);
   const [inputValue, setInput] = useState("");
+
+  const [value, onChange, error] = useInput({
+    initial: "",
+    validation: VALIDATE_USERNAME,
+    errorMessage: "error friend",
+  });
   const [publishStatus, setStatus] = useState<StatusMachine>("draft");
   const [publishStatusMultiple, setStatusMultiple] = useState<
     Array<"draft" | "live" | "unknown" | "none">
@@ -82,6 +91,10 @@ function App() {
     setStatus(value as "draft" | "live" | "unknown");
   };
 
+  const [{ output, all, mixed }, { onFollowerChange, onLeadChange }] =
+    useSelection(USESELECTION_DEMO);
+
+  console.log({ output, all, mixed });
   const { state: landscapeState, actions: landscapeActions } = useBinary("off");
   const { state: portraitState, actions: portraitActions } = useBinary("off");
   const { state: trayState, actions: trayActions } = useBinary("off");
@@ -95,9 +108,9 @@ function App() {
 
   const [target, setTarget] = useState("");
 
-  useEffect(() => {
-    console.log({ target });
-  }, [target]);
+  // useEffect(() => {
+  //   console.log({ target });
+  // }, [target]);
 
   return (
     <main>
@@ -176,18 +189,39 @@ function App() {
             }}
           >
             <Input
-              autoFocus
               value={inputValue}
               onChange={e => {
                 const nextValue = e.target.value;
                 setInput(nextValue);
               }}
               id="test-input"
-              label="Input label"
+              label="Friends"
               placeholder="Type friend"
               onChangeValue={val => console.log(val)}
               classNames={{ input: "surface -highlight px $$" }}
             />
+            <Input
+              autoFocus
+              value={value}
+              onChange={e => {
+                const nextValue = e.target.value;
+                onChange(nextValue);
+              }}
+              id="test-error-input"
+              errorElementId="test-error-input-error"
+              label="Username"
+              placeholder="Type username"
+              onChangeValue={val => console.log(val)}
+              classNames={{ input: "surface -highlight px $$" }}
+            />
+            {error !== undefined && (
+              <HelveticaNeueBold className="errors-input" aria-live="polite">
+                <IconCross size="lg" />
+                <span id={`test-error-input-error`}>
+                  {error !== undefined ? error : ""}
+                </span>
+              </HelveticaNeueBold>
+            )}
           </Group>
         </li>
 
@@ -244,6 +278,34 @@ function App() {
               }}
             />
           </Radio.Group>
+        </li>
+
+        <li>
+          <Checkbox
+            isMixed={mixed === "mixed"}
+            checked={mixed !== "mixed" && mixed === true}
+            label="Parent checkbox"
+            name="parent"
+            value="parent"
+            id="parent-checkbox-test"
+            onChange={ev => onLeadChange()}
+            fill={all ? "var(--accent-success)" : "var(--accent-error)"}
+          />
+          <br />
+          {Object.entries(output).map(([value, state]) => (
+            <div key={value}>
+              <Checkbox
+                name={value.toString().toLowerCase()}
+                label={value.toString().toLowerCase()}
+                id={`${value.toString().toLowerCase()}-test-checkbox`}
+                checked={state as boolean}
+                value={value}
+                onChange={ev => onFollowerChange(ev)}
+                // value={value}
+                fill="var(--accent-highlight)"
+              />
+            </div>
+          ))}
         </li>
 
         <li>

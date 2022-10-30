@@ -13,3 +13,9 @@ export const tags = Array.from({ length: 50 }).map(
 );
 
 export type StatusMachine = "draft" | "live" | "unknown" | "published";
+
+export const USESELECTION_DEMO = {
+  mayo: false,
+  mustard: true,
+  ketchup: false,
+};

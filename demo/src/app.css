@@ -99,3 +99,8 @@ ul {
   width: 290px;
   height: 270px;
 }
+
+.errors-input {
+  text-align: left;
+  color: var(--accent-error);
+}
