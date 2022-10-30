@@ -4,16 +4,16 @@ Attempt #5872046752 at extensible React TS components. [Demo](https://polmoneys.
 
 ### Get started 
 
-Components are meant to be used with CSS utility classNames for customization. Let's call a combination of color styles/theme a **surface**. 
+Components are meant to be used with CSS utility classNames for customization. Let's call a combination of color styles/theme a **surface** with a variant **-success**. 
 
 ```jsx
 
  <Button
-      // adds green bg & 2 units of padding horizontally 
+      // adds theme & 2 units of padding horizontally 
       className="surface -success px $$"
       onClick={() => trayActions.on()}
    >
-      <IconCaretUp size="lg" />
+     Show tray
    </Button>
 
 ```
@@ -27,9 +27,8 @@ If you are working at 'design system' level you can always use the primitive and
  const SuccessButton = (props:ButtonProps)=> <Button
       {...props}
      className="surface -success px $$"
-   >
-      <IconCaretUp size="lg" />
-   </Button>
+   />
+    
 
 Button.Success = SuccessButton;
 
@@ -44,7 +43,6 @@ Some components require more complex **classNames** prop, an Input:
 
  const HighlightInput = (props:InputProps)=> <Input
       {...props}
-      // adds yellow bg & 2 units of padding horizontally 
       classNames={{ input: "surface -highlight px $$" }}
    />
 
@@ -69,6 +67,10 @@ Add a folder under **packages** and configure both **vite.config.ts** and **pack
 ```
 
 To use it on **demo** you must add it to **package.json** dependencies and import it on **App.tsx**.
+
+### Add hooks
+
+Add hook on folder **hooks/src** and import/export it to/from **src/index.ts**. 
 
 ### Author CSS
 
