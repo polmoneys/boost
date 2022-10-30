@@ -1,36 +1,15 @@
 import { ChangeEvent, useState } from "react";
+import * as yup from "yup";
 
-/*
 export const VALIDATE_URL = yup.string().url();
 export const VALIDATE_USERNAME = yup.string().max(8, "8 chars max");
 export type SchemaURL = yup.InferType<typeof VALIDATE_URL>;
 export type SchemaUsername = yup.InferType<typeof VALIDATE_USERNAME>;
 
-  const [ value, setValue, {valid,errors}] = useInput({
-    initial?:string;
-    validation: 'url' | 'username' | (val)=> val.length > 0 ;
-  })
-  <label
-          {...(labelHidden && { className: styles.hiddenLabel })}
-          htmlFor={id}
-        >
-          {label}
-  </label>
-  <input
-      label="Username"
-      id="username"
-      name="username"
-      validation={VALIDATE_USERNAME}
-      onChange={HandleChange}
-      aria-describedby={`${id}-error`}
-    />
-
-  <p id={`${id}-error`} aria-live="polite"></p>
-*/
-
 interface Props {
   initial: string;
-  validation?: "url" | "username" | any;
+  // Roadmap: add preset validations as 'url' | 'username'...
+  validation?: any;
   errorMessage?: string;
 }
 type InputChange = ChangeEvent<HTMLInputElement>;
@@ -45,19 +24,19 @@ const UseInput = (props: Props): [string, OnChange, undefined | string] => {
   const onChange: OnChange = (data: string | InputChange) => {
     const value = typeof data === "string" ? data : data.target.value;
 
-    // if (!isNil(validation)) {
-    //   return validation.isValid(value).then((valid: boolean) => {
-    //     if (valid) {
-    //       setValue(value);
-    //       return;
-    //     } else {
-    //       if (!isNil(errorMessage)) setError(errorMessage);
-    //       return;
-    //     }
-    //   });
-    // }
+    return validation?.isValid(value).then((valid: boolean) => {
+      if (valid) {
+        setValue(value);
+        return;
+      } else {
+        validation?.validate(value).catch((err: any) => {
+          setError(err?.message ?? errorMessage);
+          setValue(value);
+        });
 
-    setValue(value);
+        return;
+      }
+    });
   };
 
   return [value, onChange, error];
