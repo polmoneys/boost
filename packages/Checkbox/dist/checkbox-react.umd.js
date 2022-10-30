@@ -1,0 +1,17 @@
+(function(i,f){typeof exports=="object"&&typeof module!="undefined"?f(exports,require("react")):typeof define=="function"&&define.amd?define(["exports","react"],f):(i=typeof globalThis!="undefined"?globalThis:i||self,f(i.Checkbox={},i.React))})(this,function(i,f){"use strict";function C(r){return r&&typeof r=="object"&&"default"in r?r:{default:r}}var v=C(f),h={exports:{}},a={};/**
+ * @license React
+ * react-jsx-runtime.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */var R=v.default,$=Symbol.for("react.element"),g=Symbol.for("react.fragment"),S=Object.prototype.hasOwnProperty,T=R.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.ReactCurrentOwner,w={key:!0,ref:!0,__self:!0,__source:!0};function b(r,t,s){var o,n={},l=null,e=null;s!==void 0&&(l=""+s),t.key!==void 0&&(l=""+t.key),t.ref!==void 0&&(e=t.ref);for(o in t)S.call(t,o)&&!w.hasOwnProperty(o)&&(n[o]=t[o]);if(r&&r.defaultProps)for(o in t=r.defaultProps,t)n[o]===void 0&&(n[o]=t[o]);return{$$typeof:$,type:r,key:l,ref:e,props:n,_owner:T.current}}a.Fragment=g,a.jsx=b,a.jsxs=b,h.exports=a;const E=h.exports.jsx;function N(r){const{children:t,as:s,gap:o="1em",size:n="320px",css:l="flex",options:e,DONOTUse:p,..._}=r,u=l==="flex",y=f.useMemo(()=>{var c;return u?{display:"flex",gap:o,flexDirection:(c=e==null?void 0:e.direction)!=null?c:"row",...(e==null?void 0:e.stretch)&&{width:"100%"},...(e==null?void 0:e.alignItems)&&{alignItems:e==null?void 0:e.alignItems},...(e==null?void 0:e.justifyContent)&&{justifyContent:e==null?void 0:e.justifyContent},...(e==null?void 0:e.wrap)&&{flexWrap:e.wrap},...n!=="320px"&&{flex:`1 0 ${n}`}}:{display:"grid",gap:o,gridTemplateColumns:`repeat(auto-fit, minmax(min(100%,${n}), 1fr))`,...(e==null?void 0:e.stretch)&&{width:"100%"}}},[u]);return E(s||"div",{..._,style:{...p!==void 0&&{...p.DONOTStyle},...y},children:t})}var x={root:"ah",checkbox:"af",mixed:"DU"},m={exports:{}},d={};/**
+ * @license React
+ * react-jsx-runtime.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */var D=v.default,I=Symbol.for("react.element"),P=Symbol.for("react.fragment"),L=Object.prototype.hasOwnProperty,F=D.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.ReactCurrentOwner,U={key:!0,ref:!0,__self:!0,__source:!0};function j(r,t,s){var o,n={},l=null,e=null;s!==void 0&&(l=""+s),t.key!==void 0&&(l=""+t.key),t.ref!==void 0&&(e=t.ref);for(o in t)L.call(t,o)&&!U.hasOwnProperty(o)&&(n[o]=t[o]);if(r&&r.defaultProps)for(o in t=r.defaultProps,t)n[o]===void 0&&(n[o]=t[o]);return{$$typeof:I,type:r,key:l,ref:e,props:n,_owner:F.current}}d.Fragment=P,d.jsx=j,d.jsxs=j,m.exports=d;const k=m.exports.jsx,B=m.exports.jsxs;function M(r){const{value:t,isMixed:s,onChange:o,className:n,label:l,id:e,name:p,checked:_,fill:u}=r,y=[x.root,n].filter(Boolean).join(" "),O=[x.checkbox,s&&x.mixed].filter(Boolean).join(" ");return f.useEffect(()=>{const c=document.querySelector(`#${e}`);c&&(c.indeterminate=!!s)},[s]),k(N,{as:"label",children:B("label",{htmlFor:e,className:y,children:[k("input",{className:O,onChange:o,type:"checkbox",name:p,id:e,...!s&&{value:t},...!s&&u!==void 0&&{style:{"--checkbox-fill":u}},checked:!s&&_}),l]})})}i.Checkbox=M,Object.defineProperties(i,{__esModule:{value:!0},[Symbol.toStringTag]:{value:"Module"}})});
