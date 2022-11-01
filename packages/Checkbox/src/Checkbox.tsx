@@ -1,5 +1,5 @@
 import { Group } from "group-react";
-import { ChangeEvent, CSSProperties, useEffect } from "react";
+import { ChangeEvent, CSSProperties, useEffect, useMemo } from "react";
 import styles from "./Checkbox.module.css";
 
 type Props = {
@@ -14,6 +14,10 @@ type Props = {
   fill?: string;
 };
 
+/* 
+  Roadmap:
+  [ ] make icon version 
+*/
 function Checkbox(props: Props) {
   const {
     value,
@@ -28,9 +32,20 @@ function Checkbox(props: Props) {
   } = props;
 
   const rootClassNames = [styles.root, className].filter(Boolean).join(" ");
-  const checkboxClassNames = [styles.checkbox, isMixed && styles.mixed]
-    .filter(Boolean)
-    .join(" ");
+
+  const checkboxClassNames = useMemo(
+    () =>
+      [
+        styles.checkbox,
+        isMixed && styles.mixed,
+        checked && styles.checked,
+        // leadCheckbox
+        !checked && isMixed !== undefined && styles.unchecked,
+      ]
+        .filter(Boolean)
+        .join(" "),
+    [isMixed, checked]
+  );
 
   useEffect(() => {
     const element = document.querySelector(`#${id}`) as HTMLInputElement;

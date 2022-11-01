@@ -90,10 +90,14 @@ function Group(props) {
 const root = "ah";
 const checkbox = "af";
 const mixed = "DU";
+const checked = "wT";
+const unchecked = "-b";
 var styles = {
   root,
   checkbox,
-  mixed
+  mixed,
+  checked,
+  unchecked
 };
 var jsxRuntime = { exports: {} };
 var reactJsxRuntime_production_min = {};
@@ -136,11 +140,16 @@ function Checkbox(props) {
     label,
     id,
     name,
-    checked,
+    checked: checked2,
     fill
   } = props;
   const rootClassNames = [styles.root, className].filter(Boolean).join(" ");
-  const checkboxClassNames = [styles.checkbox, isMixed && styles.mixed].filter(Boolean).join(" ");
+  const checkboxClassNames = useMemo(() => [
+    styles.checkbox,
+    isMixed && styles.mixed,
+    checked2 && styles.checked,
+    !checked2 && isMixed !== void 0 && styles.unchecked
+  ].filter(Boolean).join(" "), [isMixed, checked2]);
   useEffect(() => {
     const element = document.querySelector(`#${id}`);
     if (element) {
@@ -166,7 +175,7 @@ function Checkbox(props) {
             "--checkbox-fill": fill
           }
         },
-        checked: !isMixed && checked
+        checked: !isMixed && checked2
       }), label]
     })
   });

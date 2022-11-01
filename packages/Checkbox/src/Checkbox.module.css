@@ -32,11 +32,13 @@
   transform: scale(0);
   transition: 120ms transform ease-in-out;
   box-shadow: inset 1em 1em var(--checkbox-fill);
-  background-color: CanvasText;
+  border: 0.1em solid var(--checkbox-fill);
   /* transform-origin: bottom left;
   clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%); */
 }
-.checkbox:not(.mixed):checked::before {
+.checkbox:not(.mixed):checked::before,
+.checkbox:not(.mixed).checked::before,
+.checkbox.unchecked::before {
   transform: scale(1);
 }
 .checkbox:focus {
