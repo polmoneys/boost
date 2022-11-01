@@ -37,7 +37,8 @@ const useList = (initial) => {
       clearItems: useCallback(() => setItems(() => []), []),
       addItem: useCallback((item) => setItems((v) => [...v, item]), []),
       removeItemById: useCallback((id) => setItems((oldItems) => oldItems.filter((oldItem) => oldItem && oldItem.uuid !== id)), []),
-      removeItemByIndex: useCallback((index) => setItems((oldItems) => oldItems.filter((oldItem, i) => i !== index)), [])
+      removeItemByIndex: useCallback((index) => setItems((oldItems) => oldItems.filter((oldItem, i) => i !== index)), []),
+      isInList: useCallback((id) => items.map((itm) => itm.uuid).includes(id), [items])
     }
   ];
 };
@@ -2756,4 +2757,25 @@ function useSelection(items) {
     { onFollowerChange, onLeadChange, isSelected }
   ];
 }
-export { useBinary, useCache, useImageSize, UseInput as useInput, useList, useSelection };
+function useNewBrowserTab(props) {
+  const {
+    url,
+    title,
+    width = 200,
+    height = 300,
+    left = 100,
+    top = 100,
+    config
+  } = props;
+  let options = `left=${left},screenX=${left},top=${top},screenY=${top},width=${width},innerWidth=${width},innerHeight=${height},height=${height}`;
+  const defaultOptions = `menubar=no,location=no,resizable=no,scrollbars=no,status=no,`;
+  if (config !== void 0) {
+    const userOptions = `menubar=${config == null ? void 0 : config.menubar},location=${config == null ? void 0 : config.location},resizable=${config == null ? void 0 : config.resizable},scrollbars=${config == null ? void 0 : config.scrollbars},status=${config == null ? void 0 : config.status},`;
+    options = `${options}${userOptions}`;
+  } else {
+    options = `${options}${defaultOptions}`;
+  }
+  const trigger = () => window.open(url, title, options);
+  return trigger;
+}
+export { useBinary, useCache, useImageSize, UseInput as useInput, useList, useNewBrowserTab, useSelection };

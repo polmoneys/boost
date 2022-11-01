@@ -28,6 +28,10 @@ const useList = <T extends ListItem>(initial: Array<ListItem>) => {
           setItems(oldItems => oldItems.filter((oldItem, i) => i !== index)),
         []
       ),
+      isInList: useCallback(
+        (id: Uuid) => items.map(itm => itm.uuid).includes(id),
+        [items]
+      ),
     },
   ] as const;
 };

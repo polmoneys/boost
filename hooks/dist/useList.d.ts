@@ -10,5 +10,6 @@ declare const useList: <T extends ListItem>(initial: Array<ListItem>) => readonl
     readonly addItem: (item: ListItem) => void;
     readonly removeItemById: (id: Uuid) => void;
     readonly removeItemByIndex: (index: number) => void;
+    readonly isInList: (id: Uuid) => boolean;
 }];
 export default useList;
