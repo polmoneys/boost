@@ -1,4 +1,5 @@
 node_modules
 packages/Accordion
+packages/Tooltip
 packages/Utils
 demo/dist
