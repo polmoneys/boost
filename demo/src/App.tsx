@@ -37,8 +37,19 @@ import {
   HelveticaNeueBoldS,
   HelveticaNeueBold,
 } from "font-react";
-import { IconCheck, IconCross, IconCaretUp, IconCaretDown } from "icon-react";
-import { useBinary, useInput, useSelection } from "hooks-react";
+import {
+  IconCheck,
+  IconCross,
+  IconCaretUp,
+  IconCaretDown,
+  IconDash,
+} from "icon-react";
+import {
+  useBinary,
+  useInput,
+  useSelection,
+  useNewBrowserTab,
+} from "hooks-react";
 import { targets, tags, StatusMachine, USESELECTION_DEMO } from "./utils";
 
 // From CSS namespace
@@ -62,10 +73,9 @@ import "../../packages/Select/dist/style.css";
 import "../../packages/Dialog/dist/style.css";
 import "../../packages/ScrollUnit/dist/style.css";
 import "../../packages/Checkbox/dist/style.css";
+// import "../../packages/Tooltip/dist/style.css";
 
 import { VALIDATE_USERNAME } from "../../hooks/src/useInput";
-
-// import "@szhsin/react-menu/dist/index.css";
 
 // DEMO
 import "./app.css";
@@ -86,15 +96,9 @@ function App() {
     Array<"draft" | "live" | "unknown" | "none">
   >([]);
 
-  const onStatusChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
-    setStatus(value as "draft" | "live" | "unknown");
-  };
-
   const [{ output, all, mixed }, { onFollowerChange, onLeadChange }] =
     useSelection(USESELECTION_DEMO);
 
-  console.log({ output, all, mixed });
   const { state: landscapeState, actions: landscapeActions } = useBinary("off");
   const { state: portraitState, actions: portraitActions } = useBinary("off");
   const { state: trayState, actions: trayActions } = useBinary("off");
@@ -112,11 +116,26 @@ function App() {
   //   console.log({ target });
   // }, [target]);
 
+  const trigger = useNewBrowserTab({
+    url: "https://polmoneys.com",
+    title: "pol moneys",
+    width: 700,
+    config: {
+      menubar: "yes",
+      location: "yes",
+      resizable: "yes",
+      scrollbars: "yes",
+      status: "yes",
+    },
+  });
+
   return (
     <main>
       <h1>Attempt #5872046752 </h1>
 
       <Group as="ul" gap="2em" css="grid" size="480px" className="demo">
+        {/* <li className="white-space"></li> */}
+
         <Group
           as="li"
           gap="var(--gap-3)"
@@ -217,7 +236,7 @@ function App() {
             {error !== undefined && (
               <HelveticaNeueBold className="errors-input" aria-live="polite">
                 <IconCross size="lg" />
-                <span id={`test-error-input-error`}>
+                <span id="test-error-input-error">
                   {error !== undefined ? error : ""}
                 </span>
               </HelveticaNeueBold>
@@ -284,7 +303,13 @@ function App() {
           <Checkbox
             isMixed={mixed === "mixed"}
             checked={mixed !== "mixed" && mixed === true}
-            label="Parent checkbox"
+            label={
+              mixed === "mixed"
+                ? "Some selected"
+                : all
+                ? "Unselect all"
+                : "Select all"
+            }
             name="parent"
             value="parent"
             id="parent-checkbox-test"
@@ -301,7 +326,6 @@ function App() {
                 checked={state as boolean}
                 value={value}
                 onChange={ev => onFollowerChange(ev)}
-                // value={value}
                 fill="var(--accent-highlight)"
               />
             </div>
@@ -422,9 +446,11 @@ function App() {
               <IconCaretUp size="lg" />
             )}{" "}
           </Button>
+          <Button className="surface -success px $$" onClick={trigger}>
+            Open new tab
+          </Button>
         </Group>
 
-        <li className="white-space"></li>
         <Group
           as="li"
           css="flex"
@@ -586,6 +612,7 @@ function App() {
               />
             </Card>
           </Track>
+          <br />
           <br />
           <Track as="div" maskSize="1400px">
             <Card as="article" ratio="landscape">
