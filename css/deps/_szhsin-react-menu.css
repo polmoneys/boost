@@ -1,0 +1,108 @@
+/* <Dialog> & <Tray> */
+:root {
+  --reach-dialog: 1;
+}
+
+/*
+TODO: import dep properly at Options/node_modules/@szhsin/react-menu/dist/index.css
+*/
+
+.szh-menu {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  box-sizing: border-box;
+  z-index: var(--z-max);
+  border: var(--border-width) solid currentColor;
+  background-color: var(--white);
+}
+.szh-menu:focus {
+  outline: none;
+}
+.szh-menu__arrow {
+  box-sizing: border-box;
+  width: 0.75rem;
+  height: 0.75rem;
+  background-color: var(--white);
+  border: 1px solid transparent;
+  border-left-color: rgba(0, 0, 0, 0.1);
+  border-top-color: rgba(0, 0, 0, 0.1);
+  z-index: -1;
+}
+.szh-menu__arrow--dir-left {
+  right: -0.375rem;
+  transform: translateY(-50%) rotate(135deg);
+}
+.szh-menu__arrow--dir-right {
+  left: -0.375rem;
+  transform: translateY(-50%) rotate(-45deg);
+}
+.szh-menu__arrow--dir-top {
+  bottom: -0.375rem;
+  transform: translateX(-50%) rotate(-135deg);
+}
+.szh-menu__arrow--dir-bottom {
+  top: -0.375rem;
+  transform: translateX(-50%) rotate(45deg);
+}
+.szh-menu__item {
+  cursor: pointer;
+}
+.szh-menu__item:focus {
+  outline: none;
+}
+
+.szh-menu__item--focusable {
+  cursor: default;
+  background-color: inherit;
+}
+.szh-menu__item--disabled {
+  cursor: default;
+  color: var(--gray);
+}
+
+.szh-menu__radio-group {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.szh-menu__divider {
+  height: 1px;
+  background-color: currentColor;
+}
+
+.szh-menu-button {
+  min-height: var(--minHeightUserAction);
+}
+
+.szh-menu {
+  user-select: none;
+  border: none;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+}
+.szh-menu__item {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+.szh-menu-container--itemTransition .szh-menu__item {
+  transition-property: background-color, color;
+  transition-duration: 0.15s;
+  transition-timing-function: ease-in-out;
+}
+
+.szh-menu__submenu > .szh-menu__item {
+  padding-right: 2.5rem;
+}
+.szh-menu__submenu > .szh-menu__item::after {
+  content: "❯";
+  position: absolute;
+  right: 1rem;
+}
+.szh-menu__header {
+  color: var(--gray-dark);
+  font-size: 0.8em;
+  padding: 0 var(--gap-2);
+  text-transform: uppercase;
+}

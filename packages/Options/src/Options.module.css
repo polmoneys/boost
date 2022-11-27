@@ -1,6 +1,7 @@
 .menu {
-  background-color: var(--white) !important;
-  transform: translateY(0.2em);
+  background-color: var(--white);
+  transform: translateY(0.3em);
+  z-index: var(--z-3);
 }
 
 .menuOpen {
@@ -12,20 +13,18 @@
 .item {
   text-align: left;
   cursor: pointer;
+  min-width: var(--minHeightUserAction);
 }
 
 .button {
   display: inline-flex;
   align-self: start;
   align-items: center;
-
   background-color: var(--transparent);
   border: var(--border-width) solid var(--transparent);
-  min-height: var(--minHeightUserAction);
+  min-width: var(--minHeightUserAction);
   outline: none;
-
   color: inherit;
-  font: inherit;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   letter-spacing: inherit;
@@ -34,9 +33,4 @@
   user-select: none;
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
-}
-
-.button:focus {
-  outline: var(--border-width) solid currentColor;
-  outline-offset: calc(var(--border-width) * 1.1);
 }

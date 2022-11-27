@@ -1,9 +1,9 @@
-import { AriaAttributes, ReactElement, ReactNode } from "react";
-declare type FontSizes = "xs" | "s" | "r" | "l" | "xl";
-interface Props extends AriaAttributes {
-    size?: FontSizes;
-    children: HTMLElement | ReactElement | ReactNode | Array<ReactNode> | string;
-    as?: "label" | "span" | "p" | "b" | "em" | "strong" | "time" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+import { AriaAttributes, ReactNode } from "react";
+import AsProps from "./Interfaces/As";
+import Sizes from "./Interfaces/Sizes";
+interface Props extends AriaAttributes, AsProps {
+    size?: Sizes;
+    children: ReactNode;
     className?: string;
     /** truncate (px) */
     truncate?: number;
@@ -26,5 +26,6 @@ declare const HelveticaNeueThin: (props: Props) => JSX.Element;
 declare const Grotesk: (props: Props) => JSX.Element;
 declare const HelveticaNeueBoldXL: (props: Props) => JSX.Element;
 declare const HelveticaNeueBoldS: (props: Props) => JSX.Element;
+declare const HelveticaNeueS: (props: Props) => JSX.Element;
 export default Font;
-export { HelveticaNeue, HelveticaNeueMedium, HelveticaNeueBold, HelveticaNeueThin, Grotesk, HelveticaNeueBoldXL, HelveticaNeueBoldS, };
+export { HelveticaNeue, HelveticaNeueMedium, HelveticaNeueBold, HelveticaNeueThin, Grotesk, HelveticaNeueBoldXL, HelveticaNeueBoldS, HelveticaNeueS, };

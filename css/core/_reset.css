@@ -1,0 +1,94 @@
+:where(html) {
+  --ios-padding: env(safe-area-inset-top) env(safe-area-inset-right)
+    env(safe-area-inset-bottom) env(safe-area-inset-left);
+  --none-override: none !important;
+  --z-0: -1;
+  --z-1: 0;
+  --z-2: 1;
+  --z-3: 2;
+  --z-max: 999;
+}
+
+*,
+:after,
+:before {
+  box-sizing: border-box;
+  color: currentColor;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  border: 0;
+  border-style: none;
+  max-width: 100%;
+  height: auto;
+  background-repeat: no-repeat;
+  &.img-cover {
+    object-fit: cover;
+  }
+}
+
+a:is(:not([class]), :not:visited, :not:hover) {
+  hyphens: none;
+  text-decoration: underline;
+  text-decoration-skip-ink: auto;
+  text-decoration-thickness: 0.04em;
+  text-underline-offset: 0.03em;
+}
+
+a:is(:visited, :hover) {
+  color: var(--black);
+  touch-action: manipulation;
+}
+
+@media (--OSdark) {
+  @supports (-webkit-hyphens: none) {
+    a[href] {
+      color: var(--black);
+    }
+  }
+}
+
+ul {
+  list-style: none;
+}
+
+@media (forced-colors: active) {
+  svg {
+    forced-color-adjust: auto;
+  }
+}
+
+:is(::-webkit-calendar-picker-indicator, ::-webkit-clear-button, ::-webkit-inner-spin-button, ::-webkit-outer-spin-button, ) {
+  color: var(--black);
+}
+
+textarea {
+  resize: vertical;
+}
+
+/*
+    el.inert = true; 
+    el.setAttribute('inert', '');
+*/
+[inert],
+[inert] * {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: default;
+  user-select: none;
+}
+
+:is(.visually-hidden, .sr-only) {
+  inline-size: 0;
+  block-size: 0;
+  overflow: hidden;
+}
+
+[class*="nuke"] {
+  all: unset; /* protect against external styles */
+  box-sizing: border-box; /* set box-sizing after unset above */
+}

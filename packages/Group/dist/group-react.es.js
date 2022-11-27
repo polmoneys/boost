@@ -35,33 +35,33 @@ function Group(props) {
     children,
     as,
     gap = "1em",
-    size = "320px",
-    css = "flex",
+    size = "",
+    variant = "flex",
     options,
-    DONOTUse,
     ...rest
   } = props;
-  const isFlex = css === "flex";
+  const isFlex = variant === "flex";
   const stylesConfig = useMemo(() => {
-    var _a;
     if (isFlex) {
       return {
         display: "flex",
         gap,
-        flexDirection: (_a = options == null ? void 0 : options.direction) != null ? _a : "row",
-        ...(options == null ? void 0 : options.stretch) && {
+        ...(options == null ? void 0 : options.direction) !== void 0 && {
+          flexDirection: options == null ? void 0 : options.direction
+        },
+        ...(options == null ? void 0 : options.stretch) !== void 0 && {
           width: "100%"
         },
-        ...(options == null ? void 0 : options.alignItems) && {
-          alignItems: options == null ? void 0 : options.alignItems
+        ...(options == null ? void 0 : options.alignItems) !== void 0 && {
+          alignItems: options.alignItems
         },
-        ...(options == null ? void 0 : options.justifyContent) && {
-          justifyContent: options == null ? void 0 : options.justifyContent
+        ...(options == null ? void 0 : options.justifyContent) !== void 0 && {
+          justifyContent: options.justifyContent
         },
-        ...(options == null ? void 0 : options.wrap) && {
+        ...(options == null ? void 0 : options.wrap) !== void 0 && {
           flexWrap: options.wrap
         },
-        ...size !== "320px" && {
+        ...size !== "" && {
           flex: `1 0 ${size}`
         }
       };
@@ -69,7 +69,9 @@ function Group(props) {
     return {
       display: "grid",
       gap,
-      gridTemplateColumns: `repeat(auto-fit, minmax(min(100%,${size}), 1fr))`,
+      ...size !== "" && {
+        gridTemplateColumns: `repeat(auto-fit, minmax(min(100%,${size}), 1fr))`
+      },
       ...(options == null ? void 0 : options.stretch) && {
         width: "100%"
       }
@@ -79,8 +81,8 @@ function Group(props) {
   return /* @__PURE__ */ jsx(Tag, {
     ...rest,
     style: {
-      ...DONOTUse !== void 0 && {
-        ...DONOTUse.DONOTStyle
+      ...(options == null ? void 0 : options.DANGEROUS) !== void 0 && {
+        ...options.DANGEROUS
       },
       ...stylesConfig
     },

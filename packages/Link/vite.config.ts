@@ -11,11 +11,12 @@ export default defineConfig({
       fileName: format => `link-react.${format}.js`,
     },
     rollupOptions: {
-      external: ["react", "react-dom"],
+      external: ["react", "react-dom", "unit-react"],
       output: {
         globals: {
           react: "React",
           "react-dom": "ReactDOM",
+          "unit-react": "UnitReact",
         },
       },
     },

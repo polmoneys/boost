@@ -1,46 +1,68 @@
-import { Group } from "group-react";
 import { ChangeEvent, CSSProperties, useEffect, useMemo } from "react";
+import { IconCheck, IconDash, IconCross } from "icon-react";
+import { Unit } from "unit-react";
 import styles from "./Checkbox.module.css";
+import "../../Icon/dist/style.css";
 
 type Props = {
-  isMixed?: boolean;
-  checked: boolean;
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  className?: string;
   label: string;
   id: string;
   name: string;
   value: string;
-  fill?: string;
+  isMixed?: boolean;
+  checked: boolean;
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  classNames?: {
+    group?: string;
+    checkbox?: {
+      checked?: string;
+      unchecked?: string;
+      mixed?: string;
+    };
+  };
+  keyboard?: boolean;
+  autofocus?: boolean;
+  nonKeyboard?: boolean;
 };
 
-/* 
-  Roadmap:
-  [ ] make icon version 
-*/
 function Checkbox(props: Props) {
   const {
     value,
     isMixed,
     onChange,
-    className,
+    classNames,
     label,
     id,
     name,
     checked,
-    fill,
+    keyboard = true,
+    autofocus = false,
+    nonKeyboard = true,
   } = props;
 
-  const rootClassNames = [styles.root, className].filter(Boolean).join(" ");
-
+  const groupClassNames = useMemo(
+    () =>
+      [
+        styles.group,
+        classNames?.group,
+        isMixed && styles.mixed,
+        checked && styles.checked,
+      ]
+        .filter(Boolean)
+        .join(" "),
+    [isMixed, checked]
+  );
   const checkboxClassNames = useMemo(
     () =>
       [
         styles.checkbox,
-        isMixed && styles.mixed,
-        checked && styles.checked,
-        // leadCheckbox
-        !checked && isMixed !== undefined && styles.unchecked,
+        isMixed && classNames?.checkbox?.mixed && classNames?.checkbox?.mixed,
+        checked &&
+          classNames?.checkbox?.checked &&
+          classNames?.checkbox?.checked,
+        !checked &&
+          classNames?.checkbox?.unchecked &&
+          classNames?.checkbox?.unchecked,
       ]
         .filter(Boolean)
         .join(" "),
@@ -54,9 +76,13 @@ function Checkbox(props: Props) {
     }
   }, [isMixed]);
 
+  const disableRing = !keyboard && !nonKeyboard;
   return (
-    <Group as="label">
-      <label htmlFor={id} className={rootClassNames}>
+    <label htmlFor={id} className={groupClassNames}>
+      {isMixed && <IconDash size="lg" />}
+      {checked && <IconCheck size="lg" />}
+      {!checked && isMixed === undefined && <IconCross size="lg" />}
+      <Unit autofocus={autofocus} disabled={disableRing}>
         <input
           className={checkboxClassNames}
           onChange={onChange}
@@ -66,17 +92,11 @@ function Checkbox(props: Props) {
           {...(!isMixed && {
             value,
           })}
-          {...(!isMixed &&
-            fill !== undefined && {
-              style: {
-                "--checkbox-fill": fill,
-              } as CSSProperties,
-            })}
           checked={!isMixed && checked}
         />
-        {label}
-      </label>
-    </Group>
+      </Unit>
+      {label}
+    </label>
   );
 }
 

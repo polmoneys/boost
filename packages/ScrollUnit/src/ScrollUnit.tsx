@@ -1,21 +1,20 @@
-import { ReactNode } from "react";
 import * as ScrollArea from "@radix-ui/react-scroll-area";
+import { WithChildren } from "../../Types/dist/types";
 import styles from "./ScrollUnit.module.css";
 
-interface Props {
-  children: ReactNode;
+interface Props extends WithChildren {
   dir?: "ltr" | "rtl";
   classNames?: {
-    root?: string;
+    group?: string;
     viewport?: string;
   };
   type?: "auto" | "always" | "scroll" | "hover";
 }
 
 function ScrollUnit(props: Props) {
-  const { children, type = "auto", dir = "ltr", classNames, ...rest } = props;
+  const { children, type = "hover", dir = "ltr", classNames, ...rest } = props;
 
-  const rootClassnames = [styles.root, classNames?.root]
+  const groupClassnames = [styles.group, classNames?.group]
     .filter(Boolean)
     .join(" ");
   const viewportClassnames = [styles.viewport, classNames?.viewport]
@@ -23,7 +22,7 @@ function ScrollUnit(props: Props) {
     .join(" ");
 
   return (
-    <ScrollArea.Root className={rootClassnames} type={type} {...rest}>
+    <ScrollArea.Root className={groupClassnames} type={type} {...rest}>
       <ScrollArea.Viewport className={viewportClassnames}>
         {children}
       </ScrollArea.Viewport>

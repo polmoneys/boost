@@ -18,7 +18,7 @@ export default (args: ViteConfigInput) => {
         fileName: format => `scroll-unit-react.${format}.js`,
       },
       rollupOptions: {
-        external: ["react", "react-dom"],
+        external: ["react", "react-dom", "@radix-ui/react-scroll-area"],
         output: {
           globals: {
             react: "React",

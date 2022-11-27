@@ -1,15 +1,17 @@
 import { ReactElement } from "react";
-import RenderProp from "./Interfaces/RenderProp";
+import { RenderProp } from "../../Types/dist/types";
 interface Props {
     children: Array<ReactElement>;
-    initial: string;
+    initial: string | Array<string>;
+    className?: string;
     gap?: string;
-    checkboxSize?: string;
-    renderLabel: RenderProp<{
+    radioSize?: string;
+    renderLabel?: RenderProp<{
         checked: boolean;
-        checkboxLabel: string;
+        radioLabel: string;
     }, HTMLElement>;
     onChange: (selection: string) => void;
+    direction?: "row" | "column";
 }
 declare function RadioGroup(props: Props): JSX.Element;
 export default RadioGroup;

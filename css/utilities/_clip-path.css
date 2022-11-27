@@ -1,0 +1,55 @@
+.triangle {
+  -webkit-clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+
+.circle {
+  border-radius: 50%;
+  aspect-ratio: 1;
+}
+
+/* 
+  Shapes with 'colision detection'
+*/
+.item {
+  position: relative;
+  z-index: 1;
+  cursor: pointer;
+  visibility: hidden;
+}
+
+.shape {
+  display: block;
+  width: 1em;
+  height: 1em;
+}
+
+.item .shape {
+  visibility: visible;
+}
+
+.item .shape {
+  transform-origin: center bottom;
+  transition: transform 0.1s ease-in-out;
+}
+
+.item:hover {
+  visibility: visible;
+  z-index: 20;
+}
+.item:hover .shape {
+  transform: scale(2) translateY(-15%);
+}
+
+.item:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  display: none;
+  width: 1px;
+  height: 1px;
+}
+
+.item:hover:after {
+  display: block;
+}

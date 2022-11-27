@@ -19,11 +19,22 @@ export default (args: ViteConfigInput) => {
         fileName: format => `input-react.${format}.js`,
       },
       rollupOptions: {
-        external: ["react", "react-dom"],
+        external: [
+          "react",
+          "react-dom",
+          "group-react",
+          "icon-react",
+          "button-react",
+          "unit-react",
+        ],
         output: {
           globals: {
             react: "React",
             "react-dom": "ReactDOM",
+            "group-react": "GroupReact",
+            "icon-react": "IconReact",
+            "button-react": "ButtonReact",
+            "unit-react": "UnitReact",
           },
         },
       },

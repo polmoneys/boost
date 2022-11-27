@@ -1,4 +1,4 @@
-import { useState, ElementType, SyntheticEvent, Fragment } from "react";
+import { useState, SyntheticEvent } from "react";
 
 interface ImageSize {
   width: number;

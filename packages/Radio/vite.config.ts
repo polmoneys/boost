@@ -11,11 +11,13 @@ export default defineConfig({
       fileName: format => `radio-react.${format}.js`,
     },
     rollupOptions: {
-      external: ["react", "react-dom"],
+      external: ["react", "react-dom", "unit-react", "group-react"],
       output: {
         globals: {
           react: "React",
           "react-dom": "ReactDOM",
+          "unit-react": "UnitReact",
+          "group-react": "GroupReact",
         },
       },
     },

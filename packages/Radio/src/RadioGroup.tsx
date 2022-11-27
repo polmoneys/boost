@@ -1,42 +1,56 @@
 import { cloneElement, ChangeEvent, Children, ReactElement } from "react";
 import { Group } from "group-react";
-import RenderProp from "./Interfaces/RenderProp";
+import { RenderProp } from "../../Types/dist/types";
 const { count, map } = Children;
 
 interface Props {
   children: Array<ReactElement>;
-  initial: string;
+  initial: string | Array<string>;
+  className?: string;
   gap?: string;
-  checkboxSize?: string;
-  renderLabel: RenderProp<
-    { checked: boolean; checkboxLabel: string },
+  radioSize?: string;
+  renderLabel?: RenderProp<
+    { checked: boolean; radioLabel: string },
     HTMLElement
   >;
   onChange: (selection: string) => void;
+  direction?: "row" | "column";
 }
 
 function RadioGroup(props: Props) {
-  const { children, initial = false, gap = "0", renderLabel } = props;
+  const {
+    children,
+    initial = "",
+    gap = "0",
+    renderLabel,
+    direction = "row",
+    className,
+  } = props;
   const onChange = (event: ChangeEvent<HTMLInputElement>) =>
     props?.onChange?.(event.target.name);
 
   return (
-    <Group as="div" gap={gap} options={{ wrap: "wrap" }}>
+    <Group
+      as="div"
+      gap={gap}
+      options={{ wrap: "wrap", direction }}
+      {...(className !== undefined && { className })}
+    >
       {map(props.children, (radio: ReactElement) => {
         const { name } = radio.props;
         const checked = initial === name;
-        const checkboxSize =
-          props.checkboxSize !== undefined
-            ? props.checkboxSize
+        const radioSize =
+          props.radioSize !== undefined
+            ? props.radioSize
             : `calc(${Math.round(100 / count(children))}% - ${gap})`;
 
         return cloneElement(radio, {
           name,
           checked,
           onChange,
-          renderLabel: renderLabel,
+          ...(renderLabel !== undefined && { renderLabel }),
           label: name,
-          checkboxSize,
+          radioSize,
         });
       })}
     </Group>

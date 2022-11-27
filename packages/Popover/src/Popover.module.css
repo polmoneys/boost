@@ -1,0 +1,28 @@
+.group {
+  z-index: var(--z-max);
+  box-shadow: var(--shadow);
+  background-color: var(--transparent);
+}
+
+.trigger {
+  display: inline-flex;
+  align-self: start;
+  align-items: center;
+  background-color: var(--transparent);
+  border: var(--border-width) solid var(--transparent);
+  outline: none;
+  position: relative;
+  color: inherit;
+  font: inherit;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: inherit;
+
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+.arrow polygon {
+  fill: currentColor;
+}

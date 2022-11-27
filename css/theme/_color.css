@@ -1,0 +1,146 @@
+/*
+  Think of this className as a Group with color & border & fill
+*/
+
+.color-accent {
+  color: var(--accent) !important;
+  fill: var(--accent);
+  stroke-color: var(--accent);
+  &.-border {
+    border-color: var(--accent);
+    border-width: var(--border-width);
+    border-style: solid;
+  }
+  &.-hover:hover {
+    filter: brightness(var(--bright));
+  }
+}
+
+.color-error {
+  color: var(--accent-error) !important;
+  fill: var(--accent-error);
+  stroke-color: var(--accent-error);
+
+  &.-border {
+    border-color: var(--accent-error);
+    border-width: var(--border-width);
+    border-style: solid;
+  }
+  &.-hover:hover {
+    filter: brightness(var(--bright));
+  }
+}
+
+/*
+  Think of this className as a Group with background color.  
+  It sets some styles on possible children like:
+  - Link tooltip
+  - <polygon>
+  - placeholder
+  - text selection
+  - hover & focus
+  - Options header (dependency)
+
+*/
+
+.accent {
+  background-color: var(--accent) !important;
+  border-color: var(--accent);
+  border-width: var(--border-width);
+  border-style: solid;
+
+  & polygon {
+    fill: var(--accent);
+  }
+
+  &::selection {
+    color: var(--accent);
+    background-color: var(--black);
+  }
+
+  &::-webkit-input-placeholder {
+    color: var(--black) !important;
+  }
+  &::-ms-input-placeholder {
+    color: var(--black) !important;
+  }
+
+  &::before {
+    background-color: var(--black) !important;
+  }
+
+  &::after {
+    background-color: var(--accent);
+    filter: brightness(var(--brightest));
+  }
+
+  &.-hover:hover {
+    filter: brightness(var(--bright));
+  }
+  &.-focus:focus,
+  &:focus {
+    outline-color: var(--accent) !important;
+  }
+
+  & .szh-menu__header {
+    background-color: var(--accent) !important;
+  }
+
+  & a[data-tooltip]:hover::after {
+    background-color: var(--accent) !important;
+  }
+}
+
+.accent-error {
+  background-color: var(--accent-error) !important;
+  border-color: var(--accent-error);
+  border-width: var(--border-width);
+  border-style: solid;
+
+  & polygon {
+    fill: var(--accent-error);
+  }
+
+  &::selection {
+    color: var(--accent-error);
+    background-color: var(--black);
+  }
+
+  &::-webkit-input-placeholder {
+    color: var(--black) !important;
+  }
+  &::-ms-input-placeholder {
+    color: var(--black) !important;
+  }
+
+  &::before {
+    background-color: var(--black) !important;
+  }
+
+  &::after {
+    background-color: var(--accent-error);
+    filter: brightness(var(--brightest));
+  }
+
+  &.-hover:hover {
+    filter: brightness(var(--bright));
+  }
+  &.-focus:focus,
+  &:focus {
+    outline-color: var(--accent-error) !important;
+  }
+
+  & .szh-menu__header {
+    background-color: var(--accent-error) !important;
+  }
+
+  & a[data-tooltip]:hover::after {
+    background-color: var(--accent-error) !important;
+  }
+}
+
+/* Utilities */
+
+.transparent {
+  background-color: var(--transparent);
+}

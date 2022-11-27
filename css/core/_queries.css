@@ -1,0 +1,18 @@
+@custom-media --portrait (orientation: portrait);
+@custom-media --landscape (orientation: landscape);
+
+@custom-media --OSdark (prefers-color-scheme: dark);
+@custom-media --OSlight (prefers-color-scheme: light);
+
+@custom-media --xs-phone (--xs-only) and (--portrait);
+@custom-media --xs-only (240px <= width <= 360px);
+@custom-media --xs-n-below (width <= 360px);
+@custom-media --s-n-below (width <= 560px);
+@custom-media --xxl-n-above (width >= 1920px);
+
+@custom-media --safariONLY (-apple-pay-button-style: inherit);
+@custom-media --firefoxONLY (-moz-appearance: inherit);
+@custom-media --chromeONLY (-webkit-app-region: inherit) and (not (container-type: none));
+@custom-media --webkitONLY (alt: inherit) and (not (-apple-pay-button-style: inherit)) /* old IE */ @custom-media --cutMustard (grid-area: auto);
+
+@custom-media --touch (hover: none) and (pointer: coarse);

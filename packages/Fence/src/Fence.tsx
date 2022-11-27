@@ -1,9 +1,8 @@
-import { ReactNode } from "react";
 import { InView } from "react-intersection-observer";
 import AsProps from "./Interfaces/As";
+import { WithChildren } from "../../Types/dist/types";
 
-interface Props extends AsProps {
-  children: ReactNode;
+interface Props extends AsProps, WithChildren {
   className?: string;
   options?: {
     threshold?: number;

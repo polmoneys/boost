@@ -1,17 +1,11 @@
-import {
-  AriaAttributes,
-  ElementType,
-  useMemo,
-  ReactElement,
-  ReactNode,
-} from "react";
+import { AriaAttributes, ElementType, useMemo, ReactNode } from "react";
 import AsProps from "./Interfaces/As";
 import Sizes from "./Interfaces/Sizes";
 import styles from "./Font.module.css";
 
 interface Props extends AriaAttributes, AsProps {
   size?: Sizes;
-  children: string;
+  children: ReactNode;
   className?: string;
   /** truncate (px) */
   truncate?: number;
@@ -93,6 +87,7 @@ const Grotesk = Compose(styles.grotesk);
 // Size variants
 const HelveticaNeueBoldXL = ComposeSize(HelveticaNeueBold, "xl");
 const HelveticaNeueBoldS = ComposeSize(HelveticaNeueBold, "s");
+const HelveticaNeueS = ComposeSize(HelveticaNeue, "s");
 
 export default Font;
 export {
@@ -103,4 +98,5 @@ export {
   Grotesk,
   HelveticaNeueBoldXL,
   HelveticaNeueBoldS,
+  HelveticaNeueS,
 };

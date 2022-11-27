@@ -1,1 +1,1 @@
-export { default as Icon, IconPlus, IconMinus, IconCross, IconCheck, IconDash, IconSlash, IconCaretUp, IconCaretDown, IconDotsX, IconDotsY, } from "./Icon";
+export { default as Icon, IconPlus, IconMinus, IconCross, IconCheck, IconDash, IconSlash, IconCaretUp, IconCaretDown, IconDotsX, IconDotsY, IconIg, IconStar, IconTwitter, IconGithub, IconQuestion, IconBookmark, IconEmail, IconHeart, IconPin, IconColorPicker, } from "./Icon";

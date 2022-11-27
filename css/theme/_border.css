@@ -1,0 +1,31 @@
+:where(html) {
+  --border-width: 0.15em;
+  --border-radius: 0.1em;
+}
+
+.border-radius {
+  /* 
+    if within 4px of the full viewport size, 
+    remove border radius.
+     */
+  border-radius: max(
+    0px,
+    min(var(--border-radius), calc((100vw - 4px - 100%) * 9999))
+  );
+}
+
+.nested-border-radius {
+  padding: var(--gap-3);
+}
+/*  solution is to subtract the padding from the radius  */
+.nested-border-radius.group {
+  --fixed: calc(var(--border-radius) - var(--gap-3));
+}
+
+.nested-border-radius.group picture {
+  border-radius: var(--fixed) var(--fixed) 0 0;
+}
+
+.nested-border-radius.group footer {
+  border-radius: 0 0 var(--fixed) var(--fixed);
+}

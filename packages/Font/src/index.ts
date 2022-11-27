@@ -7,4 +7,5 @@ export {
   Grotesk,
   HelveticaNeueBoldXL,
   HelveticaNeueBoldS,
+  HelveticaNeueS,
 } from "./Font";

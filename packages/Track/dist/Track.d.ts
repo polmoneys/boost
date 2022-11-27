@@ -1,8 +1,7 @@
-import { ReactNode } from "react";
 import AsProps from "./Interfaces/As";
 import Options from "./Interfaces/Options";
-export interface Props extends AsProps {
-    children: ReactNode;
+import { WithChildren } from "../../Types/dist/types";
+export interface Props extends AsProps, WithChildren {
     className?: string;
     gap?: string;
     options?: Options;

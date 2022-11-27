@@ -1,9 +1,9 @@
 import { ChangeEvent, ComponentProps, Fragment } from "react";
-import styles from "./Radio.module.css";
-import { Group } from "group-react";
-import RenderProp from "./Interfaces/RenderProp";
-
+import { Unit } from "unit-react";
+import { RenderProp } from "../../Types/dist/types";
 import RadioGroup from "./RadioGroup";
+import RadioLabel from "./RadioLabel";
+import styles from "./Radio.module.css";
 
 export interface RadioProps extends ComponentProps<"input"> {
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
@@ -13,14 +13,16 @@ export interface RadioProps extends ComponentProps<"input"> {
     { checked: boolean; checkboxLabel: string },
     HTMLElement
   >;
-  checkboxSize?: string;
   classNames?: {
-    root?: string;
+    group?: string;
     label?: string;
     input?: string;
     checked?: string;
   };
   xl?: boolean;
+  keyboard?: boolean;
+  autofocus?: boolean;
+  nonKeyboard?: boolean;
 }
 
 function Radio(props?: RadioProps) {
@@ -31,9 +33,11 @@ function Radio(props?: RadioProps) {
     renderLabel,
     label,
     name,
-    checkboxSize,
     checked = false,
     classNames,
+    keyboard = true,
+    autofocus = false,
+    nonKeyboard = true,
     ...rest
   } = props;
 
@@ -50,42 +54,38 @@ function Radio(props?: RadioProps) {
       })
     );
 
-  const rootClassNames = [
-    styles.radio,
+  const groupClassnames = [
+    styles.control,
     checked && styles.checked,
     checked && classNames?.checked,
-    classNames?.root,
+    classNames?.group,
     rest?.xl && styles.xl,
   ]
     .filter(Boolean)
     .join(" ");
-  const labelClassNames = [styles.pinned, classNames?.label]
-    .filter(Boolean)
-    .join(" ");
 
-  const inputClassNames = [styles.input, classNames?.input]
-    .filter(Boolean)
-    .join(" ");
+  const disableRing = !keyboard && !nonKeyboard;
   return (
-    <Group as="div" className={rootClassNames} size={checkboxSize}>
-      <label htmlFor={id}>
-        <div className={labelClassNames} aria-hidden="true">
-          {inputLabel}
-        </div>
+    <label htmlFor={id} className={groupClassnames}>
+      <Unit autofocus={autofocus} disabled={disableRing}>
         <input
           type="radio"
           id={id}
           name={name}
           value={name}
           checked={checked}
-          className={inputClassNames}
+          {...(classNames?.input !== undefined && {
+            className: classNames.input,
+          })}
           onChange={handleChange}
         />
-      </label>
-    </Group>
+      </Unit>
+      {inputLabel}
+    </label>
   );
 }
 
 Radio.Group = RadioGroup;
+Radio.Label = RadioLabel;
 
 export default Radio;

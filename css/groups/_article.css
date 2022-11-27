@@ -1,0 +1,21 @@
+.article {
+  display: grid;
+  grid-template-columns: minmax(var(--gap-5), 1fr) minmax(auto, 57ch) minmax(
+      var(--gap-5),
+      1fr
+    );
+
+  /* https://alistapart.com/article/axiomatic-css-and-lobotomized-owls/ */
+  row-gap: var(--gap-1);
+
+  & > p {
+    grid-column: 2;
+  }
+
+  & > img {
+    grid-column: 1 / 4;
+    width: 100%;
+    max-width: 100ch;
+    justify-self: center;
+  }
+}

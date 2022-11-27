@@ -1,0 +1,25 @@
+:where(html) {
+  --offset: max(2px, 0.15em);
+}
+/* 
+    packages/Unit potentially apply a className for regular focus and keyboard 
+    to interactive elements
+*/
+
+.ring {
+  outline: var(--border-width) solid currentColor !important;
+  outline-offset: var(--offset) !important;
+}
+
+.ring-keyboard {
+  outline: var(--border-width) solid currentColor !important;
+  outline-offset: var(--offset) !important;
+}
+
+.interactive {
+  min-width: var(--minHeightUserAction);
+}
+
+.no-ring {
+  outline: none !important;
+}

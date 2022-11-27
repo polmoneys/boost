@@ -18,11 +18,20 @@ export default (args: ViteConfigInput) => {
         fileName: format => `card-react.${format}.js`,
       },
       rollupOptions: {
-        external: ["react", "react-dom"],
+        external: [
+          "react",
+          "react-dom",
+          "pic-react",
+          "group-react",
+          "font-react",
+        ],
         output: {
           globals: {
             react: "React",
             "react-dom": "ReactDOM",
+            "pic-react": "PicReact",
+            "group-react": "GroupReact",
+            "font-react": "FontReact",
           },
         },
       },

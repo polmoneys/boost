@@ -1,10 +1,10 @@
 import require$$0, { Fragment } from "react";
-import { Menu, MenuButton, MenuItem } from "@szhsin/react-menu";
-const menu = "_menu_1tdmb_1";
-const menuOpen = "_menuOpen_1tdmb_6";
-const menuClose = "_menuClose_1tdmb_9";
-const item = "_item_1tdmb_12";
-const button = "_button_1tdmb_17";
+import { Menu, MenuButton, MenuGroup, MenuDivider, MenuHeader, MenuItem } from "@szhsin/react-menu";
+const menu = "_menu_5aflf_1";
+const menuOpen = "_menuOpen_5aflf_7";
+const menuClose = "_menuClose_5aflf_10";
+const item = "_item_5aflf_13";
+const button = "_button_5aflf_19";
 var styles = {
   menu,
   menuOpen,
@@ -54,14 +54,17 @@ function Options(props) {
     onChange,
     ssr = false,
     disabled = false,
-    classNames
+    portal = true,
+    classNames,
+    selection,
+    id
   } = props;
   if (options.length === 0)
     return /* @__PURE__ */ jsx(Fragment, {});
   const menuClassNames = [styles.menu, menuClassName, classNames == null ? void 0 : classNames.group].filter(Boolean).join(" ");
   const buttonClassNames = [styles.button, classNames == null ? void 0 : classNames.button].filter(Boolean).join(" ");
-  const menuItemClassNames = [styles.item, classNames == null ? void 0 : classNames.item].filter(Boolean).join(" ");
   return /* @__PURE__ */ jsx(Menu, {
+    id,
     menuClassName: menuClassNames,
     menuButton: ({
       open
@@ -78,14 +81,27 @@ function Options(props) {
     ...ssr && {
       initialMounted: true
     },
-    children: options == null ? void 0 : options.map((option) => /* @__PURE__ */ jsx(MenuItem, {
-      className: menuItemClassNames,
-      value: option.value,
-      ...(option == null ? void 0 : option.href) !== void 0 && {
-        href: option == null ? void 0 : option.href
-      },
-      children: option.value.charAt(0).toUpperCase() + option.value.slice(1)
-    }, option.id))
+    portal,
+    children: /* @__PURE__ */ jsx(MenuGroup, {
+      children: options == null ? void 0 : options.map((option) => {
+        if (option.value === "divider") {
+          return /* @__PURE__ */ jsx(MenuDivider, {});
+        }
+        if (option.value === "title") {
+          return /* @__PURE__ */ jsx(MenuHeader, {
+            children: option.label
+          });
+        }
+        return /* @__PURE__ */ jsx(MenuItem, {
+          className: [styles.item, option.value === (selection != null ? selection : "") ? classNames == null ? void 0 : classNames.selected : classNames == null ? void 0 : classNames.item].filter(Boolean).join(" "),
+          value: option.value,
+          ...(option == null ? void 0 : option.href) !== void 0 && {
+            href: option == null ? void 0 : option.href
+          },
+          children: option.label
+        }, option.id);
+      })
+    })
   });
 }
 export { Options };

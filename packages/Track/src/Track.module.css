@@ -3,9 +3,9 @@
   overflow-x: hidden;
 }
 .scrolling {
-  --brightness: 0.95;
-  --saturate: 1.25;
-  filter: brightness(var(--brightness)) saturate(var(--saturate));
+  --scroll-intensity: 0.95;
+  --scroll-saturate: 1.25;
+  filter: brightness(var(--scroll-intensity)) saturate(var(--scroll-saturate));
   opacity: 0.9;
 }
 

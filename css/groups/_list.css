@@ -1,0 +1,9 @@
+ul.siblings-hover:hover > li:not(:hover),
+ol.siblings-hover:hover > li:not(:hover) {
+  opacity: var(--disabled);
+}
+
+/* first of class selector */
+.sibling:not(.sibling ~ .sibling) {
+  font-weight: 500;
+}

@@ -1,6 +1,6 @@
 declare const VariantOptions: readonly ["flex", "grid"];
 declare type Variants = typeof VariantOptions[number];
 interface VariantProps {
-    css?: Variants;
+    variant?: Variants;
 }
 export default VariantProps;

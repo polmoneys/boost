@@ -1,8 +1,9 @@
 import { useMemo, useReducer } from "react";
 
 export type BinaryState = "on" | "off";
+export type ActionsTypes = "ON" | "OFF" | "TOGGLE";
 
-function binaryReducer(state: BinaryState, action: "ON" | "OFF" | "TOGGLE") {
+function binaryReducer(state: BinaryState, action: ActionsTypes) {
   switch (action) {
     case "ON":
       return "on";

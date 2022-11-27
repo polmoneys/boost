@@ -1,0 +1,76 @@
+.stepper {
+  display: flex;
+  flex-direction: column;
+  counter-reset: stepper;
+  gap: var(--gap-3);
+  background-color: var(--transparent);
+  padding: var(--gap-2);
+  border-radius: var(--border-radius);
+}
+
+.stepperItem {
+  display: grid;
+  grid-template-rows: [text-row] auto [line-row] 20px;
+  grid-template-columns: [counter-column] 28px [text-column] auto;
+  column-gap: var(--gap-4);
+  row-gap: var(--gap-3);
+  position: relative;
+  color: var(--accent-error);
+}
+
+.stepperItem .stepperCounter {
+  position: relative;
+}
+
+.stepperItem.complete {
+  color: var(--accent);
+}
+
+.stepperCounter:after {
+  position: absolute;
+  content: "";
+  display: block;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: var(--accent-error);
+  border: var(--border-width) solid var(--transparent);
+  right: -6px;
+  bottom: -6px;
+}
+
+.stepperItem.complete .stepperCounter:after {
+  content: "";
+  background-color: var(--accent);
+}
+.stepperItem:last-child {
+  grid-template-rows: [text-row] auto;
+}
+
+.stepperLine {
+  display: block;
+  width: 2px;
+  background-color: currentColor;
+  height: 100%;
+  justify-self: center;
+}
+.stepperItem:last-child .stepperLine {
+  display: none;
+}
+
+.stepperCounter {
+  flex-shrink: 0;
+  counter-increment: stepper;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: var(--border-width) solid currentColor;
+  color: currentColor;
+  border-radius: 50%;
+  line-height: 1;
+}
+.stepperCounter:before {
+  content: counter(stepper);
+}

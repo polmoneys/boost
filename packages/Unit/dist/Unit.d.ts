@@ -1,10 +1,10 @@
-import { ReactNode } from "react";
+import { ReactElement } from "react";
 interface Props {
-    children: ReactNode;
-    keyboard?: boolean;
+    children: ReactElement;
     autofocus?: boolean;
-    nonKeyboard?: boolean;
     within?: boolean;
+    isTextInput?: boolean;
+    disabled?: boolean;
 }
 declare function Unit(props: Props): JSX.Element;
 export default Unit;

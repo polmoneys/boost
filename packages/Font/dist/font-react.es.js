@@ -114,4 +114,5 @@ const HelveticaNeueThin = Compose(styles.thin);
 const Grotesk = Compose(styles.grotesk);
 const HelveticaNeueBoldXL = ComposeSize(HelveticaNeueBold, "xl");
 const HelveticaNeueBoldS = ComposeSize(HelveticaNeueBold, "s");
-export { Font, Grotesk, HelveticaNeue, HelveticaNeueBold, HelveticaNeueBoldS, HelveticaNeueBoldXL, HelveticaNeueMedium, HelveticaNeueThin };
+const HelveticaNeueS = ComposeSize(HelveticaNeue, "s");
+export { Font, Grotesk, HelveticaNeue, HelveticaNeueBold, HelveticaNeueBoldS, HelveticaNeueBoldXL, HelveticaNeueMedium, HelveticaNeueS, HelveticaNeueThin };

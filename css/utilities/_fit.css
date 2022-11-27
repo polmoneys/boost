@@ -1,0 +1,15 @@
+.fit-width {
+  width: fit-content;
+}
+
+.fit-height {
+  height: fit-content;
+}
+
+.fit-min-width {
+  min-width: 0;
+}
+
+.fit-min-height {
+  min-height: 0;
+}

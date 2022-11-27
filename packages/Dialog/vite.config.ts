@@ -11,12 +11,24 @@ export default defineConfig({
       fileName: format => `dialog-react.${format}.js`,
     },
     rollupOptions: {
-      external: ["react", "react-dom", "@reach/dialog"],
+      external: [
+        "react",
+        "react-dom",
+        "@reach/dialog",
+        "scroll-unit-react",
+        "group-react",
+        "button-react",
+        "icon-react",
+      ],
       output: {
         globals: {
           react: "React",
           "react-dom": "ReactDOM",
-          "@reach/dialog": "reachDialog",
+          "@reach/dialog": "ReachDialog",
+          "scroll-unit-react": "ScrollUnitReact",
+          "group-react": "GroupReact",
+          "button-react": "ButtonReact",
+          "icon-react": "IconReact",
         },
       },
     },

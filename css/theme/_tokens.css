@@ -1,0 +1,62 @@
+:where(html) {
+  --zero: 0;
+  --minHeightUserAction: max(36px, 2em);
+  --minHeightHero: clamp(250px, 50vmax, 500px);
+
+  --white: #f1f1f1;
+  --black: rgba(0, 0, 0, 0.8);
+  --gray: rgba(0, 0, 0, 0.465);
+  --gray-light: rgba(0, 0, 0, 0.135);
+  --transparent: transparent;
+
+  --disabled: 0.8;
+
+  --panel-footer: #f3f4f6;
+  --panel-content: #4b5563;
+  --panel-content-hover: #e5e7eb;
+  --panel-description: #6b7280;
+  --panel-footer-title: #9ca3af;
+  --panel-footer-svg: #9ca3af;
+
+  --shadow-color: 220 3% 15%;
+  --shadow-strength: 1%;
+  --shadow: 0 3px 5px -2px hsl(var(--shadow-color) /
+          calc(var(--shadow-strength) + 3%)),
+    0 7px 14px -5px hsl(var(--shadow-color) / calc(var(--shadow-strength) + 5%));
+
+  --overlay: rgba(41, 41, 41, 0.28);
+}
+
+@media (--touch) {
+  :where(html) {
+    --minHeightUserAction: max(44px, 2.2em);
+  }
+}
+
+:root {
+  /* color-scheme: light; */
+  accent-color: var(--accent);
+  --background: #f2f5f7;
+  --color: #020826;
+  --accent: #09f;
+  --accent-error: #f09;
+}
+
+/* @media (--OSdark) {
+  :root {
+    color-scheme: dark;
+    --background: #232946;
+    --color: #f9f4ef;
+    --accent: #eebbc3;
+    --accent-error: #232946;
+    --accent-success: #b8c1ec;
+    accent-color: var(--accent);
+    --shadow: none; 
+    --overlay: rgba(41, 41, 41, 0.28);
+  }
+} */
+
+body {
+  background-color: var(--background);
+  color: var(--color);
+}

@@ -239,7 +239,7 @@ function Track(props) {
     className,
     children,
     maskSize,
-    gap = "1em",
+    gap = "var(--gap-3)",
     as = "div"
   } = props;
   const [base, setBase] = useState(null);

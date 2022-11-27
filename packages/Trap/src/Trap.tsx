@@ -1,9 +1,8 @@
-import { ReactNode } from "react";
 import { FocusScope } from "@react-aria/focus";
 import OptionsProps from "./Interfaces/Options";
+import { WithChildren } from "../../Types/dist/types";
 
-interface Props {
-  children: ReactNode;
+interface Props extends WithChildren {
   initial?: boolean;
   options?: OptionsProps;
 }

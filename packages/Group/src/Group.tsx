@@ -1,33 +1,22 @@
-import { ReactNode, useMemo, ElementType } from "react";
+import { useMemo, ElementType, CSSProperties } from "react";
 import AsProps from "./Interfaces/As";
 import VariantProps from "./Interfaces/Variants";
-import { Dictionary } from "./Interfaces/Dictionary";
+import { Dictionary, WithChildren } from "../../Types/dist/types";
 
-interface Props extends AsProps, VariantProps {
+interface Props extends AsProps, VariantProps, WithChildren {
   className?: string;
-  children: ReactNode;
   gap?: string;
   size?: string;
-  DONOTUse?: {
-    DONOTStyle: Dictionary;
+  id?: string;
+  options?: {
+    stretch?: boolean;
+    alignItems?: string;
+    justifyContent?: string;
+    wrap?: string;
+    direction?: string;
+    placeItems?: string;
+    DANGEROUS?: Dictionary;
   };
-  options?:
-    | {
-        stretch?: boolean;
-        alignItems?: string;
-        justifyContent?: string;
-        wrap?: string;
-        direction?: string;
-        placeItems?: never;
-      }
-    | {
-        placeItems?: string;
-        alignItems?: never;
-        stretch?: never;
-        justifyContent?: never;
-        wrap?: never;
-        direction?: never;
-      };
 }
 
 function Group(props: Props) {
@@ -35,48 +24,51 @@ function Group(props: Props) {
     children,
     as,
     gap = "1em",
-    size = "320px",
-    css = "flex",
+    size = "",
+    variant = "flex",
     options,
-    DONOTUse,
     ...rest
-    // rest === className,
   } = props;
 
-  const isFlex = css === "flex";
+  const isFlex = variant === "flex";
 
   const stylesConfig = useMemo(() => {
     if (isFlex) {
       return {
         display: "flex",
         gap,
-        flexDirection: options?.direction ?? "row",
-        ...(options?.stretch && { width: "100%" }),
-        ...(options?.alignItems && { alignItems: options?.alignItems }),
-        ...(options?.justifyContent && {
-          justifyContent: options?.justifyContent,
+        ...(options?.direction !== undefined && {
+          flexDirection: options?.direction,
+        }),
+        ...(options?.stretch !== undefined && { width: "100%" }),
+        ...(options?.alignItems !== undefined && {
+          alignItems: options.alignItems,
+        }),
+        ...(options?.justifyContent !== undefined && {
+          justifyContent: options.justifyContent,
         }),
 
-        ...(options?.wrap && { flexWrap: options.wrap }),
-        ...(size !== "320px" && { flex: `1 0 ${size}` }),
+        ...(options?.wrap !== undefined && { flexWrap: options.wrap }),
+        ...(size !== "" && { flex: `1 0 ${size}` }),
       };
     }
     return {
       display: "grid",
       gap,
-      gridTemplateColumns: `repeat(auto-fit, minmax(min(100%,${size}), 1fr))`,
+      ...(size !== "" && {
+        gridTemplateColumns: `repeat(auto-fit, minmax(min(100%,${size}), 1fr))`,
+      }),
       ...(options?.stretch && { width: "100%" }),
     };
-  }, [isFlex]) as Dictionary;
-
+  }, [isFlex]) as CSSProperties;
   const Tag = as || ("div" as ElementType);
 
   return (
     <Tag
       {...rest}
       style={{
-        ...(DONOTUse !== undefined && {
-          ...DONOTUse.DONOTStyle,
+        ...(options?.DANGEROUS !== undefined && {
+          ...options.DANGEROUS,
         }),
         ...stylesConfig,
       }}

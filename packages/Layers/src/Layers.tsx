@@ -1,10 +1,10 @@
-import { ReactNode, ElementType, useMemo } from "react";
+import { ElementType, useMemo } from "react";
 import AsProps from "./Interfaces/As";
+import { WithChildren } from "../../Types/dist/types";
 import styles from "./Layers.module.css";
 
-interface Props extends AsProps {
+interface Props extends AsProps, WithChildren {
   align?: "start" | "end" | "center";
-  children: ReactNode;
   className?: string;
 }
 

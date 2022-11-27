@@ -20,7 +20,7 @@ export interface Props {
   };
 }
 
-// Open new browser tab with options. Apple.com does it for starting a chat.
+// Open new browser tab. Apple.com does it for chat support.
 
 function useNewBrowserTab(props: Props): () => void {
   const {

@@ -10,7 +10,10 @@
   "dependencies": {
     "@reach/dialog": "^0.17.0",
     "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "react-dom": "^18.0.0",
+    "group-react": "*",
+    "icon-react": "*",
+    "button-react": "*"
   },
   "peerDependencies": {
     "react": "^18.0.0",

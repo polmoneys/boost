@@ -1,0 +1,70 @@
+.page {
+  --app-gutter: min(calc(var(--gap-5) * 6), 20vw);
+  display: grid;
+  grid-row-gap: var(--app-gutter) 0;
+  grid-template-columns: var(--app-gutter) 1fr var(--app-gutter);
+  align-content: start;
+
+  & > .container {
+    grid-column: 2 / -2;
+    &.-full {
+      grid-column: 1 / -1;
+    }
+  }
+}
+
+/*
+https://ryanmulligan.dev/blog/layout-breakouts/
+
+  <div class="page-breakout">
+      <div>Content</div>
+      <div class="page-breakout-popout">Popout</div>
+      <div>Content</div>
+      <div class="page-breakout-feature">Feature</div>
+      <div>Content</div>
+      <div class="page-breakout-full">Full</div>
+      <div>Content</div>
+  </div>
+    
+*/
+.page-breakout {
+  --page-breakout-gap: clamp(1rem, 6vw, 3rem);
+  --page-breakout-full: minmax(var(--page-breakout-gap), 1fr);
+  --page-breakout-content: min(50ch, 100% - var(--page-breakout-gap) * 2);
+  --page-breakout-popout: minmax(0, 2rem);
+  --page-breakout-feature: minmax(0, 5rem);
+
+  display: grid;
+  grid-template-columns:
+    [full-start] var(--page-breakout-full)
+    [feature-start] var(--page-breakout-feature)
+    [popout-start] var(--page-breakout-popout)
+    [content-start] var(--page-breakout-content) [content-end]
+    var(--page-breakout-popout) [popout-end]
+    var(--page-breakout-feature) [feature-end]
+    var(--page-breakout-full) [full-end];
+}
+
+.page-breakout > * {
+  grid-column: content;
+}
+
+.page-breakout .page-breakout-popout {
+  grid-column: popout;
+}
+
+.page-breakout .page-breakout-feature {
+  grid-column: feature;
+}
+
+.page-breakout .page-breakout-full {
+  grid-column: full;
+  border-radius: unset;
+}
+
+:where(.page-breakout > *) {
+  display: grid;
+  place-items: center;
+  min-height: var(--minHeightUserAction);
+  border-radius: var(--border-radius);
+}

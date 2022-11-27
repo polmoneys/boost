@@ -1,11 +1,10 @@
 import require$$0, { useMemo } from "react";
-const root = "_root_1fs58_1";
-const button = "_button_1fs58_40";
-const ring = "_ring_1fs58_41";
+import { Unit } from "unit-react";
+const root = "_root_lp4s1_1";
+const button = "_button_lp4s1_57";
 var styles = {
   root,
-  button,
-  ring
+  button
 };
 var jsxRuntime = { exports: {} };
 var reactJsxRuntime_production_min = {};
@@ -43,8 +42,9 @@ function Link(props) {
     children,
     newTab = false,
     href,
-    variant = "default",
+    variant = "",
     className,
+    tooltip,
     ...rest
   } = props;
   const {
@@ -59,13 +59,19 @@ function Link(props) {
   }, [newTab]);
   const isButton = variant === "button";
   const classNames = [className, styles.root, isButton && styles.button].filter(Boolean).join(" ");
-  return /* @__PURE__ */ jsx("a", {
-    ...rest,
-    className: classNames,
-    rel,
-    target,
-    href,
-    children
+  return /* @__PURE__ */ jsx(Unit, {
+    disabled: !isButton,
+    children: /* @__PURE__ */ jsx("a", {
+      ...rest,
+      className: classNames,
+      rel,
+      target,
+      href,
+      ...tooltip !== void 0 && {
+        "data-tooltip": tooltip
+      },
+      children
+    })
   });
 }
 export { Link };

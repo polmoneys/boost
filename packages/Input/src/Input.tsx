@@ -1,8 +1,12 @@
-import { ComponentProps, ChangeEvent } from "react";
+import { ComponentProps, ChangeEvent, KeyboardEvent } from "react";
 import { Group } from "group-react";
+import { Unit } from "unit-react";
+import { Button } from "button-react";
+import { IconCross } from "icon-react";
 import styles from "./Input.module.css";
 
-interface Props extends Omit<ComponentProps<"input">, "onChange"> {
+interface Props
+  extends Omit<ComponentProps<"input">, "onChange" | "className"> {
   // id of element describing error
   errorElementId?: string;
   autocomplete?:
@@ -27,21 +31,25 @@ interface Props extends Omit<ComponentProps<"input">, "onChange"> {
     | "previous"
     | "search"
     | "send";
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   onChangeValue?: (value: string) => void;
   id: string;
   label: string;
   classNames?: {
-    root?: string;
+    group?: string;
     input?: string;
-    focusWithin?: string;
   };
+  keyboard?: boolean;
+  autofocus?: boolean;
+  nonKeyboard?: boolean;
+  direction?: "row" | "column";
+  px?: string;
+  variant?: "" | "search";
 }
 
 function Input(props: Props) {
   const {
     children,
-    autoFocus,
     onChange,
     value,
     autocomplete = "off",
@@ -53,46 +61,95 @@ function Input(props: Props) {
     onChangeValue,
     id,
     label,
+    autoFocus = false,
+    keyboard = true,
+    nonKeyboard = true,
+    direction = "column",
     classNames,
+    px = "var(--gap-3)",
+    variant = "",
     ...rest
   } = props;
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
-    if (value.length > 2) {
-      onChangeValue?.(value);
-      onChange?.(event);
+    onChangeValue?.(value);
+    onChange?.(event);
+  };
+
+  const groupClassnames = [styles.group, classNames?.group]
+    .filter(Boolean)
+    .join(" ");
+
+  const onKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    const key = e.key;
+
+    if (key === "Enter" || key === "Escape") {
+      e.preventDefault();
+    }
+
+    if (key === "Escape") {
+      onChangeValue?.("");
     }
   };
 
-  const rootClassnames = [styles.root, classNames?.root]
-    .filter(Boolean)
-    .join(" ");
-  const inputClassnames = [styles.input, classNames?.input]
-    .filter(Boolean)
-    .join(" ");
+  const isSearch = variant === "search";
+  const onClear = () => onChangeValue?.("");
+  const onPressStart = () => {
+    const element = document.querySelector(`#${id}`) as HTMLInputElement;
+    if (element) {
+      element.focus();
+    }
+  };
 
   return (
     <Group
       as="div"
-      options={{ direction: "column", alignItems: "flex-start" }}
-      className={rootClassnames}
+      options={{ direction, alignItems: "flex-start" }}
+      className={groupClassnames}
+      {...(isSearch && { gap: "0" })}
     >
-      <label htmlFor={id}>{label}</label>
-      <input
-        className={inputClassnames}
-        type={type}
-        defaultValue={value}
-        autoComplete={autocomplete}
-        enterKeyHint={enterkeyhint}
-        inputMode={inputmode}
-        aria-describedby={errorElementId}
-        onChange={handleChange}
-        {...(placeholder && { placeholder })}
-        {...rest}
-      />
+      <label htmlFor={id} {...(isSearch && { className: "visually-hidden" })}>
+        {label}
+      </label>
+      <Unit autofocus={autoFocus} isTextInput>
+        <input
+          type={type}
+          value={value}
+          autoComplete={autocomplete}
+          enterKeyHint={enterkeyhint}
+          inputMode={inputmode}
+          aria-describedby={errorElementId}
+          onChange={handleChange}
+          {...(placeholder && { placeholder })}
+          {...rest}
+          {...(px !== undefined && {
+            style: {
+              paddingLeft: px,
+              paddingRight: px,
+            },
+          })}
+          {...(classNames?.input !== undefined && {
+            className: classNames?.input,
+          })}
+          onKeyDown={onKeyDown}
+        />
+      </Unit>
+      {isSearch && (
+        <Button
+          variant="icon"
+          onClick={onClear}
+          className={styles.clear}
+          keyboard={false}
+          nonKeyboard={false}
+        >
+          <IconCross />
+        </Button>
+      )}
     </Group>
   );
 }
+
+Input.Search = (props: Props) => <Input {...props} variant="search" />;
 
 export default Input;

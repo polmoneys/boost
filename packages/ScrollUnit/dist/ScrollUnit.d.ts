@@ -1,9 +1,8 @@
-import { ReactNode } from "react";
-interface Props {
-    children: ReactNode;
+import { WithChildren } from "../../Types/dist/types";
+interface Props extends WithChildren {
     dir?: "ltr" | "rtl";
     classNames?: {
-        root?: string;
+        group?: string;
         viewport?: string;
     };
     type?: "auto" | "always" | "scroll" | "hover";

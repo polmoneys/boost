@@ -19,11 +19,13 @@ export default (args: ViteConfigInput) => {
         fileName: format => `checkbox-react.${format}.js`,
       },
       rollupOptions: {
-        external: ["react", "react-dom"],
+        external: ["react", "react-dom", "unit-react", "icon-react"],
         output: {
           globals: {
             react: "React",
             "react-dom": "ReactDOM",
+            "unit-react": "UnitReact",
+            "icon-react": "IconReact",
           },
         },
       },

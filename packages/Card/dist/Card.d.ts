@@ -1,16 +1,22 @@
 import { ReactNode } from "react";
-import { Dictionary } from "./Interfaces/Dictionary";
+import { Pic } from "pic-react";
 import AsProps from "./Interfaces/As";
-import { CardMedia } from "card-media-react";
-interface Props extends AsProps {
-    children: ReactNode;
+import { WithChildren, Dictionary } from "../../Types/dist/types";
+interface Props extends AsProps, WithChildren {
     ratio: "square" | "portrait" | "landscape";
     DONOTUse?: {
         DONOTStyle: Dictionary;
     };
+    className?: string;
 }
 declare function Card(props: Props): JSX.Element;
 declare namespace Card {
-    var Media: typeof CardMedia;
+    var Title: (props: TitleProps) => JSX.Element;
+    var Media: typeof Pic;
+}
+interface TitleProps {
+    actions?: ReactNode;
+    children: ReactNode;
+    className?: string;
 }
 export default Card;

@@ -41,6 +41,7 @@ module.exports = cfg => {
         // Pick by custom property name
         match: [
           "transparent",
+          "disabled",
           "white",
           "black",
           "gray",
@@ -51,7 +52,12 @@ module.exports = cfg => {
           "grid-item-width",
           "ratio-",
           "item-grid",
-          "minHeightUserAction",
+          "minHeight",
+          "z-",
+          "border-",
+          "bright",
+          "shout",
+          "offset",
         ],
       }),
       devMode

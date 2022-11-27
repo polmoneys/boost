@@ -1,6 +1,7 @@
 import { ChangeEvent, ComponentProps } from "react";
-import RenderProp from "./Interfaces/RenderProp";
+import { RenderProp } from "../../Types/dist/types";
 import RadioGroup from "./RadioGroup";
+import RadioLabel from "./RadioLabel";
 export interface RadioProps extends ComponentProps<"input"> {
     onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
     id: string;
@@ -9,17 +10,20 @@ export interface RadioProps extends ComponentProps<"input"> {
         checked: boolean;
         checkboxLabel: string;
     }, HTMLElement>;
-    checkboxSize?: string;
     classNames?: {
-        root?: string;
+        group?: string;
         label?: string;
         input?: string;
         checked?: string;
     };
     xl?: boolean;
+    keyboard?: boolean;
+    autofocus?: boolean;
+    nonKeyboard?: boolean;
 }
 declare function Radio(props?: RadioProps): JSX.Element;
 declare namespace Radio {
     var Group: typeof RadioGroup;
+    var Label: typeof RadioLabel;
 }
 export default Radio;

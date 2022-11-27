@@ -1,0 +1,6 @@
+.columns {
+  --columns-count: 3;
+  --columns-width: 150px;
+
+  columns: var(--columns-count) var(--columns-width);
+}

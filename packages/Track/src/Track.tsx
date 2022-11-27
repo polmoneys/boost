@@ -1,19 +1,11 @@
-import {
-  ReactNode,
-  useRef,
-  useEffect,
-  ElementType,
-  useState,
-  Fragment,
-} from "react";
+import { useRef, useEffect, ElementType, useState, Fragment } from "react";
 import AsProps from "./Interfaces/As";
 import Options from "./Interfaces/Options";
+import { WithChildren } from "../../Types/dist/types";
 import Scroller from "./utils";
-
 import styles from "./Track.module.css";
 
-export interface Props extends AsProps {
-  children: ReactNode;
+export interface Props extends AsProps, WithChildren {
   className?: string;
   gap?: string;
   options?: Options;
@@ -21,7 +13,13 @@ export interface Props extends AsProps {
 }
 
 function Track(props: Props) {
-  const { className, children, maskSize, gap = "1em", as = "div" } = props;
+  const {
+    className,
+    children,
+    maskSize,
+    gap = "var(--gap-3)",
+    as = "div",
+  } = props;
 
   const [base, setBase] = useState<Scroller | null>(null);
   const isScrollerReady = base !== null;

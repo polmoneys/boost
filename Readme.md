@@ -4,35 +4,47 @@ Attempt #5872046752 at extensible React TS components. [Demo](https://polmoneys.
 
 ### Get started 
 
-Components are meant to be used with CSS utility classNames for customization. Let's call a combination of color styles/theme a **surface** with a variant **-success**. 
+```<Button>```, [docs](https://github.com/polmoneys/boost/tree/master/packages/Button/get-started.md),```<Card>```, [docs](https://github.com/polmoneys/boost/tree/master/packages/Card/get-started.md),```<Checkbox>```, [docs](https://github.com/polmoneys/boost/tree/master/packages/Checkbox/get-started.md),```<Dialog>```, [docs](https://github.com/polmoneys/boost/tree/master/packages/Dialog/get-started.md),```<Fence>```, [docs](https://github.com/polmoneys/boost/tree/master/packages/Fence/get-started.md),```<Font>```, [docs](https://github.com/polmoneys/boost/tree/master/packages/Font/get-started.md),```<Group>```, [docs](https://github.com/polmoneys/boost/tree/master/packages/Group/get-started.md),```<Icon>```, [docs](https://github.com/polmoneys/boost/tree/master/packages/Icon/get-started.md),```<Input>```, [docs](https://github.com/polmoneys/boost/tree/master/packages/Input/get-started.md),```<Layers>```, [docs](https://github.com/polmoneys/boost/tree/master/packages/Layers/get-started.md), ```<Link>```, [docs](https://github.com/polmoneys/boost/tree/master/packages/Link/get-started.md), ```<Options>```, [docs](https://github.com/polmoneys/boost/tree/master/packages/Options/get-started.md), ```<Pic>```, [docs](https://github.com/polmoneys/boost/tree/master/packages/Pic/get-started.md), ```<Popover>```, [docs](https://github.com/polmoneys/boost/tree/master/packages/Popover/get-started.md), ```<Radio>```, [docs](https://github.com/polmoneys/boost/tree/master/packages/Radio/get-started.md), ```<ScrollUnit>```, [docs](https://github.com/polmoneys/boost/tree/master/packages/ScrollUnit/get-started.md), ```<Shape>```, [docs](https://github.com/polmoneys/boost/tree/master/packages/Shape/get-started.md), ```<Stat>```, [docs](https://github.com/polmoneys/boost/tree/master/packages/Stat/get-started.md), ```<Sticky>```, [docs](https://github.com/polmoneys/boost/tree/master/packages/Sticky/get-started.md), ```<Track>```, [docs](https://github.com/polmoneys/boost/tree/master/packages/Track/get-started.md), ```<Trap>```, [docs](https://github.com/polmoneys/boost/tree/master/packages/Trap/get-started.md), ```<Unit>```, [docs](https://github.com/polmoneys/boost/tree/master/packages/Unit/get-started.md). 
+
+
+### Overview
+
+Components are meant to be used with CSS utility classNames for customization. 
+
 
 ```jsx
 
+
  <Button
       // adds theme & 2 units of padding horizontally 
-      className="surface -success px $$"
+      className="success px $$"
       onClick={() => trayActions.on()}
    >
      Show tray
    </Button>
 
+
 ```
 
 If you are working at 'design system' level you can always use the primitive and add sugar to it:
 
+
 ```jsx
+
 
 // @/packages/Button/src/Button.tsx
 
  const SuccessButton = (props:ButtonProps)=> <Button
       {...props}
-     className="surface -success px $$"
+     className="success px $$"
    />
     
 
 Button.Success = SuccessButton;
 
+
 ```
+
 
 Some components require more complex **classNames** prop, an Input: 
 
@@ -41,22 +53,25 @@ Some components require more complex **classNames** prop, an Input:
 
 // @/packages/Input/src/Input.tsx
 
- const HighlightInput = (props:InputProps)=> <Input
+ const AccentInput = (props:InputProps)=> <Input
       {...props}
-      classNames={{ input: "surface -highlight px $$" }}
+      classNames={{ input: "accent px $$" }}
    />
 
-Input.Highlight = HighlightInput;
+Input.Accent = AccentInput;
+
 
 ```
 
-Same idea with Select, Options, Radio, Button and Link components. 
 
 ### Add packages
 
+
 Add a folder under **packages** and configure both **vite.config.ts** and **package.json** to it's own requirements, check other packages for reference. 
 
+
 ```bash
+
 
    # install any dependencies this package needs
    yarn install 
@@ -64,36 +79,53 @@ Add a folder under **packages** and configure both **vite.config.ts** and **pack
    # build
    yarn build
 
+
 ```
 
-To use it on **demo** you must add it to **package.json** dependencies and import it on **App.tsx**.
+
+To use, add it to [package.json](https://github.com/polmoneys/boost/blob/master/demo/package.json) dependencies.
+
 
 ### Add hooks
 
-Add hook on folder **hooks/src** and import/export it to/from **src/index.ts**. 
+
+Add hook on folder [hooks/src](https://github.com/polmoneys/boost/blob/master/hooks/src) and import/export it to/from **src/index.ts**. 
+
 
 ### Author CSS
+
 
 Write CSS with PostCSS sugar on any folder structure and import all files to **index.css**. A file **css.css** will be created in **/dist** directory.
 
 
+
 ```bash
+
 
    # @/css/
 
    yarn build
 
+
 ```
 
-Picked tokens (check **postcss.config.cjs**) will be exported as **css-tokens.js** in **dist** folder so that you may consume it as **js**. 
+[Get started](https://github.com/polmoneys/boost/blob/master/css/get-started.md).
 
 ### Tooling
+
 
 Yarn workspaces template for React TS library & app powered by [vite](https://vitejs.dev/). 
 
 [PostCSS +8](https://cssdb.org/) with [PresetEnv](https://github.com/csstools/postcss-plugins/tree/main/plugin-packs/postcss-preset-env) stage **0**. 
 
+
+### Roadmap 
+
+- [ ] improve export **types** & **css** from Packages && script after **yarn build** of a Package to trigger **yarn build** on ```css```folder
+- [ ] un-gitignore **utils**
+
 ### Inspiration 💐
+
 
 > Our requirements are more modest but at the same time more responsible: 
 > buildings, furniture, drinking glasses may well be consumer items that 
@@ -103,7 +135,9 @@ Yarn workspaces template for React TS library & app powered by [vite](https://vi
 
 Erik Gunnar Asplund on **Swedish Grace**.
 
+
 ### Feedback 
+
 
 [Twitter](https://twitter.com/polmoneys)
 

@@ -1,104 +1,19 @@
 import require$$0, { useMemo, useEffect } from "react";
-var jsxRuntime$1 = { exports: {} };
-var reactJsxRuntime_production_min$1 = {};
-/**
- * @license React
- * react-jsx-runtime.production.min.js
- *
- * Copyright (c) Facebook, Inc. and its affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-var f$1 = require$$0, k$1 = Symbol.for("react.element"), l$1 = Symbol.for("react.fragment"), m$1 = Object.prototype.hasOwnProperty, n$1 = f$1.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.ReactCurrentOwner, p$1 = { key: true, ref: true, __self: true, __source: true };
-function q$1(c, a, g) {
-  var b, d = {}, e = null, h = null;
-  g !== void 0 && (e = "" + g);
-  a.key !== void 0 && (e = "" + a.key);
-  a.ref !== void 0 && (h = a.ref);
-  for (b in a)
-    m$1.call(a, b) && !p$1.hasOwnProperty(b) && (d[b] = a[b]);
-  if (c && c.defaultProps)
-    for (b in a = c.defaultProps, a)
-      d[b] === void 0 && (d[b] = a[b]);
-  return { $$typeof: k$1, type: c, key: e, ref: h, props: d, _owner: n$1.current };
-}
-reactJsxRuntime_production_min$1.Fragment = l$1;
-reactJsxRuntime_production_min$1.jsx = q$1;
-reactJsxRuntime_production_min$1.jsxs = q$1;
-{
-  jsxRuntime$1.exports = reactJsxRuntime_production_min$1;
-}
-const jsx$1 = jsxRuntime$1.exports.jsx;
-function Group(props) {
-  const {
-    children,
-    as,
-    gap = "1em",
-    size = "320px",
-    css = "flex",
-    options,
-    DONOTUse,
-    ...rest
-  } = props;
-  const isFlex = css === "flex";
-  const stylesConfig = useMemo(() => {
-    var _a;
-    if (isFlex) {
-      return {
-        display: "flex",
-        gap,
-        flexDirection: (_a = options == null ? void 0 : options.direction) != null ? _a : "row",
-        ...(options == null ? void 0 : options.stretch) && {
-          width: "100%"
-        },
-        ...(options == null ? void 0 : options.alignItems) && {
-          alignItems: options == null ? void 0 : options.alignItems
-        },
-        ...(options == null ? void 0 : options.justifyContent) && {
-          justifyContent: options == null ? void 0 : options.justifyContent
-        },
-        ...(options == null ? void 0 : options.wrap) && {
-          flexWrap: options.wrap
-        },
-        ...size !== "320px" && {
-          flex: `1 0 ${size}`
-        }
-      };
-    }
-    return {
-      display: "grid",
-      gap,
-      gridTemplateColumns: `repeat(auto-fit, minmax(min(100%,${size}), 1fr))`,
-      ...(options == null ? void 0 : options.stretch) && {
-        width: "100%"
-      }
-    };
-  }, [isFlex]);
-  const Tag = as || "div";
-  return /* @__PURE__ */ jsx$1(Tag, {
-    ...rest,
-    style: {
-      ...DONOTUse !== void 0 && {
-        ...DONOTUse.DONOTStyle
-      },
-      ...stylesConfig
-    },
-    children
-  });
-}
-const root = "ah";
+import { IconDash, IconCheck, IconCross } from "icon-react";
+import { Unit } from "unit-react";
+const group = "p-";
 const checkbox = "af";
 const mixed = "DU";
 const checked = "wT";
 const unchecked = "-b";
 var styles = {
-  root,
+  group,
   checkbox,
   mixed,
   checked,
   unchecked
 };
+var style = /* @__PURE__ */ (() => "._-7{vertical-align:middle;overflow:hidden;border-radius:50%;aspect-ratio:1}\n")();
 var jsxRuntime = { exports: {} };
 var reactJsxRuntime_production_min = {};
 /**
@@ -136,32 +51,40 @@ function Checkbox(props) {
     value,
     isMixed,
     onChange,
-    className,
+    classNames,
     label,
     id,
     name,
     checked: checked2,
-    fill
+    keyboard = true,
+    autofocus = false,
+    nonKeyboard = true
   } = props;
-  const rootClassNames = [styles.root, className].filter(Boolean).join(" ");
-  const checkboxClassNames = useMemo(() => [
-    styles.checkbox,
-    isMixed && styles.mixed,
-    checked2 && styles.checked,
-    !checked2 && isMixed !== void 0 && styles.unchecked
-  ].filter(Boolean).join(" "), [isMixed, checked2]);
+  const groupClassNames = useMemo(() => [styles.group, classNames == null ? void 0 : classNames.group, isMixed && styles.mixed, checked2 && styles.checked].filter(Boolean).join(" "), [isMixed, checked2]);
+  const checkboxClassNames = useMemo(() => {
+    var _a, _b, _c, _d, _e, _f;
+    return [styles.checkbox, isMixed && ((_a = classNames == null ? void 0 : classNames.checkbox) == null ? void 0 : _a.mixed) && ((_b = classNames == null ? void 0 : classNames.checkbox) == null ? void 0 : _b.mixed), checked2 && ((_c = classNames == null ? void 0 : classNames.checkbox) == null ? void 0 : _c.checked) && ((_d = classNames == null ? void 0 : classNames.checkbox) == null ? void 0 : _d.checked), !checked2 && ((_e = classNames == null ? void 0 : classNames.checkbox) == null ? void 0 : _e.unchecked) && ((_f = classNames == null ? void 0 : classNames.checkbox) == null ? void 0 : _f.unchecked)].filter(Boolean).join(" ");
+  }, [isMixed, checked2]);
   useEffect(() => {
     const element = document.querySelector(`#${id}`);
     if (element) {
       element.indeterminate = isMixed ? true : false;
     }
   }, [isMixed]);
-  return /* @__PURE__ */ jsx(Group, {
-    as: "label",
-    children: /* @__PURE__ */ jsxs("label", {
-      htmlFor: id,
-      className: rootClassNames,
-      children: [/* @__PURE__ */ jsx("input", {
+  const disableRing = !keyboard && !nonKeyboard;
+  return /* @__PURE__ */ jsxs("label", {
+    htmlFor: id,
+    className: groupClassNames,
+    children: [isMixed && /* @__PURE__ */ jsx(IconDash, {
+      size: "lg"
+    }), checked2 && /* @__PURE__ */ jsx(IconCheck, {
+      size: "lg"
+    }), !checked2 && isMixed === void 0 && /* @__PURE__ */ jsx(IconCross, {
+      size: "lg"
+    }), /* @__PURE__ */ jsx(Unit, {
+      autofocus,
+      disabled: disableRing,
+      children: /* @__PURE__ */ jsx("input", {
         className: checkboxClassNames,
         onChange,
         type: "checkbox",
@@ -170,14 +93,9 @@ function Checkbox(props) {
         ...!isMixed && {
           value
         },
-        ...!isMixed && fill !== void 0 && {
-          style: {
-            "--checkbox-fill": fill
-          }
-        },
         checked: !isMixed && checked2
-      }), label]
-    })
+      })
+    }), label]
   });
 }
 export { Checkbox };

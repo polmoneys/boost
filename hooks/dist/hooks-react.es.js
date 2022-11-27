@@ -1,4 +1,4 @@
-import { useReducer, useMemo, useState, useCallback, useRef } from "react";
+import { useReducer, useMemo, useRef, useState, useEffect, useCallback } from "react";
 function binaryReducer(state, action) {
   switch (action) {
     case "ON":
@@ -20,28 +20,6 @@ function useBinary(initialState) {
   }), []);
   return { state, actions };
 }
-function useImageSize() {
-  const [imageSize, setImageSize] = useState(null);
-  const getImageSize = (event) => {
-    const target = event.target;
-    setImageSize({ width: target.naturalWidth, height: target.naturalHeight });
-  };
-  return [imageSize, getImageSize];
-}
-const useList = (initial) => {
-  const [items, setItems] = useState(initial);
-  return [
-    items,
-    {
-      setItems,
-      clearItems: useCallback(() => setItems(() => []), []),
-      addItem: useCallback((item) => setItems((v) => [...v, item]), []),
-      removeItemById: useCallback((id) => setItems((oldItems) => oldItems.filter((oldItem) => oldItem && oldItem.uuid !== id)), []),
-      removeItemByIndex: useCallback((index) => setItems((oldItems) => oldItems.filter((oldItem, i) => i !== index)), []),
-      isInList: useCallback((id) => items.map((itm) => itm.uuid).includes(id), [items])
-    }
-  ];
-};
 function useCache() {
   const c = useRef({
     cache: {},
@@ -63,6 +41,57 @@ function useCache() {
     }
   }).current;
   return c;
+}
+function useMap(initialState = []) {
+  const [collection, setCollection] = useState(() => new Map(initialState));
+  const add = (key, value) => setCollection((oldItems) => {
+    const newMap = new Map(oldItems);
+    newMap.set(key, value);
+    return newMap;
+  });
+  const empty = () => setCollection(/* @__PURE__ */ new Map());
+  const remove = (key) => setCollection((oldItems) => {
+    const newMap = new Map(oldItems);
+    newMap.delete(key);
+    return newMap;
+  });
+  const has2 = (key) => collection.has(key);
+  return {
+    items: [...collection],
+    size: collection.size,
+    empty,
+    add,
+    remove,
+    has: has2
+  };
+}
+function useFormFocusout(id, onOut) {
+  useEffect(() => {
+    const formElement = document.querySelector(`#${id}`);
+    const onFocusOut = (event) => {
+      if (formElement) {
+        if (!formElement.contains(event.relatedTarget)) {
+          onOut();
+        }
+      }
+    };
+    if (formElement) {
+      formElement.addEventListener("focusout", onFocusOut);
+    }
+    return () => {
+      if (formElement) {
+        formElement.removeEventListener("focusout", onFocusOut);
+      }
+    };
+  }, [id]);
+}
+function useImageSize() {
+  const [imageSize, setImageSize] = useState(null);
+  const getImageSize = (event) => {
+    const target = event.target;
+    setImageSize({ width: target.naturalWidth, height: target.naturalHeight });
+  };
+  return [imageSize, getImageSize];
 }
 var map;
 try {
@@ -2721,6 +2750,72 @@ const UseInput = (props) => {
   };
   return [value, onChange, error];
 };
+const useList = (initial) => {
+  const [items, setItems] = useState(initial);
+  return [
+    items,
+    {
+      setItems,
+      clearItems: useCallback(() => setItems(() => []), []),
+      addItem: useCallback((item) => setItems((v) => [...v, item]), []),
+      removeItemById: useCallback((id) => setItems((oldItems) => oldItems.filter((oldItem) => oldItem && oldItem.uuid !== id)), []),
+      removeItemByIndex: useCallback((index) => setItems((oldItems) => oldItems.filter((oldItem, i) => i !== index)), []),
+      isInList: useCallback((id) => items.map((itm) => itm.uuid).includes(id), [items])
+    }
+  ];
+};
+function useNewBrowserTab(props) {
+  const {
+    url,
+    title,
+    width = 200,
+    height = 300,
+    left = 100,
+    top = 100,
+    config
+  } = props;
+  let options = `left=${left},screenX=${left},top=${top},screenY=${top},width=${width},innerWidth=${width},innerHeight=${height},height=${height}`;
+  const defaultOptions = `menubar=no,location=no,resizable=no,scrollbars=no,status=no,`;
+  if (config !== void 0) {
+    const userOptions = `menubar=${config == null ? void 0 : config.menubar},location=${config == null ? void 0 : config.location},resizable=${config == null ? void 0 : config.resizable},scrollbars=${config == null ? void 0 : config.scrollbars},status=${config == null ? void 0 : config.status},`;
+    options = `${options}${userOptions}`;
+  } else {
+    options = `${options}${defaultOptions}`;
+  }
+  const trigger = () => window.open(url, title, options);
+  return trigger;
+}
+function hasResizeObserver() {
+  return typeof window.ResizeObserver !== "undefined";
+}
+function useResizeObserver(props) {
+  const { ref, onResize } = props;
+  useEffect(() => {
+    let element = ref == null ? void 0 : ref.current;
+    if (!element) {
+      return;
+    }
+    if (!hasResizeObserver()) {
+      window.addEventListener("resize", onResize, false);
+      return () => {
+        window.removeEventListener("resize", onResize, false);
+      };
+    } else {
+      const resizeObserverInstance = new window.ResizeObserver((entries) => {
+        if (!entries.length) {
+          return;
+        }
+        onResize();
+      });
+      resizeObserverInstance.observe(element);
+      return () => {
+        if (element) {
+          resizeObserverInstance.unobserve(element);
+        }
+      };
+    }
+  }, [onResize, ref]);
+}
 function useSelection(items) {
   const [mixedState, dispatchUpdate] = useState(items);
   const allChecked = useMemo(() => {
@@ -2757,25 +2852,25 @@ function useSelection(items) {
     { onFollowerChange, onLeadChange, isSelected }
   ];
 }
-function useNewBrowserTab(props) {
-  const {
-    url,
-    title,
-    width = 200,
-    height = 300,
-    left = 100,
-    top = 100,
-    config
-  } = props;
-  let options = `left=${left},screenX=${left},top=${top},screenY=${top},width=${width},innerWidth=${width},innerHeight=${height},height=${height}`;
-  const defaultOptions = `menubar=no,location=no,resizable=no,scrollbars=no,status=no,`;
-  if (config !== void 0) {
-    const userOptions = `menubar=${config == null ? void 0 : config.menubar},location=${config == null ? void 0 : config.location},resizable=${config == null ? void 0 : config.resizable},scrollbars=${config == null ? void 0 : config.scrollbars},status=${config == null ? void 0 : config.status},`;
-    options = `${options}${userOptions}`;
-  } else {
-    options = `${options}${defaultOptions}`;
-  }
-  const trigger = () => window.open(url, title, options);
-  return trigger;
+function useSet(initialState = []) {
+  const [collection, setCollection] = useState(() => new Set(initialState));
+  const add = (newItem) => setCollection((oldTags) => /* @__PURE__ */ new Set([...oldTags, newItem]));
+  const empty = () => setCollection(new Set(initialState));
+  const remove = (newItem) => {
+    setCollection((oldTags) => {
+      const newSet = new Set(oldTags);
+      newSet.delete(newItem);
+      return newSet;
+    });
+  };
+  const has2 = (key) => collection.has(key);
+  return {
+    items: [...collection],
+    size: collection.size,
+    empty,
+    add,
+    remove,
+    has: has2
+  };
 }
-export { useBinary, useCache, useImageSize, UseInput as useInput, useList, useNewBrowserTab, useSelection };
+export { useBinary, useCache, useFormFocusout, useImageSize, UseInput as useInput, useList, useMap, useNewBrowserTab, useResizeObserver, useSelection, useSet };

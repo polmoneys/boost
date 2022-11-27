@@ -1,47 +1,43 @@
-.root {
+.group {
   position: relative;
   display: grid;
-  grid-template-columns: 1em auto;
+  grid-template-columns: var(--minHeightUserAction) auto;
+  place-content: start;
+  place-items: center;
   gap: var(--gap-2);
 }
 
 .checkbox {
-  --checkbox-fill: var(--gray-3);
-  accent-color: var(--gray-3);
+  accent-color: var(--black);
   margin: 0;
   font: inherit;
   color: currentColor;
-  width: 1.15em;
-  height: 1.15em;
-  border: 0.15em solid currentColor;
-  border-radius: 0.15em;
-  transform: translateY(-0.075em);
-  display: grid;
-  place-content: center;
-}
-.checkbox:not(.mixed) {
+  height: var(--minHeightUserAction);
+  width: var(--minHeightUserAction);
+  aspect-ratio: 1;
+  border: var(--border-width) solid currentColor;
+  border-radius: inherit;
+  background-color: var(--transparent);
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  background-color: var(--white);
 }
-.checkbox:not(.mixed)::before {
-  content: "";
-  width: 0.65em;
-  height: 0.65em;
-  transform: scale(0);
-  transition: 120ms transform ease-in-out;
-  box-shadow: inset 1em 1em var(--checkbox-fill);
-  border: 0.1em solid var(--checkbox-fill);
-  /* transform-origin: bottom left;
-  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%); */
+
+.group.mixed {
 }
-.checkbox:not(.mixed):checked::before,
-.checkbox:not(.mixed).checked::before,
-.checkbox.unchecked::before {
-  transform: scale(1);
+
+.group.checked .checkbox {
+  filter: brightness(var(--bright));
 }
-.checkbox:focus {
-  outline: var(--border-width) solid currentColor;
-  outline-offset: calc(var(--border-width) * 1.1);
+
+.group.unchecked {
+}
+
+.group svg {
+  position: absolute;
+  background-color: transparent;
+  top: 0;
+  left: 0;
+  transform: scale(1.1) translate(0.2em, 0.2em);
+  z-index: var(--z-2);
 }

@@ -15,12 +15,13 @@ interface Props {
 function Icon(props: Props) {
   const {
     d = "",
-    disabled = false,
     variant,
-    fill = "var(--accent-highlight)",
+    fill = "var(--accent)",
     stroke = "currentColor",
     strokeWidth = 2,
     size = "md",
+    // TODO:
+    disabled = false,
   } = props;
 
   const { outline, backgroundColor } = useMemo(() => {
@@ -65,27 +66,25 @@ function Icon(props: Props) {
 const Compose = (d: string) => (props: Props) => <Icon {...props} d={d} />;
 
 // Sugar
-const IconPlus = Compose(iconPaths["plus"]);
-const IconMinus = Compose(iconPaths["minus"]);
-const IconCross = Compose(iconPaths["cross"]);
-const IconCheck = Compose(iconPaths["check"]);
-const IconDash = Compose(iconPaths["dash"]);
-const IconSlash = Compose(iconPaths["slash"]);
-const IconCaretUp = Compose(iconPaths["caretUp"]);
-const IconCaretDown = Compose(iconPaths["caretDown"]);
-const IconDotsX = Compose(iconPaths["dotsX"]);
-const IconDotsY = Compose(iconPaths["dotsY"]);
+export const IconPlus = Compose(iconPaths["plus"]);
+export const IconMinus = Compose(iconPaths["minus"]);
+export const IconCross = Compose(iconPaths["cross"]);
+export const IconCheck = Compose(iconPaths["check"]);
+export const IconDash = Compose(iconPaths["dash"]);
+export const IconSlash = Compose(iconPaths["slash"]);
+export const IconCaretUp = Compose(iconPaths["caretUp"]);
+export const IconCaretDown = Compose(iconPaths["caretDown"]);
+export const IconDotsX = Compose(iconPaths["dotsX"]);
+export const IconDotsY = Compose(iconPaths["dotsY"]);
+export const IconStar = Compose(iconPaths["star"]);
+export const IconIg = Compose(iconPaths["instagram"]);
+export const IconTwitter = Compose(iconPaths["twitter"]);
+export const IconGithub = Compose(iconPaths["github"]);
+export const IconQuestion = Compose(iconPaths["question"]);
+export const IconEmail = Compose(iconPaths["email"]);
+export const IconBookmark = Compose(iconPaths["bookmark"]);
+export const IconPin = Compose(iconPaths["pin"]);
+export const IconHeart = Compose(iconPaths["heart"]);
+export const IconColorPicker = Compose(iconPaths["colorPicker"]);
 
 export default Icon;
-export {
-  IconPlus,
-  IconMinus,
-  IconCross,
-  IconCheck,
-  IconDash,
-  IconSlash,
-  IconCaretUp,
-  IconCaretDown,
-  IconDotsX,
-  IconDotsY,
-};

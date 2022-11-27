@@ -1,20 +1,31 @@
 import { Fragment, ReactNode } from "react";
-import { Menu, MenuItem, MenuButton } from "@szhsin/react-menu";
+import {
+  Menu,
+  MenuItem,
+  MenuButton,
+  MenuGroup,
+  MenuDivider,
+  MenuHeader,
+} from "@szhsin/react-menu";
 import OptionsProps from "./Interfaces/Options";
 import styles from "./Options.module.css";
 
 interface Props {
+  id: string;
   options: OptionsProps;
   onChange?: (selection: string) => void;
   triggerOn?: ReactNode;
   triggerOff?: ReactNode;
   ssr?: boolean;
+  portal?: boolean;
   disabled?: boolean;
   classNames?: {
     group?: string;
     button?: string;
     item?: string;
+    selected?: string;
   };
+  selection?: string;
 }
 
 const menuClassName = ({ state }: { state: string }) =>
@@ -28,7 +39,10 @@ function Options(props: Props) {
     onChange,
     ssr = false,
     disabled = false,
+    portal = true,
     classNames,
+    selection,
+    id,
   } = props;
   if (options.length === 0) return <Fragment />;
 
@@ -38,12 +52,10 @@ function Options(props: Props) {
   const buttonClassNames = [styles.button, classNames?.button]
     .filter(Boolean)
     .join(" ");
-  const menuItemClassNames = [styles.item, classNames?.item]
-    .filter(Boolean)
-    .join(" ");
 
   return (
     <Menu
+      id={id}
       menuClassName={menuClassNames}
       menuButton={({ open }) => (
         <MenuButton
@@ -55,19 +67,37 @@ function Options(props: Props) {
       )}
       {...(onChange && { onItemClick: event => onChange?.(event.value) })}
       {...(ssr && { initialMounted: true })}
+      portal={portal}
     >
-      {options?.map(option => (
-        <MenuItem
-          key={option.id}
-          className={menuItemClassNames}
-          value={option.value}
-          {...(option?.href !== undefined && {
-            href: option?.href,
-          })}
-        >
-          {option.value.charAt(0).toUpperCase() + option.value.slice(1)}
-        </MenuItem>
-      ))}
+      <MenuGroup>
+        {options?.map(option => {
+          if (option.value === "divider") {
+            return <MenuDivider />;
+          }
+          if (option.value === "title") {
+            return <MenuHeader>{option.label}</MenuHeader>;
+          }
+          return (
+            <MenuItem
+              key={option.id}
+              className={[
+                styles.item,
+                option.value === (selection ?? "")
+                  ? classNames?.selected
+                  : classNames?.item,
+              ]
+                .filter(Boolean)
+                .join(" ")}
+              value={option.value}
+              {...(option?.href !== undefined && {
+                href: option?.href,
+              })}
+            >
+              {option.label}
+            </MenuItem>
+          );
+        })}
+      </MenuGroup>
     </Menu>
   );
 }

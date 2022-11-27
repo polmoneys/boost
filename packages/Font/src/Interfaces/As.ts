@@ -16,7 +16,7 @@ const HTMLtag = [
 type HTMLTags = typeof HTMLtag[number];
 
 interface AsProps {
-  as: HTMLTags;
+  as?: HTMLTags;
 }
 
 export default AsProps;

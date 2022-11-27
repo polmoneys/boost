@@ -67,7 +67,7 @@
 }
 
 :is(.xl, .l)::first-letter {
-  text-transform: var(--casing);
+  text-transform: var(--shout);
 }
 
 .xl:has(span, b),

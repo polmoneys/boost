@@ -1,31 +1,32 @@
-import { ReactNode, Fragment } from "react";
+import { ReactElement } from "react";
 import { FocusRing } from "@react-aria/focus";
 
 interface Props {
-  children: ReactNode;
-  keyboard?: boolean;
+  children: ReactElement;
   autofocus?: boolean;
-  nonKeyboard?: boolean;
   within?: boolean;
+  isTextInput?: boolean;
+  disabled?: boolean;
 }
 
 function Unit(props: Props) {
   const {
     children,
-    keyboard,
     autofocus = false,
     within = false,
-    nonKeyboard,
+    isTextInput = false,
+    disabled = false,
   } = props;
 
   return (
     <FocusRing
       autoFocus={autofocus}
-      focusClass={nonKeyboard ? "ring" : "no-ring"}
-      focusRingClass={keyboard ? "ring-keyboard" : "no-ring-keyboard"}
+      focusClass={disabled ? "no-ring" : "ring"}
+      focusRingClass={disabled ? "no-ring" : "ring-keyboard"}
       within={within}
+      isTextInput={isTextInput}
     >
-      <Fragment>{children}</Fragment>
+      {children}
     </FocusRing>
   );
 }

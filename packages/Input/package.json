@@ -10,7 +10,10 @@
   "dependencies": {
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "group-react": "*"
+    "group-react": "*",
+    "unit-react": "*",
+    "button-react": "*",
+    "icon-react": "*"
   },
   "peerDependencies": {
     "react": "^18.0.0",

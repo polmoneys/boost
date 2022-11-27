@@ -1,11 +1,15 @@
 import { ReactNode, useMemo, ComponentProps } from "react";
+import { Unit } from "unit-react";
 import styles from "./Link.module.css";
 
 interface Props extends ComponentProps<"a"> {
-  variant?: "button" | "default";
+  variant?: "button" | "";
   children: string | ReactNode;
   newTab?: boolean;
   href: string;
+  tooltip?: string;
+  keyboard?: boolean;
+  nonkeyboard?: boolean;
 }
 
 function Link(props: Props) {
@@ -13,8 +17,9 @@ function Link(props: Props) {
     children,
     newTab = false,
     href,
-    variant = "default",
+    variant = "",
     className,
+    tooltip,
     ...rest
   } = props;
 
@@ -30,10 +35,20 @@ function Link(props: Props) {
   const classNames = [className, styles.root, isButton && styles.button]
     .filter(Boolean)
     .join(" ");
+
   return (
-    <a {...rest} className={classNames} rel={rel} target={target} href={href}>
-      {children}
-    </a>
+    <Unit disabled={!isButton}>
+      <a
+        {...rest}
+        className={classNames}
+        rel={rel}
+        target={target}
+        href={href}
+        {...(tooltip !== undefined && { "data-tooltip": tooltip })}
+      >
+        {children}
+      </a>
+    </Unit>
   );
 }
 

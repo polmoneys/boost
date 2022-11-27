@@ -1,0 +1,36 @@
+.payment-icon:not(.selected) {
+  filter: grayscale(100%);
+  opacity: 0.4;
+}
+
+.saturate {
+  filter: saturate(0.2);
+}
+
+:where(html) {
+  --bright: 1.1;
+  --brighter: 1.3;
+  --brightest: 2.4;
+}
+
+.bright {
+  filter: brightness(var(--brighter));
+}
+
+.overflow {
+  height: 1.4em;
+  background: linear-gradient(rgba(white, 0), rgba(white, 1));
+}
+
+.fix-logo {
+  mix-blend-mode: darken;
+  filter: grayscale(100%) contrast(1%);
+  &:hover {
+    mix-blend-mode: normal;
+    filter: none;
+  }
+}
+
+.emoji-red-check {
+  filter: hue-rotate(-120deg);
+}

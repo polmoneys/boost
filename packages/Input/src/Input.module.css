@@ -1,37 +1,38 @@
-.root {
+.group {
+  position: relative;
+  width: fit-content;
 }
 
-.root:focus-within {
+.group label::after {
+  content: "\A";
+  white-space: pre;
 }
 
-.input {
-  caret-color: var(--gray-2);
+.group input {
+  caret-color: var(--black);
   appearance: none;
   font-family: inherit;
   font-size: max(16px, 1rem);
   min-width: 0;
   flex-grow: 1;
   background-color: var(--transparent);
-  border: var(--border-width) solid var(--transparent);
-  min-height: var(--minHeightUserAction);
-}
-
-.input:focus {
-  border-radius: 0;
-  outline: var(--border-width) solid currentColor;
-  outline-offset: calc(var(--border-width) * 1.1);
-}
-.input::-webkit-input-placeholder {
-  color: var(--gray-2);
-}
-.input::-ms-input-placeholder {
-  color: var(--gray-2);
+  border: var(--border-width) solid currentColor;
+  line-height: var(--minHeightUserAction);
 }
 
 .input:autofill {
 }
 
-.root label::after {
-  content: "\A";
-  white-space: pre;
+.input::-webkit-input-placeholder {
+  color: currentColor;
+}
+.input::-ms-input-placeholder {
+  color: currentColor;
+}
+
+.clear {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  transform: translate(-0.3em, -0.15em);
 }

@@ -1,0 +1,41 @@
+html {
+  scroll-behavior: smooth;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  overflow-y: scroll;
+}
+@supports (scrollbar-gutter: stable) {
+  body {
+    overflow-y: auto;
+    scrollbar-gutter: stable;
+  }
+}
+
+.hide-scroll {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/*
+    You could not have one axis be hidden
+    (hidden, scroll and auto all limit the content from expanding beyond the element) 
+    while having the other one set to visible.
+    until...
+    clip in one direction 
+    visible in another direction
+*/
+@supports (overflow: clip) {
+  /* safe to use overflow: clip */
+}
