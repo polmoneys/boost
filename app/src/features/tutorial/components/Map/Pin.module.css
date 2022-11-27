@@ -1,0 +1,51 @@
+.pin {
+  position: fixed;
+  right: 90px;
+  width: max-content;
+  display: none !important;
+}
+@media (orientation: landscape) {
+  .pin {
+    display: flex !important;
+  }
+}
+
+/* .pin:not(.current) {
+  opacity: 0.9;
+} */
+.pin.done {
+  filter: brightness(2);
+  transition: filter 0.3 ease-in-out;
+}
+.pin.done:hover {
+  filter: none;
+}
+.pin p {
+  opacity: 0;
+  transition: opacity 0.3 ease-in-out;
+}
+
+.pin:hover p {
+  opacity: 1;
+}
+
+.badge {
+  position: relative;
+  width: 36px;
+  height: 36px;
+}
+
+.badge > * {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.badge > *:first-child {
+  z-index: 1;
+}
+.badge > *:last-child {
+  z-index: 2;
+  color: var(--accent-error);
+  fill: var(--accent-error);
+}
