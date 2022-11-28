@@ -5,22 +5,23 @@ import Timer from "../../packages/Utils/src/Timer";
 interface Props {
   onEndPTR?: () => void;
   durationPTR: number;
+  element?: Element;
 }
 
 function usePullToRefresh(props: Props) {
-  const { durationPTR = 1000, onEndPTR } = props;
+  const { durationPTR = 1000, onEndPTR, element = window } = props;
 
-  const pStart = { x: 0, y: 0 };
-  const pStop = { x: 0, y: 0 };
+  const startPoint = { x: 0, y: 0 };
+  const endPoint = { x: 0, y: 0 };
   const [isPTR, setStatus] = useState(false);
   function swipeStart(e: any) {
     if (typeof e["targetTouches"] !== "undefined") {
       const touch = e.targetTouches[0];
-      pStart.x = touch.screenX;
-      pStart.y = touch.screenY;
+      startPoint.x = touch.screenX;
+      startPoint.y = touch.screenY;
     } else {
-      pStart.x = e.screenX;
-      pStart.y = e.screenY;
+      startPoint.x = e.screenX;
+      startPoint.y = e.screenY;
     }
   }
 
@@ -34,10 +35,9 @@ function usePullToRefresh(props: Props) {
   }
 
   function swipeCheck() {
-    const changeY = pStart.y - pStop.y;
-    const changeX = pStart.x - pStop.x;
+    const changeY = startPoint.y - endPoint.y;
+    const changeX = startPoint.x - endPoint.x;
     if (isPullDown(changeY, changeX)) {
-      console.log("Swipe Down!");
       setStatus(true);
       onEndPTR?.();
       new Timer(() => setStatus(false), durationPTR);
@@ -49,19 +49,23 @@ function usePullToRefresh(props: Props) {
   function swipeEnd(e: any) {
     if (typeof e["changedTouches"] !== "undefined") {
       const touch = e.changedTouches[0];
-      pStop.x = touch.screenX;
-      pStop.y = touch.screenY;
+      endPoint.x = touch.screenX;
+      endPoint.y = touch.screenY;
     } else {
-      pStop.x = e.screenX;
-      pStop.y = e.screenY;
+      endPoint.x = e.screenX;
+      endPoint.y = e.screenY;
     }
 
     swipeCheck();
   }
 
-  useEvent("touchstart", function (e: any) {
-    swipeStart(e);
-  });
+  useEvent(
+    "touchstart",
+    function (e: any) {
+      swipeStart(e);
+    },
+    element
+  );
 
   useEvent("touchend", function (e: any) {
     swipeEnd(e);

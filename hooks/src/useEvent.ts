@@ -1,21 +1,10 @@
 import { useEffect, useRef } from "react";
 
-/*
-
-USAGE
------
-
-useEvent('mousemove', handler);
-const handler = useCallback(
-    ({ clientX, clientY }) => {
-    setStateX({ x: clientX, y: clientY });
-    },
-    [stateX]
-);
-
- */
-
-const useEvent = (eventName: string, handler: any, element = window) => {
+function useEvent(
+  eventName: string,
+  handler: any,
+  element: Element | HTMLElement | Window = window
+) {
   const savedHandler = useRef();
   useEffect(() => {
     savedHandler.current = handler;
@@ -30,6 +19,6 @@ const useEvent = (eventName: string, handler: any, element = window) => {
       element.removeEventListener(eventName, eventListener);
     };
   }, [eventName, element]);
-};
+}
 
 export default useEvent;
