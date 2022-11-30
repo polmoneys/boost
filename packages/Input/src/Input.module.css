@@ -20,13 +20,14 @@
   line-height: var(--minHeightUserAction);
 }
 
-.input:autofill {
+.group input:autofill {
+}
+.group input:placeholder-shown {
+}
+.group input:focus-visible {
 }
 
-.input::-webkit-input-placeholder {
-  color: currentColor;
-}
-.input::-ms-input-placeholder {
+.group input::-webkit-input-placeholder {
   color: currentColor;
 }
 

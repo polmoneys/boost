@@ -1,8 +1,8 @@
-import { ChangeEvent, CSSProperties, useEffect, useMemo } from "react";
+import { ChangeEvent, useEffect, useMemo } from "react";
 import { IconCheck, IconDash, IconCross } from "icon-react";
 import { Unit } from "unit-react";
-import styles from "./Checkbox.module.css";
 import "../../Icon/dist/style.css";
+import styles from "./Checkbox.module.css";
 
 type Props = {
   label: string;

@@ -17,4 +17,10 @@ interface Props extends AsProps, VariantProps, WithChildren {
     };
 }
 declare function Group(props: Props): JSX.Element;
+declare namespace Group {
+    var Row: (props: Props) => JSX.Element;
+    var Column: (props: Props) => JSX.Element;
+    var ColToRow: (props: Props) => JSX.Element;
+    var Center: (props: Props) => JSX.Element;
+}
 export default Group;

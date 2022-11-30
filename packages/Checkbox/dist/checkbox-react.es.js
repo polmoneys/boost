@@ -1,6 +1,7 @@
 import require$$0, { useMemo, useEffect } from "react";
 import { IconDash, IconCheck, IconCross } from "icon-react";
 import { Unit } from "unit-react";
+var style = /* @__PURE__ */ (() => "._-7{vertical-align:middle;overflow:hidden;border-radius:50%;aspect-ratio:1}\n")();
 const group = "p-";
 const checkbox = "af";
 const mixed = "DU";
@@ -13,7 +14,6 @@ var styles = {
   checked,
   unchecked
 };
-var style = /* @__PURE__ */ (() => "._-7{vertical-align:middle;overflow:hidden;border-radius:50%;aspect-ratio:1}\n")();
 var jsxRuntime = { exports: {} };
 var reactJsxRuntime_production_min = {};
 /**

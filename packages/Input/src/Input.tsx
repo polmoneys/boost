@@ -5,6 +5,17 @@ import { Button } from "button-react";
 import { IconCross } from "icon-react";
 import styles from "./Input.module.css";
 
+/*
+
+ <input
+      type="number"
+      inputmode="decimal"
+      placeholder="Type a number and blur"
+      onFocus="this.type='number'; this.value=this.lastValue"
+      onBlur="this.type=''; this.lastValue=this.value; this.value=this.value==''?'':(+this.value).toLocaleString()"
+    />
+    
+*/
 interface Props
   extends Omit<ComponentProps<"input">, "onChange" | "className"> {
   // id of element describing error

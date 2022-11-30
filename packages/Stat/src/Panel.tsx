@@ -24,32 +24,31 @@ interface Props {
   };
 }
 function Panel(props: Props) {
-  const {
-    id,
-    children,
-    title,
-    description,
-    actions,
-    subtitle,
-    classNames = {
-      group: styles.white,
-      content: "p $$$$",
-      footer: "p $$",
-    },
-  } = props;
+  const { id, children, title, description, actions, subtitle, classNames } =
+    props;
 
   const hasFooter = actions !== undefined;
   const hasSubtitle = subtitle !== undefined;
+  const groupClassNames = [styles.white, classNames?.group]
+    .filter(Boolean)
+    .join(" ");
 
+  const contentClassNames = ["p $$$$", classNames?.content]
+    .filter(Boolean)
+    .join(" ");
+
+  const footerClassNames = ["p $$", styles.footer, classNames?.footer]
+    .filter(Boolean)
+    .join(" ");
   return (
     <Group
       as="div"
       options={{ direction: "column" }}
-      className={classNames.group}
+      className={groupClassNames}
       gap="0"
       id={id}
     >
-      <div className={classNames.content}>
+      <div className={contentClassNames}>
         <HelveticaNeue className={styles.title}>{title}</HelveticaNeue>
         <HelveticaNeue className={styles.description}>
           {description}
@@ -57,7 +56,7 @@ function Panel(props: Props) {
         {children}
       </div>
       {hasFooter && (
-        <div className={[styles.footer, classNames.footer].join(" ")}>
+        <div className={footerClassNames}>
           {hasSubtitle && (
             <HelveticaNeue className={styles.subtitle}>
               {subtitle}

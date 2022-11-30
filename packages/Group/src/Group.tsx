@@ -40,7 +40,10 @@ function Group(props: Props) {
         ...(options?.direction !== undefined && {
           flexDirection: options?.direction,
         }),
-        ...(options?.stretch !== undefined && { width: "100%" }),
+        ...(options?.stretch !== undefined && {
+          width: "100%",
+          height: "100%",
+        }),
         ...(options?.alignItems !== undefined && {
           alignItems: options.alignItems,
         }),
@@ -77,5 +80,42 @@ function Group(props: Props) {
     </Tag>
   );
 }
+
+Group.Row = (props: Props) => <Group {...props} />;
+
+Group.Column = (props: Props) => {
+  const { options, ...rest } = props;
+  return (
+    <Group
+      options={{ direction: "column", ...(options !== undefined && options) }}
+      {...rest}
+    />
+  );
+};
+
+Group.ColToRow = (props: Props) => {
+  const { className, ...rest } = props;
+  return (
+    <Group
+      {...rest}
+      className={["col-to-row", className].filter(Boolean).join(" ")}
+    />
+  );
+};
+
+Group.Center = (props: Props) => {
+  const { options, ...rest } = props;
+  return (
+    <Group
+      {...rest}
+      options={{
+        ...options,
+        alignItems: "center",
+        justifyContent: "center",
+        stretch: true,
+      }}
+    />
+  );
+};
 
 export default Group;
