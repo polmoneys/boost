@@ -38,6 +38,7 @@ function Pin(props: Props) {
     <Group
       as="div"
       className={[
+        "wiggle",
         styles.pin,
         isCurrent && styles.current,
         step > pin.step && styles.done,

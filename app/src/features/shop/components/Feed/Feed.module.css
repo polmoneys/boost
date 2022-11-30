@@ -1,0 +1,12 @@
+.group {
+  min-height: 30vh;
+  border: var(--border-width) solid var(--accent);
+  padding: var(--gap-3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.group.isPulling {
+  border: var(--border-width) solid var(--accent-error);
+}
