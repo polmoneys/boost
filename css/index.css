@@ -6,13 +6,15 @@
 
 @import "theme/_color";
 @import "theme/_ring";
-@import "theme/_filter";
-@import "theme/_border";
 
+@import "utilities/_animation";
+@import "utilities/_border";
 @import "utilities/_fit";
+@import "utilities/_filter";
 @import "utilities/_orientation";
 @import "utilities/_spacing";
 @import "utilities/_sticky";
+@import "utilities/_transform";
 
 @import "groups/_grid";
 @import "groups/_table";

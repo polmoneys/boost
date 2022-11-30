@@ -13,3 +13,24 @@
 .fit-min-height {
   min-height: 0;
 }
+
+.fit-max-width {
+  width: max-content;
+}
+/* 
+  Reveal truncated/ellipsed content on hover
+*/
+.cell > .cell-content {
+  display: block;
+  overflow: hidden;
+  padding: var(--gap-1) var(--gap-3);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cell:hover > .cell-content {
+  background-color: inherit;
+  contain: paint;
+  width: fit-content;
+  min-width: 100%;
+}

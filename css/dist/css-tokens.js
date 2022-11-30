@@ -1,5 +1,5 @@
 'use strict';
-const minHeightUserAction = 'max(44px, 2.2em)';
+const minHeightUserAction = 'max(36px, 2em)';
 const minHeightHero = 'clamp(250px, 50vmax, 500px)';
 const white = '#f1f1f1';
 const black = 'rgba(0, 0, 0, 0.8)';

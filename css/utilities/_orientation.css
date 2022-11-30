@@ -27,4 +27,7 @@
   .col-to-row {
     flex-direction: row;
   }
+  .align-items-center-landscape {
+    align-items: center;
+  }
 }

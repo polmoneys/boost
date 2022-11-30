@@ -14,18 +14,20 @@
   );
 }
 
+/* 
+    Nested border radius is a bit odd
+    Fix is to subtract the padding from the radius.
+     */
+
 .nested-border-radius {
   padding: var(--gap-3);
 }
-/*  solution is to subtract the padding from the radius  */
 .nested-border-radius.group {
   --fixed: calc(var(--border-radius) - var(--gap-3));
 }
-
 .nested-border-radius.group picture {
   border-radius: var(--fixed) var(--fixed) 0 0;
 }
-
 .nested-border-radius.group footer {
   border-radius: 0 0 var(--fixed) var(--fixed);
 }
