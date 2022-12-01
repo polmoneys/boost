@@ -1,3 +1,27 @@
+var __defProp = Object.defineProperty;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __publicField = (obj, key, value) => {
+  __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
+  return value;
+};
+function transitionEndPromise(element) {
+  return new Promise((resolve) => {
+    const node = element;
+    node.addEventListener("transitionend", function f(event) {
+      if (event.target !== node)
+        return;
+      node.removeEventListener("transitionend", f);
+      resolve();
+    });
+  });
+}
+function timeline() {
+  return new Promise((resolve) => requestAnimationFrame(resolve));
+}
+function animate(element, stylz) {
+  Object.assign(element.current.style, stylz);
+  return transitionEndPromise(element.current).then(() => timeline());
+}
 const arraySplit = (items, fn) => {
   let match = [];
   let dispose = [];
@@ -337,4 +361,58 @@ const mergeRefs = (...refs) => {
 const addProps = (children, props) => {
   return react.exports.isValidElement(children) && react.exports.cloneElement(children, props);
 };
-export { addProps, arraySplit, filterT, formatDate, formatNumber, mergeRefs, sortT };
+const scrollToElement = (selector) => {
+  const el = document.querySelector(selector);
+  if (el) {
+    el.scrollIntoView();
+  }
+};
+function truncateStartEnd(initial, padding = 4) {
+  if (!initial)
+    return;
+  const str = initial.toString();
+  const leftSide = str.substr(0, padding);
+  const rightSide = str.substr(str.length - padding, padding);
+  const newStr = `${leftSide}${".".repeat(padding)}${rightSide}`;
+  return {
+    next: newStr,
+    prev: str
+  };
+}
+function validFileName(initial) {
+  const specialCharacters = /[!$\[\]{}%\/\\"?&|~]+|[\.]{2,}]/;
+  return !specialCharacters.test(initial);
+}
+class Timer {
+  constructor(cb, delay) {
+    __publicField(this, "timerId", null);
+    __publicField(this, "start");
+    __publicField(this, "remaining");
+    __publicField(this, "cb");
+    __publicField(this, "resume", () => {
+      this.start = Date.now();
+      if (this.timerId !== null) {
+        clearTimeout(this.timerId);
+      }
+      this.timerId = setTimeout(this.cb, this.remaining);
+    });
+    __publicField(this, "clear", () => {
+      if (this.timerId !== null) {
+        clearTimeout(this.timerId);
+      }
+    });
+    __publicField(this, "pause", () => {
+      if (this.timerId !== null) {
+        clearTimeout(this.timerId);
+      }
+      if (this.start !== void 0) {
+        this.remaining -= Date.now() - this.start;
+      }
+    });
+    this.remaining = delay;
+    this.cb = cb;
+    this.resume();
+  }
+}
+const openUrl = (to) => window == null ? void 0 : window.open(to, "_blank");
+export { Timer, addProps, animate, arraySplit, filterT, formatDate, formatNumber, mergeRefs, openUrl, scrollToElement, sortT, timeline, truncateStartEnd, validFileName };

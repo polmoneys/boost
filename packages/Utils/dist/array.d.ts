@@ -1,5 +1,15 @@
+/**
+ * Utility to split an array by a condition ()=>
+ */
 export declare const arraySplit: <T>(items: T[], fn: (el: T) => boolean) => [T[], T[]];
+/**
+ * Utility to create Array[n]
+ */
 export declare const rangify: (to: number) => number[];
+/**
+ * Utility to nest hierarchical data
+ * https://codepen.io/polmoneys/pen/NWvYRvJ
+ */
 export declare const nest: (items: Array<any>, id?: number | null, link?: string) => any;
 export declare const arrayLatest: <T>(items: T[], upcoming: T, clamp: number) => T[];
 /**

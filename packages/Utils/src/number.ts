@@ -15,6 +15,13 @@ export const numberClamp = (num: number, min: number, max: number) => {
 };
 
 /**
+ * Utility to round numbers
+ */
+
+export const roundTo = (n: number, precision: number) =>
+  Math.round(n * 10 ** precision) / 10 ** precision;
+
+/**
  * Get 1fr
  */
 
