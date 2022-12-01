@@ -119,7 +119,7 @@ Write CSS with PostCSS sugar on any folder structure and import all files to **i
 
 You can always re-export all packages from a single export and make components more specific with built-in styles to improve **DX**.
 
-Folder [styled](https://github.com/polmoneys/boost/blob/master/css/get-started.md) shows how.
+Folder [styled](https://github.com/polmoneys/boost/blob/master/styled/src/index.ts) shows how.
 
 
 ### Tooling
