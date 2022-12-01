@@ -48,7 +48,7 @@ function useCache() {
   }).current;
   return c;
 }
-const useEvent = (eventName, handler, element = window) => {
+function useEvent(eventName, handler, element = window) {
   const savedHandler = useRef();
   useEffect(() => {
     savedHandler.current = handler;
@@ -60,7 +60,7 @@ const useEvent = (eventName, handler, element = window) => {
       element.removeEventListener(eventName, eventListener);
     };
   }, [eventName, element]);
-};
+}
 function useMap(initialState = []) {
   const [collection, setCollection] = useState(() => new Map(initialState));
   const add = (key, value) => setCollection((oldItems) => {
@@ -2880,7 +2880,6 @@ function usePullToRefresh(props) {
     const changeY = startPoint.y - endPoint.y;
     const changeX = startPoint.x - endPoint.x;
     if (isPullDown(changeY, changeX)) {
-      console.log("Swipe Down!");
       setStatus(true);
       onEndPTR == null ? void 0 : onEndPTR();
       new Timer(() => setStatus(false), durationPTR);
