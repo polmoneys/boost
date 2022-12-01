@@ -17,7 +17,7 @@ export function timeline() {
   return new Promise(resolve => requestAnimationFrame(resolve));
 }
 
-export function animate(element: any, stylz: string) {
+export function animate(element: any, stylz: Record<string, string>) {
   Object.assign(element.current.style, stylz);
   return transitionEndPromise(element.current).then(() => timeline());
 }
