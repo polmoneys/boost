@@ -9,6 +9,17 @@ export interface Dictionaries extends Array<Dictionary> {}
 
 export type DomElementSize = `${string}px` | `${string}%` | `calc(${string})`;
 
+const sizeUnits = ["xs", "sm", "md", "lg", "xl"] as const;
+export type Size = typeof sizeUnits[number];
+// use as Sizes.SM
+export const Sizes: { [key: string]: Size } = {
+  XS: "xs",
+  SM: "sm",
+  MD: "md",
+  LG: "lg",
+  XL: "xl",
+};
+
 export interface WithChildren {
   children: ReactNode;
 }
