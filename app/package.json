@@ -35,6 +35,7 @@
     "sticky-react": "*",
     "track-react": "*",
     "unit-react": "*",
+    "list-react": "*",
     "yup": "^0.32.11"
   },
   "devDependencies": {

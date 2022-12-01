@@ -2,14 +2,9 @@ import {
   useState,
   Fragment,
   useEffect,
-  useMemo,
-  useCallback,
-  ChangeEvent,
   useRef,
-  CSSProperties,
 } from "react";
 import {
-  Sticky,
   Shape,
   Fence,
   Group,
@@ -19,7 +14,6 @@ import {
   Input,
   Card,
   Layers,
-  Track,
   Radio,
   Options,
   Dialog,
@@ -32,38 +26,24 @@ import {
   HelveticaNeueBoldS,
   HelveticaNeueBold,
   HelveticaNeueS,
-  HelveticaNeueMedium,
   HelveticaNeueThin,
   IconCheck,
   IconCross,
   IconCaretUp,
   IconCaretDown,
-  IconDash,
-  IconSlash,
   IconStar,
   IconTwitter,
   IconIg,
   IconQuestion,
   IconBookmark,
-  IconEmail,
   IconGithub,
   IconHeart,
-  IconPin,
   IconDotsY,
-  IconDotsX,
   IconColorPicker,
 } from "styled-react";
+import { List } from "list-react";
 import { animate, timeline, openUrl, scrollToElement } from "boost-utils";
-import {
-  useBinary,
-  useInput,
-  useSelection,
-  useNewBrowserTab,
-  useFormFocusout,
-  useSet,
-  useMap,
-  useResizeObserver,
-} from "hooks-react";
+import { useBinary, useInput, useSelection } from "hooks-react";
 import { VALIDATE_USERNAME } from "../../hooks/src/useInput";
 // DEMO
 import {
@@ -207,6 +187,7 @@ function App() {
       .then(() => {
         console.log("Timeline animation ends");
       });
+
   return (
     <Fragment>
       <h1 translate="no" className="visually-hidden">
@@ -1857,6 +1838,140 @@ function App() {
           </Group.Column>
         </article>
 
+        <article className="full">
+          <div className="grid -md -stretch gap !!" style={{ width: "100%" }}>
+            <Stat.Panel
+              title="<List />"
+              description="List with slots"
+              subtitle="Details"
+              actions={[
+                {
+                  label: (
+                    <Fragment>
+                      <IconStar />
+                      <HelveticaNeueS>Snippet</HelveticaNeueS>
+                    </Fragment>
+                  ),
+                  action: () =>
+                    openUrl(
+                      "https://github.com/polmoneys/boost/blob/master/packages/List/get-started.md"
+                    ),
+                },
+                {
+                  label: (
+                    <Fragment>
+                      <IconGithub />
+                      <HelveticaNeueS>Source</HelveticaNeueS>
+                    </Fragment>
+                  ),
+                  action: () =>
+                    openUrl(
+                      "https://github.com/polmoneys/boost/blob/master/packages/List/src/List.tsx"
+                    ),
+                  className: "ml-auto",
+                },
+              ]}
+            >
+              <List label="Example list" className="list-demo">
+                <List.Item
+                  end={
+                    <Button className="accent-error" variant="icon">
+                      <IconBookmark stroke="var(--white)" />
+                    </Button>
+                  }
+                >
+                  Some serious content
+                </List.Item>
+                <List.Item
+                  end={
+                    <Button className="accent-error" variant="icon">
+                      <IconBookmark stroke="var(--white)" />
+                    </Button>
+                  }
+                >
+                  Some serious content
+                </List.Item>
+                <List.Item
+                  end={
+                    <Button className="accent-error" variant="icon">
+                      <IconBookmark stroke="var(--white)" />
+                    </Button>
+                  }
+                >
+                  Some serious content
+                </List.Item>
+              </List>
+            </Stat.Panel>
+            <Stat.Panel title="">
+              <List label="Example list" className="list-demo">
+                <List.Item
+                  description="With sub content"
+                  start={
+                    <Button variant="icon">
+                      <IconHeart stroke="var(--accent-error)" />
+                    </Button>
+                  }
+                >
+                  Some serious content
+                </List.Item>
+
+                <List.Item
+                  description="With sub content"
+                  start={
+                    <Button variant="icon">
+                      <IconHeart stroke="var(--accent-error)" />
+                    </Button>
+                  }
+                >
+                  Some serious content
+                </List.Item>
+                <List.Item
+                  description="With sub content"
+                  start={
+                    <Button variant="icon">
+                      <IconHeart stroke="var(--accent-error)" />
+                    </Button>
+                  }
+                >
+                  Some serious content
+                </List.Item>
+
+                <List.Divider>
+                  <HelveticaNeueBoldS>New</HelveticaNeueBoldS>
+                </List.Divider>
+
+                <List.Item
+                  start={
+                    <Button variant="icon">
+                      <IconHeart />
+                    </Button>
+                  }
+                  end={
+                    <Button variant="icon">
+                      <IconBookmark />
+                    </Button>
+                  }
+                >
+                  Some serious content
+                </List.Item>
+                <List.Item
+                  start={
+                    <Button variant="icon">
+                      <IconHeart />
+                    </Button>
+                  }
+                  end={
+                    <Button variant="icon">
+                      <IconBookmark />
+                    </Button>
+                  }
+                >
+                  Some serious content
+                </List.Item>
+              </List>
+            </Stat.Panel>
+          </div>
+        </article>
         <article className="full">
           <div className="resize">
             <div className="sticky-grid" style={{ width: "100%" }}>

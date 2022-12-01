@@ -111,6 +111,24 @@ header {
   color: var(--panel-footer);
 }
 
+.list-demo {
+  /* max-width: 700px; */
+  /* border: 1px solid currentColor; */
+}
+.list-demo:not(:last-of-type) {
+  /* margin-bottom: 2em; */
+}
+/* .list-demo li:nth(odd) {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.list-demo li:nth(even) {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.list-demo li:not(:last-of-type) {
+  border-bottom: 1px solid currentColor;
+} */
+
 .animated-timeline-demo {
   cursor: pointer;
   transition: filter 100ms ease-in-out, transform 300ms ease-out;
