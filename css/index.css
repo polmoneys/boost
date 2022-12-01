@@ -9,6 +9,7 @@
 
 @import "utilities/_animation";
 @import "utilities/_border";
+@import "utilities/_clip-path";
 @import "utilities/_fit";
 @import "utilities/_filter";
 @import "utilities/_orientation";
