@@ -38,3 +38,5 @@ const itemGridMd = '440px';
 const itemGridLg = '690px';
 const itemGridXl = '860px';
 const gridItemWidth = '860px';
+const listAccent = '#09f';
+const listAccentColor = 'currentColor';
