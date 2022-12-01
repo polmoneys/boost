@@ -53,7 +53,7 @@ import {
   IconDotsX,
   IconColorPicker,
 } from "styled-react";
-
+import { animate, timeline, openUrl, scrollToElement } from "boost-utils";
 import {
   useBinary,
   useInput,
@@ -75,64 +75,34 @@ import {
   TABLE_DEMO,
   OPTIONS_DEMO,
   PINS,
-} from "./snippets/utils";
+} from "./utils/utils";
 import Skeletons from "./features/tutorial/components/Skeletons/Skeletons";
 import Products from "./features/shop/components/Products/Products";
 import { default as CardTutorial } from "./features/tutorial/components/Card/Card";
-// import Snippet from "./features/tutorial/components/Snippet/Snippet";
 
 // From CSS namespace
 import "../../css/dist/css.css";
-import "../../css/dist/css-tokens.js";
-
+// import * as Tokens from "../../css/dist/css-tokens.js";
 // DEMO
 import "./styles/app.css";
-import Map from "./features/tutorial/components/Map/Map";
 import pagemap from "./features/tutorial/components/Map/lib";
 import Pin from "./features/tutorial/components/Map/Pin";
 import Feed from "./features/shop/components/Feed/Feed";
 import Header from "./features/tutorial/components/FakeHeader/FakeHeader";
-import { string } from "yup";
 
 function App() {
+  // console.log({ Tokens });
+
+  // Page
   const [mapStep, setMapStep] = useState(0);
 
-  const [trapped, setTrap] = useState(false);
-  const [valueSearch, onChangeSearch] = useState("");
-  const [publishStatus, setStatus] = useState<StatusMachine>("draft");
-  const [{ output, all, mixed }, { onFollowerChange, onLeadChange }] =
-    useSelection(USESELECTION_DEMO);
-  const [value, onChange, error] = useInput({
-    initial: "",
-    validation: VALIDATE_USERNAME,
-  });
-  const [tab, setTab] = useState(false);
-  const [size, setSize] = useState("xs");
-  const { state: landscapeState, actions: landscapeActions } = useBinary("off");
-  const { state: portraitState, actions: portraitActions } = useBinary("off");
-  const { state: trayState, actions: trayActions } = useBinary("off");
-
-  const trigger = useNewBrowserTab({
-    url: "https://polmoneys.com",
-    title: "pol moneys",
-    width: 700,
-    config: {
-      menubar: "yes",
-      location: "yes",
-      resizable: "yes",
-      scrollbars: "yes",
-      status: "yes",
-    },
-  });
-  const ref = useRef(null);
+  useEffect(() => {
+    drawMap();
+  }, []);
   // useResizeObserver({
   //   ref,
   //   onResize: () => drawMap(),
   // });
-  useEffect(() => {
-    drawMap();
-  }, []);
-
   const drawMap = () => {
     const el = document.querySelector("#map") as HTMLCanvasElement;
     if (el) {
@@ -151,19 +121,92 @@ function App() {
     }
   };
 
+  const scrollToHooksPanel = () => scrollToElement("#hooks-panel");
+
+  // Demos/Panels
   const [theme, setTheme] = useState("default");
   const [shapeColor, setShapeColor] = useState("currentColor");
+  const [trapped, setTrap] = useState(false);
+  const [valueSearch, onChangeSearch] = useState("");
+  const [publishStatus, setStatus] = useState<StatusMachine>("draft");
+  const [{ output, all, mixed }, { onFollowerChange, onLeadChange }] =
+    useSelection(USESELECTION_DEMO);
+  const [value, onChange, error] = useInput({
+    initial: "",
+    validation: VALIDATE_USERNAME,
+  });
+  const [tab, setTab] = useState(false);
+  const [size, setSize] = useState("xs");
+  const { state: landscapeState, actions: landscapeActions } = useBinary("off");
+  const { state: portraitState, actions: portraitActions } = useBinary("off");
+  const { state: trayState, actions: trayActions } = useBinary("off");
 
-  const scrollToHooksPanel = () => {
-    const el = document.querySelector("#hooks-panel");
-    console.log({ el });
-    if (el) {
-      el.scrollIntoView();
-    }
-  };
+  // Anims
+  const spinRef = useRef(null);
+  const spinRef2 = useRef(null);
+  const spinRef3 = useRef(null);
 
-  const openUrl = (to: string) => window.open(to, "_blank");
-
+  const doAnimate = () =>
+    timeline()
+      .then(() => {
+        console.log("Timeline animation starts");
+      })
+      .then(() =>
+        animate(spinRef, {
+          transform: "scale(1.4)",
+        })
+      )
+      .then(() =>
+        animate(spinRef2, {
+          transform: "scale(1.1)",
+          filter: "brightness(1.2)",
+        })
+      )
+      .then(() =>
+        animate(spinRef, {
+          filter: "brightness(1.4)",
+          transform: "rotate(20deg)",
+        })
+      )
+      .then(() =>
+        animate(spinRef3, {
+          transform: "rotate(360deg)",
+          filter: "brightness(1.3)",
+        })
+      )
+      .then(() =>
+        animate(spinRef2, {
+          filter: "brightness(1.1)",
+          transform: "rotate(360deg)",
+        })
+      )
+      .then(() =>
+        animate(spinRef, {
+          filter: "brightness(1.1)",
+          transform: "scale(1) rotate(20)",
+        })
+      )
+      .then(() =>
+        animate(spinRef3, {
+          transform: "rotate(0)",
+          filter: "none",
+        })
+      )
+      .then(() =>
+        animate(spinRef2, {
+          filter: "none",
+          transform: "scale(1.2)",
+        })
+      )
+      .then(() =>
+        animate(spinRef, {
+          filter: "none",
+          transform: "rotate(0)",
+        })
+      )
+      .then(() => {
+        console.log("Timeline animation ends");
+      });
   return (
     <Fragment>
       <h1 translate="no" className="visually-hidden">
@@ -1169,14 +1212,44 @@ function App() {
                 </Popover>
               </Group>
             </Stat.Panel>
+
             <Stat.Panel
-              title="<Stat.Panel />"
-              description="Without footer actions"
-              subtitle="Details"
+              title="Humble animations"
+              description="Promise based timeline() with transitionEnd"
             >
-              <Group.Center as="div" className="grey">
-                <div className="spin" />
-              </Group.Center>
+              <Group
+                className="py $$$$"
+                as="div"
+                options={{
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <div
+                  className="animated-timeline-demo"
+                  ref={spinRef}
+                  tabIndex={-1}
+                  onClick={() => doAnimate()}
+                >
+                  <Shape sides={6} fill="var(--accent-error)" />
+                </div>
+                <div
+                  className="animated-demo"
+                  ref={spinRef2}
+                  tabIndex={-1}
+                  onClick={() => doAnimate()}
+                >
+                  <Shape sides={6} fill="var(--accent-error)" />
+                </div>
+                <div
+                  className="animated-timeline-demo"
+                  ref={spinRef3}
+                  tabIndex={-1}
+                  onClick={() => doAnimate()}
+                >
+                  <Shape sides={6} fill="var(--accent-error)" />
+                </div>
+              </Group>
             </Stat.Panel>
           </div>
         </article>
@@ -1408,6 +1481,15 @@ function App() {
                   height: "30px",
                 }}
               />
+            </Stat.Panel>
+            <Stat.Panel
+              title="<Stat.Panel />"
+              description="Without footer actions"
+              subtitle="Details"
+            >
+              <Group.Center as="div" className="grey">
+                <div className="spin" />
+              </Group.Center>
             </Stat.Panel>
           </div>
         </article>
