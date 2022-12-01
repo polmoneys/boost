@@ -6,26 +6,27 @@ import {
   useCallback,
   ChangeEvent,
   useRef,
+  CSSProperties,
 } from "react";
-import { Sticky } from "sticky-react";
-import { Shape } from "shape-react";
-import { Fence } from "fence-react";
-import { Group } from "group-react";
-import { Link } from "link-react";
-import { Button } from "button-react";
-import { Trap } from "trap-react";
-import { Input } from "input-react";
-import { Card } from "card-react";
-import { Layers } from "layers-react";
-import { Track } from "track-react";
-import { Radio } from "radio-react";
-import { Options } from "options-react";
-import { Dialog } from "dialog-react";
-import { Checkbox } from "checkbox-react";
-import { Popover } from "popover-react";
-import { ScrollUnit } from "scroll-unit-react";
-import { Stat } from "stat-react";
 import {
+  Sticky,
+  Shape,
+  Fence,
+  Group,
+  Link,
+  Button,
+  Trap,
+  Input,
+  Card,
+  Layers,
+  Track,
+  Radio,
+  Options,
+  Dialog,
+  Checkbox,
+  Popover,
+  ScrollUnit,
+  Stat,
   HelveticaNeue,
   HelveticaNeueBoldXL,
   HelveticaNeueBoldS,
@@ -33,8 +34,6 @@ import {
   HelveticaNeueS,
   HelveticaNeueMedium,
   HelveticaNeueThin,
-} from "font-react";
-import {
   IconCheck,
   IconCross,
   IconCaretUp,
@@ -53,7 +52,8 @@ import {
   IconDotsY,
   IconDotsX,
   IconColorPicker,
-} from "icon-react";
+} from "styled-react";
+import { animate, timeline, openUrl, scrollToElement } from "boost-utils";
 import {
   useBinary,
   useInput,
@@ -75,60 +75,34 @@ import {
   TABLE_DEMO,
   OPTIONS_DEMO,
   PINS,
-} from "./snippets/utils";
+} from "./utils/utils";
 import Skeletons from "./features/tutorial/components/Skeletons/Skeletons";
 import Products from "./features/shop/components/Products/Products";
 import { default as CardTutorial } from "./features/tutorial/components/Card/Card";
-// import Snippet from "./features/tutorial/components/Snippet/Snippet";
 
 // From CSS namespace
 import "../../css/dist/css.css";
-import "../../css/dist/css-tokens.js";
-
+// import * as Tokens from "../../css/dist/css-tokens.js";
 // DEMO
 import "./styles/app.css";
-import Map from "./features/tutorial/components/Map/Map";
 import pagemap from "./features/tutorial/components/Map/lib";
 import Pin from "./features/tutorial/components/Map/Pin";
+import Feed from "./features/shop/components/Feed/Feed";
+import Header from "./features/tutorial/components/FakeHeader/FakeHeader";
 
 function App() {
+  // console.log({ Tokens });
+
+  // Page
   const [mapStep, setMapStep] = useState(0);
 
-  const [trapped, setTrap] = useState(false);
-  const [valueSearch, onChangeSearch] = useState("");
-  const [publishStatus, setStatus] = useState<StatusMachine>("draft");
-  const [{ output, all, mixed }, { onFollowerChange, onLeadChange }] =
-    useSelection(USESELECTION_DEMO);
-  const [value, onChange, error] = useInput({
-    initial: "",
-    validation: VALIDATE_USERNAME,
-  });
-  const [tab, setTab] = useState(false);
-  const [size, setSize] = useState("xs");
-  const { state: landscapeState, actions: landscapeActions } = useBinary("off");
-  const { state: portraitState, actions: portraitActions } = useBinary("off");
-  const { state: trayState, actions: trayActions } = useBinary("off");
-  const trigger = useNewBrowserTab({
-    url: "https://polmoneys.com",
-    title: "pol moneys",
-    width: 700,
-    config: {
-      menubar: "yes",
-      location: "yes",
-      resizable: "yes",
-      scrollbars: "yes",
-      status: "yes",
-    },
-  });
-  const ref = useRef(null);
+  useEffect(() => {
+    drawMap();
+  }, []);
   // useResizeObserver({
   //   ref,
   //   onResize: () => drawMap(),
   // });
-  useEffect(() => {
-    drawMap();
-  }, []);
-
   const drawMap = () => {
     const el = document.querySelector("#map") as HTMLCanvasElement;
     if (el) {
@@ -147,52 +121,106 @@ function App() {
     }
   };
 
+  const scrollToHooksPanel = () => scrollToElement("#hooks-panel");
+
+  // Demos/Panels
   const [theme, setTheme] = useState("default");
   const [shapeColor, setShapeColor] = useState("currentColor");
+  const [trapped, setTrap] = useState(false);
+  const [valueSearch, onChangeSearch] = useState("");
+  const [publishStatus, setStatus] = useState<StatusMachine>("draft");
+  const [{ output, all, mixed }, { onFollowerChange, onLeadChange }] =
+    useSelection(USESELECTION_DEMO);
+  const [value, onChange, error] = useInput({
+    initial: "",
+    validation: VALIDATE_USERNAME,
+  });
+  const [tab, setTab] = useState(false);
+  const [size, setSize] = useState("xs");
+  const { state: landscapeState, actions: landscapeActions } = useBinary("off");
+  const { state: portraitState, actions: portraitActions } = useBinary("off");
+  const { state: trayState, actions: trayActions } = useBinary("off");
 
-  const scrollToHooksPanel = () => {
-    const el = document.querySelector("#hooks-panel");
-    console.log({ el });
-    if (el) {
-      el.scrollIntoView();
-    }
-  };
+  // Anims
+  const spinRef = useRef(null);
+  const spinRef2 = useRef(null);
+  const spinRef3 = useRef(null);
 
-  const openUrl = (to: string) => window.open(to, "_blank");
+  const doAnimate = () =>
+    timeline()
+      .then(() => {
+        console.log("Timeline animation starts");
+      })
+      .then(() =>
+        animate(spinRef, {
+          transform: "scale(1.4)",
+        })
+      )
+      .then(() =>
+        animate(spinRef2, {
+          transform: "scale(1.1)",
+          filter: "brightness(1.2)",
+        })
+      )
+      .then(() =>
+        animate(spinRef, {
+          filter: "brightness(1.4)",
+          transform: "rotate(20deg)",
+        })
+      )
+      .then(() =>
+        animate(spinRef3, {
+          transform: "rotate(360deg)",
+          filter: "brightness(1.3)",
+        })
+      )
+      .then(() =>
+        animate(spinRef2, {
+          filter: "brightness(1.1)",
+          transform: "rotate(360deg)",
+        })
+      )
+      .then(() =>
+        animate(spinRef, {
+          filter: "brightness(1.1)",
+          transform: "scale(1) rotate(20)",
+        })
+      )
+      .then(() =>
+        animate(spinRef3, {
+          transform: "rotate(0)",
+          filter: "none",
+        })
+      )
+      .then(() =>
+        animate(spinRef2, {
+          filter: "none",
+          transform: "scale(1.2)",
+        })
+      )
+      .then(() =>
+        animate(spinRef, {
+          filter: "none",
+          transform: "rotate(0)",
+        })
+      )
+      .then(() => {
+        console.log("Timeline animation ends");
+      });
   return (
     <Fragment>
-      <canvas id="map"></canvas>
+      <h1 translate="no" className="visually-hidden">
+        Boost
+      </h1>
+
+      <canvas id="map" className="fade-in"></canvas>
       {PINS.map(pin => (
         <Pin pin={pin} step={mapStep} key={pin.step.toString()} />
       ))}
       <main>
-        <article className="fake-header full">
-          <Group as="div">
-            <div style={{ width: "30%", paddingRight: "var(--gap-3)" }}>
-              <Skeletons />
-            </div>
-            <div style={{ width: "50%" }}>
-              <Skeletons />
-            </div>
-            <div style={{ width: "10%", marginLeft: "auto" }}>
-              <Skeletons />
-            </div>
-          </Group>
-          <Group as="div">
-            <div style={{ width: "80%" }}>
-              <Skeletons />
-            </div>
-            <div style={{ width: "10%", marginLeft: "auto" }}>
-              <Skeletons />
-            </div>
-          </Group>
-
-          <Skeletons />
-        </article>
-        <article className="py $$$">
-          <Group as="div" options={{ direction: "column" }}>
-            <Skeletons amount={16} />
-          </Group>
+        <Header />
+        <article className="py $$$ ">
+          <Skeletons amount={16} />
         </article>
 
         <article className="full">
@@ -629,12 +657,7 @@ function App() {
                   },
                 ]}
               >
-                <Group
-                  as="div"
-                  gap=".5em"
-                  options={{ direction: "column" }}
-                  className={theme}
-                >
+                <Group.Column as="div" gap=".5em" className={theme}>
                   <Checkbox
                     isMixed={mixed === "mixed"}
                     checked={mixed !== "mixed" && mixed === true}
@@ -657,7 +680,7 @@ function App() {
                       />
                     </div>
                   ))}
-                </Group>
+                </Group.Column>
               </Stat.Panel>
               <Stat.Panel
                 id="checkbox-b-panel"
@@ -676,7 +699,7 @@ function App() {
                   },
                 ]}
               >
-                <Group as="div" gap=".5em" options={{ direction: "column" }}>
+                <Group.Column as="div" gap=".5em">
                   <Checkbox
                     isMixed={mixed === "mixed"}
                     checked={mixed !== "mixed" && mixed === true}
@@ -702,7 +725,7 @@ function App() {
                       />
                     </div>
                   ))}
-                </Group>
+                </Group.Column>
               </Stat.Panel>
 
               <Stat.Panel
@@ -878,32 +901,20 @@ function App() {
                 },
               ]}
             >
-              <Group
-                as="div"
-                gap="var(--gap-3)"
-                options={{
-                  direction: "column",
-                }}
-              >
+              <Group.Column as="div" gap="var(--gap-3)">
                 <Group as="div" gap="var(--gap-3)">
-                  <IconHeart />
-                  <IconHeart />
-                  <IconHeart />
-                  <IconHeart />
+                  <IconStar stroke="var(--accent-error)" variant="solid" />
+                  <IconStar stroke="var(--accent-error)" variant="solid" />
+                  <IconStar stroke="var(--accent-error)" variant="solid" />
+                  <IconStar stroke="var(--accent-error)" variant="solid" />
                 </Group>
-                <Group
-                  as="div"
-                  gap="var(--gap-3)"
-                  options={{
-                    direction: "column",
-                  }}
-                >
+                <Group.Column as="div" gap="var(--gap-3)">
                   <IconHeart stroke="var(--accent-error)" />
                   <IconHeart stroke="var(--accent-error)" />
                   <IconHeart stroke="var(--accent-error)" />
                   <IconHeart stroke="var(--accent-error)" />
-                </Group>
-              </Group>
+                </Group.Column>
+              </Group.Column>
             </Stat.Panel>
             <Stat.Panel
               title="<Unit/>"
@@ -1175,10 +1186,9 @@ function App() {
                     group: "accent p $$ ",
                   }}
                 >
-                  <Group
+                  <Group.Column
                     as="div"
                     options={{
-                      direction: "column",
                       alignItems: "center",
                       DANGEROUS: {
                         maxWidth: "200px",
@@ -1198,15 +1208,49 @@ function App() {
                       </Link>{" "}
                       anae shandy cante oremus.
                     </HelveticaNeue>
-                  </Group>
+                  </Group.Column>
                 </Popover>
               </Group>
             </Stat.Panel>
+
             <Stat.Panel
-              title="<Stat.Panel />"
-              description="Without footer actions"
-              subtitle="Details"
-            ></Stat.Panel>
+              title="Humble animations"
+              description="Promise based timeline() with transitionEnd"
+            >
+              <Group
+                className="py $$$$"
+                as="div"
+                options={{
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <div
+                  className="animated-timeline-demo"
+                  ref={spinRef}
+                  tabIndex={-1}
+                  onClick={() => doAnimate()}
+                >
+                  <Shape sides={6} fill="var(--accent-error)" />
+                </div>
+                <div
+                  className="animated-demo"
+                  ref={spinRef2}
+                  tabIndex={-1}
+                  onClick={() => doAnimate()}
+                >
+                  <Shape sides={6} fill="var(--accent-error)" />
+                </div>
+                <div
+                  className="animated-timeline-demo"
+                  ref={spinRef3}
+                  tabIndex={-1}
+                  onClick={() => doAnimate()}
+                >
+                  <Shape sides={6} fill="var(--accent-error)" />
+                </div>
+              </Group>
+            </Stat.Panel>
           </div>
         </article>
 
@@ -1438,16 +1482,19 @@ function App() {
                 }}
               />
             </Stat.Panel>
+            <Stat.Panel
+              title="<Stat.Panel />"
+              description="Without footer actions"
+              subtitle="Details"
+            >
+              <Group.Center as="div" className="grey">
+                <div className="spin" />
+              </Group.Center>
+            </Stat.Panel>
           </div>
         </article>
         <article>
-          <Group
-            as="div"
-            gap="var(--gap-3)"
-            options={{
-              direction: "column",
-            }}
-          >
+          <Group.Column as="div" gap="var(--gap-3)">
             <Skeletons amount={2} />
             <Stat.Panel
               title="<Stat.Meter/>"
@@ -1469,10 +1516,9 @@ function App() {
                 },
               ]}
             >
-              <Group
+              <Group.Column
                 as="ul"
                 options={{
-                  direction: "column",
                   DANGEROUS: {
                     marginBottom: "var(--gap-3)",
                   },
@@ -1501,7 +1547,7 @@ function App() {
                       </HelveticaNeueS>
                     </Group>
                   ))}
-              </Group>
+              </Group.Column>
               <Stat.Meter
                 label=""
                 max={140}
@@ -1559,8 +1605,31 @@ function App() {
                 ]}
               />
             </Stat.Panel>
+            <Skeletons />
+            <Stat.Panel
+              title="Pull To Refresh"
+              description="mobile only"
+              id="ptr-panel"
+              subtitle="Details"
+              actions={[
+                {
+                  label: (
+                    <Fragment>
+                      <IconGithub />
+                      <HelveticaNeueS>Source</HelveticaNeueS>
+                    </Fragment>
+                  ),
+                  action: () =>
+                    openUrl(
+                      "https://github.com/polmoneys/boost/blob/master/packages/Stat/src/Steps.tsx"
+                    ),
+                },
+              ]}
+            >
+              <Feed />
+            </Stat.Panel>
             <Skeletons amount={2} />
-          </Group>
+          </Group.Column>
         </article>
 
         <article className="full">
@@ -1616,13 +1685,7 @@ function App() {
           >
             <Skeletons amount={8} />
           </Fence>
-          <Group
-            as="div"
-            gap="var(--gap-3)"
-            options={{
-              direction: "column",
-            }}
-          >
+          <Group.Column as="div" gap="var(--gap-3)">
             <ScrollUnit
               classNames={{
                 viewport: "css-scroll-gallery",
@@ -1688,11 +1751,10 @@ function App() {
               ]}
             >
               <Layers as="ul">
-                <Group
+                <Group.Column
                   as="li"
                   aria-hidden={!tab ? true : false}
                   options={{
-                    direction: "column",
                     alignItems: "center",
                     justifyContent: "center",
                   }}
@@ -1704,12 +1766,11 @@ function App() {
                     Show Square
                   </Button>
                   <Shape.Triangle fill="var(--accent-error)" />
-                </Group>
+                </Group.Column>
 
-                <Group
+                <Group.Column
                   as="li"
                   options={{
-                    direction: "column",
                     alignItems: "center",
                     justifyContent: "center",
                   }}
@@ -1722,7 +1783,7 @@ function App() {
                     Show Triangle
                   </Button>
                   <Shape.Square fill="var(--accent)" />
-                </Group>
+                </Group.Column>
               </Layers>
               <HelveticaNeueS>I will not move/jump</HelveticaNeueS>
             </Stat.Panel>
@@ -1793,7 +1854,7 @@ function App() {
             </Stat.Panel>
 
             <Skeletons amount={2} />
-          </Group>
+          </Group.Column>
         </article>
 
         <article className="full">
@@ -1869,11 +1930,10 @@ function App() {
           </Fence>
         </article>
         <article>
-          <Group
+          <Group.Column
             as="div"
             gap="var(--gap-3)"
             options={{
-              direction: "column",
               DANGEROUS: {
                 paddingBottom: "var(--gap-3)",
               },
@@ -1899,118 +1959,144 @@ function App() {
                 },
               ]}
             >
-              <Group
-                as="ul"
-                options={{
-                  direction: "column",
-                }}
-              >
-                <Group as="li" options={{ alignItems: "center" }}>
+              <Group.Column as="ul">
+                <Group.ColToRow
+                  as="li"
+                  className="align-items-center-landscape"
+                >
                   <HelveticaNeueBoldS>useBinary</HelveticaNeueBoldS>
                   <HelveticaNeueS
-                    className="ml-auto"
+                    className="ml-landscape-auto"
                     dangerousColor="var(--panel-description)"
                   >
                     Adds toggle logic
                   </HelveticaNeueS>
-                </Group>
+                </Group.ColToRow>
 
-                <Group as="li" options={{ alignItems: "center" }}>
+                <Group.ColToRow
+                  as="li"
+                  className="align-items-center-landscape"
+                >
                   <HelveticaNeueBoldS>useCache</HelveticaNeueBoldS>
                   <HelveticaNeueS
-                    className="ml-auto"
+                    className="ml-landscape-auto"
                     dangerousColor="var(--panel-description)"
                   >
                     Primitive to compose other hooks
                   </HelveticaNeueS>
-                </Group>
+                </Group.ColToRow>
 
-                <Group as="li" options={{ alignItems: "center" }}>
+                <Group.ColToRow
+                  as="li"
+                  className="align-items-center-landscape"
+                >
                   <HelveticaNeueBoldS>useFormFocusout</HelveticaNeueBoldS>
                   <HelveticaNeueS
-                    className="ml-auto"
+                    className="ml-landscape-auto"
                     dangerousColor="var(--panel-description)"
                   >
                     React to user leaving a form
                   </HelveticaNeueS>
-                </Group>
+                </Group.ColToRow>
 
-                <Group as="li" options={{ alignItems: "center" }}>
+                <Group.ColToRow
+                  as="li"
+                  className="align-items-center-landscape"
+                >
                   <HelveticaNeueBoldS>useImageSize</HelveticaNeueBoldS>
                   <HelveticaNeueS
-                    className="ml-auto"
+                    className="ml-landscape-auto"
                     dangerousColor="var(--panel-description)"
                   >
                     Ratio and natural size
                   </HelveticaNeueS>
-                </Group>
+                </Group.ColToRow>
 
-                <Group as="li" options={{ alignItems: "center" }}>
+                <Group.ColToRow
+                  as="li"
+                  className="align-items-center-landscape"
+                >
                   <HelveticaNeueBoldS>useInput</HelveticaNeueBoldS>
                   <HelveticaNeueS
-                    className="ml-auto"
+                    className="ml-landscape-auto"
                     dangerousColor="var(--panel-description)"
                   >
                     Adds YUP validation
                   </HelveticaNeueS>
-                </Group>
+                </Group.ColToRow>
 
-                <Group as="li" options={{ alignItems: "center" }}>
+                {/* <Group as="li" className="align-items-center-landscape">
                   <HelveticaNeueBoldS>useMap</HelveticaNeueBoldS>
                   <HelveticaNeueS
-                    className="ml-auto"
+                    className="ml-landscape-auto"
                     dangerousColor="var(--panel-description)"
                   >
                     Sugar over new Map
                   </HelveticaNeueS>
-                </Group>
+                </Group> */}
 
-                <Group as="li" options={{ alignItems: "center" }}>
+                <Group.ColToRow
+                  as="li"
+                  className="align-items-center-landscape"
+                >
                   <HelveticaNeueBoldS>useNewBrowserTab</HelveticaNeueBoldS>
                   <HelveticaNeueS
-                    className="ml-auto"
+                    className="ml-landscape-auto"
                     dangerousColor="var(--panel-description)"
                   >
                     Like Apple.com chat support
                   </HelveticaNeueS>
-                </Group>
-                <Group as="li" options={{ alignItems: "center" }}>
+                </Group.ColToRow>
+                {/* <Group as="li" className="align-items-center-landscape">
                   <HelveticaNeueBoldS>useResizeObserver</HelveticaNeueBoldS>
                   <HelveticaNeueS
-                    className="ml-auto"
+                    className="ml-landscape-auto"
                     dangerousColor="var(--panel-description)"
                   >
                     Measure elements
                   </HelveticaNeueS>
-                </Group>
+                </Group> */}
 
-                <Group as="li" options={{ alignItems: "center" }}>
+                <Group.ColToRow
+                  as="li"
+                  className="align-items-center-landscape"
+                >
                   <HelveticaNeueBoldS>useSelection</HelveticaNeueBoldS>
                   <HelveticaNeueS
-                    className="ml-auto"
+                    className="ml-landscape-auto"
                     dangerousColor="var(--panel-description)"
                   >
                     A leader controls followers
                   </HelveticaNeueS>
-                </Group>
+                </Group.ColToRow>
 
-                <Group as="li" options={{ alignItems: "center" }}>
+                {/* <Group as="li" className="align-items-center-landscape">
                   <HelveticaNeueBoldS>useSet</HelveticaNeueBoldS>
                   <HelveticaNeueS
-                    className="ml-auto"
+                    className="ml-landscape-auto"
                     dangerousColor="var(--panel-description)"
                   >
                     Sugar over new Set
                   </HelveticaNeueS>
-                </Group>
-              </Group>
+                </Group> */}
+                <Group.ColToRow
+                  as="li"
+                  className="align-items-center-landscape"
+                >
+                  <HelveticaNeueS
+                    className="ml-landscape-auto"
+                    dangerousColor="var(--panel-description)"
+                  >
+                    ...more
+                  </HelveticaNeueS>
+                </Group.ColToRow>
+              </Group.Column>
             </Stat.Panel>
 
             <Skeletons amount={6} />
-          </Group>
+          </Group.Column>
         </article>
       </main>
-
       <Dialog
         label="Landscape "
         id="dialog-landscape"
@@ -2018,12 +2104,7 @@ function App() {
         open={landscapeState === "on"}
         actions={<IconTwitter size="lg" />}
       >
-        <Group
-          as="div"
-          className="p $$"
-          gap="var(--gap-2)"
-          options={{ direction: "column" }}
-        >
+        <Group.Column as="div" className="p $$" gap="var(--gap-2)">
           <HelveticaNeue>
             Lorem ipsum dolor sit amet, no veri erat accusamus vel, cu ubique
             legere philosophia cum. Nisl vide ei eam, est at causae omnium,
@@ -2037,7 +2118,7 @@ function App() {
           <Button className="accent px $$" onClick={() => portraitActions.on()}>
             Trigger DialogPortrait
           </Button>
-        </Group>
+        </Group.Column>
       </Dialog>
       <Dialog
         id="dialog-portrait"
@@ -2047,12 +2128,7 @@ function App() {
         onClose={() => portraitActions.off()}
         open={portraitState === "on"}
       >
-        <Group
-          as="div"
-          className="p $$"
-          gap="var(--gap-2)"
-          options={{ direction: "column" }}
-        >
+        <Group.Column as="div" className="p $$" gap="var(--gap-2)">
           <HelveticaNeue>
             Lorem ipsum dolor sit amet, no veri erat accusamus vel, cu ubique
             legere philosophia cum. Nisl vide ei eam, est at causae omnium,
@@ -2062,7 +2138,7 @@ function App() {
             saepe cu cum, mea utamur deterruisset in, quem offendit sea ut. Per
             ne mazim partem animal, pro corrumpit forensibus et.
           </HelveticaNeue>
-        </Group>
+        </Group.Column>
       </Dialog>
       <Dialog.Tray
         id="tray-dialog"
@@ -2071,12 +2147,7 @@ function App() {
         onClose={() => trayActions.off()}
         actions={<IconTwitter size="lg" />}
       >
-        <Group
-          as="div"
-          className="p $$"
-          gap="var(--gap-2)"
-          options={{ direction: "column" }}
-        >
+        <Group.Column as="div" className="p $$" gap="var(--gap-2)">
           <HelveticaNeue>
             Lorem ipsum dolor sit amet, no veri erat accusamus vel, cu ubique
             legere philosophia cum. Nisl vide ei eam, est at causae omnium,
@@ -2094,7 +2165,7 @@ function App() {
             mundi.
           </HelveticaNeue>
           <br />
-        </Group>
+        </Group.Column>
       </Dialog.Tray>
     </Fragment>
   );

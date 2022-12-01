@@ -38,6 +38,27 @@ return (
 
 ```
 
+## useEvent 
+
+
+Cleans up event listeners.
+
+
+```tsx
+
+
+useEvent('mousemove', handler);
+
+const handler = useCallback(
+    ({ clientX, clientY }) => {
+    setStateX({ x: clientX, y: clientY });
+    },
+    [stateX]
+);
+
+
+```
+
 
 ## useFormFocusout
 
@@ -125,6 +146,21 @@ return (
 Use it to render and CRUD **collections**. Shape of entries should be ```[ string , any]```. 
 
 
+
+## usePullToRefresh
+
+Touch **only**. 
+
+```tsx
+
+  const { isPulling } = usePullToRefresh({
+    onEndPTR: () => console.log("END PTR"),
+    durationPTR: 3000,
+  });
+
+```
+
+
 ## useSelection
 
 
@@ -137,12 +173,15 @@ Use it to render and CRUD **collections**. Shape of entries should be ```[ strin
   ketchup: false,
 };);
 
+const isMixed = mixed === "mixed";
+const leaderCheckboxLabel = isMixed ? "Some selected" : all ? " All selected" : " None selected";
+
 return (
     <Fragment>
       <Checkbox
-            isMixed={mixed === "mixed"}
-            checked={mixed !== "mixed" && mixed === true}
-            label={mixed === "mixed" ? "Some " : all ? " all" : " none"}
+            isMixed={isMixed}
+            checked={!isMixed && mixed === true}
+            label={leaderCheckboxLabel}
             name="parent"
             value="parent"
             id="parent-checkbox-test"

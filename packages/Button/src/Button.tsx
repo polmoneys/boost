@@ -25,7 +25,7 @@ function Button(props: Props) {
   const isIcon = variant === "icon";
   const classNames = [
     className,
-    styles.root,
+    styles.group,
     isText && styles.text,
     isIcon && styles.icon,
   ]

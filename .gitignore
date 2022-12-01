@@ -1,8 +1,5 @@
 node_modules
-packages/Accordion
-packages/Tooltip
 css/theme/_shadow.css
-packages/SelectNative
 packages/Stat/src/Knob.tsx
 packages/Stat/src/Knob.module.css
-TODO.md
+packages/Pic/src/Zoom.tsx

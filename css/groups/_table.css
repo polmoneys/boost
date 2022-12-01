@@ -20,7 +20,7 @@ thead {
 th,
 td {
   padding: var(--gap-3);
-  min-width: 6em;
+  min-width: 10em;
   text-align: left;
   margin: 0;
 }

@@ -9,6 +9,10 @@ export declare const formatNumber: (num: number, locale?: string | undefined) =>
  */
 export declare const numberClamp: (num: number, min: number, max: number) => number;
 /**
+ * Utility to round numbers
+ */
+export declare const roundTo: (n: number, precision: number) => number;
+/**
  * Get 1fr
  */
 export declare function gridColumnWidth(): string | 0;

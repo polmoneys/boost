@@ -1,5 +1,5 @@
-(function(r,i){typeof exports=="object"&&typeof module!="undefined"?i(exports,require("react"),require("icon-react"),require("unit-react")):typeof define=="function"&&define.amd?define(["exports","react","icon-react","unit-react"],i):(r=typeof globalThis!="undefined"?globalThis:r||self,i(r.Checkbox={},r.React,r.IconReact,r.UnitReact))})(this,function(r,i,p,g){"use strict";function j(t){return t&&typeof t=="object"&&"default"in t?t:{default:t}}var C=j(i),x={group:"p-",checkbox:"af",mixed:"DU",checked:"wT",unchecked:"-b"},Y=(()=>`._-7{vertical-align:middle;overflow:hidden;border-radius:50%;aspect-ratio:1}
-`)(),s={exports:{}},k={};/**
+(function(r,i){typeof exports=="object"&&typeof module!="undefined"?i(exports,require("react"),require("icon-react"),require("unit-react")):typeof define=="function"&&define.amd?define(["exports","react","icon-react","unit-react"],i):(r=typeof globalThis!="undefined"?globalThis:r||self,i(r.Checkbox={},r.React,r.IconReact,r.UnitReact))})(this,function(r,i,p,g){"use strict";function j(t){return t&&typeof t=="object"&&"default"in t?t:{default:t}}var C=j(i),F=(()=>`._-7{vertical-align:middle;overflow:hidden;border-radius:50%;aspect-ratio:1}
+`)(),x={group:"p-",checkbox:"af",mixed:"DU",checked:"wT",unchecked:"-b"},s={exports:{}},k={};/**
  * @license React
  * react-jsx-runtime.production.min.js
  *

@@ -1,4 +1,9 @@
 /**
+ * Utility to open url in new tab imperatively
+ */
+export const openUrl = (to: string) => window?.open(to, "_blank");
+
+/**
  * Get params from URI.
  * e.g. /orders/99/items/22, it will return  [orderId = 99, items = 22]
  */

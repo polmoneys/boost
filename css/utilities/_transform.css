@@ -1,0 +1,4 @@
+.scale-up {
+  transform: var(--scale-up);
+  transform-origin: var(--scale-up-origin);
+}

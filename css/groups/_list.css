@@ -7,3 +7,39 @@ ol.siblings-hover:hover > li:not(:hover) {
 .sibling:not(.sibling ~ .sibling) {
   font-weight: 500;
 }
+
+/* At most 3 (3 or less, excluding 0) children */
+ul.has:has(> :nth-child(-n + 3):last-child) {
+  outline: 1px solid red;
+}
+
+/* At most 3 (3 or less, including 0) children */
+ul.has:not(:has(> :nth-child(3))) {
+  outline: 1px solid red;
+}
+
+/* Exactly 5 children */
+ul.has:has(> :nth-child(5):last-child) {
+  outline: 1px solid blue;
+}
+
+/* At least 10 (10 or more) children */
+ul.has:has(> :nth-child(10)) {
+  outline: 1px solid green;
+}
+
+/* Between 7 and 9 children (boundaries inclusive) */
+ul.has:has(> :nth-child(7)):has(> :nth-child(-n + 9):last-child) {
+  outline: 1px solid yellow;
+}
+
+/* Between 7 and 9 children (boundaries exclusive) */
+ul.has:has(> :nth-child(7) + *):not(:has(> :nth-child(9))) {
+  outline: 2px solid cyan !important;
+}
+
+/* 
+https://blog.logrocket.com/advanced-guide-css-has-selector/#selecting-parent
+To select all <img> elements that come anywhere after <p> elements
+p ~ img 
+*/

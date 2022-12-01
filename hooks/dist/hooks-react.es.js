@@ -1,4 +1,10 @@
-import { useReducer, useMemo, useRef, useState, useEffect, useCallback } from "react";
+var __defProp = Object.defineProperty;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __publicField = (obj, key, value) => {
+  __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
+  return value;
+};
+import { useReducer, useMemo, useRef, useEffect, useState, useCallback } from "react";
 function binaryReducer(state, action) {
   switch (action) {
     case "ON":
@@ -41,6 +47,19 @@ function useCache() {
     }
   }).current;
   return c;
+}
+function useEvent(eventName, handler, element = window) {
+  const savedHandler = useRef();
+  useEffect(() => {
+    savedHandler.current = handler;
+  }, [handler]);
+  useEffect(() => {
+    const eventListener = (event) => savedHandler.current(event);
+    element.addEventListener(eventName, eventListener);
+    return () => {
+      element.removeEventListener(eventName, eventListener);
+    };
+  }, [eventName, element]);
 }
 function useMap(initialState = []) {
   const [collection, setCollection] = useState(() => new Map(initialState));
@@ -961,8 +980,8 @@ var stubFalse_1 = stubFalse;
   var freeExports = exports && !exports.nodeType && exports;
   var freeModule = freeExports && true && module && !module.nodeType && module;
   var moduleExports = freeModule && freeModule.exports === freeExports;
-  var Buffer = moduleExports ? root2.Buffer : void 0;
-  var nativeIsBuffer = Buffer ? Buffer.isBuffer : void 0;
+  var Buffer2 = moduleExports ? root2.Buffer : void 0;
+  var nativeIsBuffer = Buffer2 ? Buffer2.isBuffer : void 0;
   var isBuffer2 = nativeIsBuffer || stubFalse2;
   module.exports = isBuffer2;
 })(isBuffer$2, isBuffer$2.exports);
@@ -1213,7 +1232,7 @@ function setToArray$1(set2) {
   return result;
 }
 var _setToArray = setToArray$1;
-var Symbol$1 = _Symbol, Uint8Array = _Uint8Array, eq = eq_1, equalArrays$1 = _equalArrays, mapToArray = _mapToArray, setToArray = _setToArray;
+var Symbol$1 = _Symbol, Uint8Array2 = _Uint8Array, eq = eq_1, equalArrays$1 = _equalArrays, mapToArray = _mapToArray, setToArray = _setToArray;
 var COMPARE_PARTIAL_FLAG$4 = 1, COMPARE_UNORDERED_FLAG$2 = 2;
 var boolTag = "[object Boolean]", dateTag = "[object Date]", errorTag = "[object Error]", mapTag$1 = "[object Map]", numberTag = "[object Number]", regexpTag = "[object RegExp]", setTag$1 = "[object Set]", stringTag = "[object String]", symbolTag = "[object Symbol]";
 var arrayBufferTag = "[object ArrayBuffer]", dataViewTag$1 = "[object DataView]";
@@ -1227,7 +1246,7 @@ function equalByTag$1(object2, other, tag, bitmask, customizer, equalFunc, stack
       object2 = object2.buffer;
       other = other.buffer;
     case arrayBufferTag:
-      if (object2.byteLength != other.byteLength || !equalFunc(new Uint8Array(object2), new Uint8Array(other))) {
+      if (object2.byteLength != other.byteLength || !equalFunc(new Uint8Array2(object2), new Uint8Array2(other))) {
         return false;
       }
       return true;
@@ -2785,6 +2804,110 @@ function useNewBrowserTab(props) {
   const trigger = () => window.open(url, title, options);
   return trigger;
 }
+function useNumber(initialState = 0) {
+  if (typeof initialState !== "number") {
+    throw new Error("`initialState` argument must be a number");
+  }
+  const [state, setState] = useState(initialState);
+  const handlers = useMemo(() => ({
+    update: (updater) => {
+      setState((s) => {
+        if (typeof updater === "function") {
+          return Number(updater(s));
+        }
+        return Number(updater);
+      });
+    },
+    reset: () => {
+      setState(initialState);
+    },
+    zero: () => {
+      setState(0);
+    }
+  }), [initialState]);
+  return [state, handlers];
+}
+class Timer {
+  constructor(cb, delay) {
+    __publicField(this, "timerId", null);
+    __publicField(this, "start");
+    __publicField(this, "remaining");
+    __publicField(this, "cb");
+    __publicField(this, "resume", () => {
+      this.start = Date.now();
+      if (this.timerId !== null) {
+        clearTimeout(this.timerId);
+      }
+      this.timerId = setTimeout(this.cb, this.remaining);
+    });
+    __publicField(this, "clear", () => {
+      if (this.timerId !== null) {
+        clearTimeout(this.timerId);
+      }
+    });
+    __publicField(this, "pause", () => {
+      if (this.timerId !== null) {
+        clearTimeout(this.timerId);
+      }
+      if (this.start !== void 0) {
+        this.remaining -= Date.now() - this.start;
+      }
+    });
+    this.remaining = delay;
+    this.cb = cb;
+    this.resume();
+  }
+}
+function usePullToRefresh(props) {
+  const { durationPTR = 1e3, onEndPTR, element = window } = props;
+  const startPoint = { x: 0, y: 0 };
+  const endPoint = { x: 0, y: 0 };
+  const [isPTR, setStatus] = useState(false);
+  function swipeStart(e) {
+    if (typeof e["targetTouches"] !== "undefined") {
+      const touch = e.targetTouches[0];
+      startPoint.x = touch.screenX;
+      startPoint.y = touch.screenY;
+    } else {
+      startPoint.x = e.screenX;
+      startPoint.y = e.screenY;
+    }
+  }
+  function isPullDown(dY, dX) {
+    return dY < 0 && (Math.abs(dX) <= 100 && Math.abs(dY) >= 300 || Math.abs(dX) / Math.abs(dY) <= 0.3 && dY >= 60);
+  }
+  function swipeCheck() {
+    const changeY = startPoint.y - endPoint.y;
+    const changeX = startPoint.x - endPoint.x;
+    if (isPullDown(changeY, changeX)) {
+      setStatus(true);
+      onEndPTR == null ? void 0 : onEndPTR();
+      new Timer(() => setStatus(false), durationPTR);
+    } else {
+      setStatus(false);
+    }
+  }
+  function swipeEnd(e) {
+    if (typeof e["changedTouches"] !== "undefined") {
+      const touch = e.changedTouches[0];
+      endPoint.x = touch.screenX;
+      endPoint.y = touch.screenY;
+    } else {
+      endPoint.x = e.screenX;
+      endPoint.y = e.screenY;
+    }
+    swipeCheck();
+  }
+  useEvent("touchstart", function(e) {
+    swipeStart(e);
+  }, element);
+  useEvent("touchend", function(e) {
+    swipeEnd(e);
+  });
+  return {
+    isPulling: isPTR
+  };
+}
 function hasResizeObserver() {
   return typeof window.ResizeObserver !== "undefined";
 }
@@ -2873,4 +2996,27 @@ function useSet(initialState = []) {
     has: has2
   };
 }
-export { useBinary, useCache, useFormFocusout, useImageSize, UseInput as useInput, useList, useMap, useNewBrowserTab, useResizeObserver, useSelection, useSet };
+function useString(initialState = "") {
+  if (typeof initialState !== "string") {
+    throw new Error("`initialState` argument must be a string");
+  }
+  const [state, setState] = useState(initialState);
+  const handlers = useMemo(() => ({
+    update: (updater) => {
+      setState((s) => {
+        if (typeof updater === "function") {
+          return String(updater(s));
+        }
+        return String(updater);
+      });
+    },
+    reset: () => {
+      setState(initialState);
+    },
+    empty: () => {
+      setState("");
+    }
+  }), [initialState]);
+  return [state, handlers];
+}
+export { useBinary, useCache, useEvent, useFormFocusout, useImageSize, UseInput as useInput, useList, useMap, useNewBrowserTab, useNumber, usePullToRefresh, useResizeObserver, useSelection, useSet, useString };

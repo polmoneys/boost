@@ -8,6 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "styled-react": "*",
     "button-react": "*",
     "card-react": "*",
     "checkbox-react": "*",

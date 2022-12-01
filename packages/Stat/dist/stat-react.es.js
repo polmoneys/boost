@@ -59,24 +59,23 @@ function Panel(props) {
     description: description2,
     actions,
     subtitle: subtitle2,
-    classNames = {
-      group: styles$4.white,
-      content: "p $$$$",
-      footer: "p $$"
-    }
+    classNames
   } = props;
   const hasFooter = actions !== void 0;
   const hasSubtitle = subtitle2 !== void 0;
+  const groupClassNames = [styles$4.white, classNames == null ? void 0 : classNames.group].filter(Boolean).join(" ");
+  const contentClassNames = ["p $$$$", classNames == null ? void 0 : classNames.content].filter(Boolean).join(" ");
+  const footerClassNames = ["p $$", styles$4.footer, classNames == null ? void 0 : classNames.footer].filter(Boolean).join(" ");
   return /* @__PURE__ */ jsxs$1(Group$1, {
     as: "div",
     options: {
       direction: "column"
     },
-    className: classNames.group,
+    className: groupClassNames,
     gap: "0",
     id,
     children: [/* @__PURE__ */ jsxs$1("div", {
-      className: classNames.content,
+      className: contentClassNames,
       children: [/* @__PURE__ */ jsx$1(HelveticaNeue, {
         className: styles$4.title,
         children: title2
@@ -85,7 +84,7 @@ function Panel(props) {
         children: description2
       }), children]
     }), hasFooter && /* @__PURE__ */ jsxs$1("div", {
-      className: [styles$4.footer, classNames.footer].join(" "),
+      className: footerClassNames,
       children: [hasSubtitle && /* @__PURE__ */ jsx$1(HelveticaNeue, {
         className: styles$4.subtitle,
         children: subtitle2

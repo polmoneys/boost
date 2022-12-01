@@ -1,3 +1,6 @@
+/**
+ * Utility to split an array by a condition ()=>
+ */
 export const arraySplit = <T>(
   items: T[],
   fn: (el: T) => boolean
@@ -14,7 +17,16 @@ export const arraySplit = <T>(
   return [match, dispose];
 };
 
+/**
+ * Utility to create Array[n]
+ */
+
 export const rangify = (to: number) => [...Array(to).keys()];
+
+/**
+ * Utility to nest hierarchical data
+ * https://codepen.io/polmoneys/pen/NWvYRvJ
+ */
 
 export const nest = (
   items: Array<any>,
@@ -24,8 +36,6 @@ export const nest = (
   items
     .filter(item => item[link] === id)
     .map(item => ({ ...item, children: nest(items, item.id, link) }));
-
-//  https://codepen.io/polmoneys/pen/NWvYRvJ
 
 export const arrayLatest = <T>(items: Array<T>, upcoming: T, clamp: number) => [
   upcoming,

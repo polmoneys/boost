@@ -1,0 +1,57 @@
+.wiggle:hover,
+.wiggle.-animating {
+  animation: wiggle 400ms 50ms forwards ease-in-out;
+}
+
+@keyframes wiggle {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-10deg);
+  }
+  75% {
+    transform: rotate(8deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.fade-in {
+  animation: show 600ms 100ms cubic-bezier(0.38, 0.97, 0.56, 0.76) forwards;
+  opacity: 0;
+}
+
+@keyframes show {
+  100% {
+    opacity: 1;
+  }
+}
+
+.spin {
+  height: 2em;
+  width: 2em;
+  border: calc(var(--border-width) * 2) solid currentColor;
+  border-top: calc(var(--border-width) * 2) solid var(--accent-error);
+  border-radius: 50%;
+  animation: rotate 1s infinite linear;
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-delay: -1ms;
+    animation-duration: 1ms;
+    animation-iteration-count: 1;
+    background-attachment: initial;
+    scroll-behavior: auto;
+    transition-delay: 0s;
+    transition-duration: 0s;
+  }
+}

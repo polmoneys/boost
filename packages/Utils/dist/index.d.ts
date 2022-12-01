@@ -1,5 +1,10 @@
+export { timeline, animate } from "./animate";
 export { arraySplit, sortT, filterT } from "./array";
 export type { Sorter, Filter } from "./array";
 export { formatDate } from "./date";
 export { formatNumber } from "./number";
 export { mergeRefs, addProps } from "./react";
+export { scrollToElement } from "./scroll";
+export { truncateStartEnd, validFileName } from "./string";
+export { default as Timer } from "./Timer";
+export { openUrl } from "./url";

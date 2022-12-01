@@ -5,8 +5,9 @@
     "packages": [
       "packages/*",
       "hooks",
+      "css",
       "app",
-      "css"
+      "styled"
     ]
   }
 }
