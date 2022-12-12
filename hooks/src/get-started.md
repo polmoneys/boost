@@ -141,6 +141,19 @@ return (
 
 ```
 
+## useIsPortrait 
+
+
+The only size-aware mediaquery that makes sense imo is orientation. 
+
+
+```tsx
+
+const isPortrait = useIsPortrait();
+
+```
+
+
 ## useMap
 
 Use it to render and CRUD **collections**. Shape of entries should be ```[ string , any]```. 

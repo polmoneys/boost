@@ -2769,6 +2769,20 @@ const UseInput = (props) => {
   };
   return [value, onChange, error];
 };
+const useIsPortrait = () => {
+  const [matches, setMatches] = useState(false);
+  useEffect(() => {
+    const query = "(orientation:portrait)";
+    const media = window.matchMedia(query);
+    if (media.matches !== matches) {
+      setMatches(media.matches);
+    }
+    const listener = () => setMatches(media.matches);
+    window.addEventListener("resize", listener);
+    return () => window.removeEventListener("resize", listener);
+  }, [matches]);
+  return matches;
+};
 const useList = (initial) => {
   const [items, setItems] = useState(initial);
   return [
@@ -2996,6 +3010,49 @@ function useSet(initialState = []) {
     has: has2
   };
 }
+const isFocusedElementEditable = () => {
+  const { activeElement, body } = document;
+  if (!activeElement) {
+    return false;
+  }
+  if (activeElement === body) {
+    return false;
+  }
+  switch (activeElement.tagName) {
+    case "INPUT":
+    case "TEXTAREA":
+      return true;
+  }
+  return activeElement.hasAttribute("contenteditable");
+};
+const isTypedCharGood = ({
+  keyCode,
+  metaKey,
+  ctrlKey,
+  altKey
+}) => {
+  if (metaKey || ctrlKey || altKey) {
+    return false;
+  }
+  if (keyCode >= 48 && keyCode <= 57) {
+    return true;
+  }
+  if (keyCode >= 65 && keyCode <= 90) {
+    return true;
+  }
+  return false;
+};
+const useStartTyping = (onStartTyping) => {
+  useEffect(() => {
+    const keydown = (event) => {
+      !isFocusedElementEditable() && isTypedCharGood(event) && onStartTyping(event);
+    };
+    document.addEventListener("keydown", keydown);
+    return () => {
+      document.removeEventListener("keydown", keydown);
+    };
+  }, []);
+};
 function useString(initialState = "") {
   if (typeof initialState !== "string") {
     throw new Error("`initialState` argument must be a string");
@@ -3019,4 +3076,4 @@ function useString(initialState = "") {
   }), [initialState]);
   return [state, handlers];
 }
-export { useBinary, useCache, useEvent, useFormFocusout, useImageSize, UseInput as useInput, useList, useMap, useNewBrowserTab, useNumber, usePullToRefresh, useResizeObserver, useSelection, useSet, useString };
+export { useBinary, useCache, useEvent, useFormFocusout, useImageSize, UseInput as useInput, useIsPortrait, useList, useMap, useNewBrowserTab, useNumber, usePullToRefresh, useResizeObserver, useSelection, useSet, useStartTyping, useString };
