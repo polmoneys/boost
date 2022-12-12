@@ -1,9 +1,4 @@
-import {
-  useState,
-  Fragment,
-  useEffect,
-  useRef,
-} from "react";
+import { useState, Fragment, useEffect, useRef } from "react";
 import {
   Shape,
   Fence,
@@ -40,8 +35,11 @@ import {
   IconHeart,
   IconDotsY,
   IconColorPicker,
+  List,
+  UI,
+  Textarea,
 } from "styled-react";
-import { List } from "list-react";
+
 import { animate, timeline, openUrl, scrollToElement } from "boost-utils";
 import { useBinary, useInput, useSelection } from "hooks-react";
 import { VALIDATE_USERNAME } from "../../hooks/src/useInput";
@@ -272,6 +270,14 @@ function App() {
                     </span>
                   </HelveticaNeueBold>
                 )}
+
+                {/* <Textarea
+                    onChangeValue={(onchangev: any) =>
+                      console.log({ onchangev })
+                    }
+                    label="Some label"
+                    value="Once upon a time "
+                  /> */}
               </Stat.Panel>
               <Stat.Panel
                 id="input-search-panel"
@@ -1468,15 +1474,21 @@ function App() {
               description="Without footer actions"
               subtitle="Details"
             >
-              <Group.Center as="div" className="grey">
+              <Group.Center
+                as="div"
+                className="grey"
+                options={{ DANGEROUS: { minHeight: "20vh" } }}
+              >
                 <div className="spin" />
               </Group.Center>
             </Stat.Panel>
           </div>
         </article>
+        <UI.Br />
         <article>
           <Group.Column as="div" gap="var(--gap-3)">
             <Skeletons amount={2} />
+
             <Stat.Panel
               title="<Stat.Meter/>"
               description="Assign space to quantities"

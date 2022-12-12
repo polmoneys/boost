@@ -31,6 +31,7 @@
     "scroll-unit-react": "*",
     "select-react": "*",
     "shape-react": "*",
+    "textarea-react": "*",
     "stat-react": "*",
     "sticky-react": "*",
     "track-react": "*",
