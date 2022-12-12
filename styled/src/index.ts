@@ -1,4 +1,4 @@
-export { default as Composed } from "./Composed";
+export { default as UI } from "./Composed";
 export { Sticky } from "sticky-react";
 export { Shape } from "shape-react";
 export { Fence } from "fence-react";
@@ -9,8 +9,10 @@ export { Trap } from "trap-react";
 export { Input } from "input-react";
 export { Card } from "card-react";
 export { Layers } from "layers-react";
+export { List } from "list-react";
 export { Track } from "track-react";
 export { Radio } from "radio-react";
+export { Textarea } from "textarea-react";
 export { Options } from "options-react";
 export { Dialog } from "dialog-react";
 export { Checkbox } from "checkbox-react";
