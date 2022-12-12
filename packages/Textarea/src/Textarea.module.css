@@ -1,0 +1,27 @@
+.group {
+  width: 100%;
+}
+
+.group label::after {
+  content: "\A";
+  white-space: pre;
+}
+.group textarea {
+  caret-color: var(--black);
+  appearance: none;
+  font-family: inherit;
+  font-size: max(16px, 1rem);
+  min-width: 0;
+  flex-grow: 1;
+  width: 100%;
+  padding: var(--gap-3);
+  background-color: var(--transparent);
+  border: var(--border-width) solid currentColor;
+  min-height: var(--minHeightUserAction);
+  line-height: 1.4;
+  overflow: hidden;
+}
+
+.group textarea:focus {
+  outline: none;
+}
