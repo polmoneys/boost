@@ -44,6 +44,7 @@ export default (args: ViteConfigInput) => {
           "sticky-react",
           "track-react",
           "unit-react",
+          "textarea-react",
         ],
         output: {
           globals: {
@@ -70,6 +71,7 @@ export default (args: ViteConfigInput) => {
             "stat-react": "StatReact",
             "sticky-react": "StickyReact",
             "track-react": "TrackReact",
+            "textarea-react": "TextareaReact",
           },
         },
       },

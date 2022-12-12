@@ -27,6 +27,7 @@
     "radio-react": "*",
     "scroll-unit-react": "*",
     "select-react": "*",
+    "textarea-react": "*",
     "stat-react": "*",
     "sticky-react": "*",
     "track-react": "*",
