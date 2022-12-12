@@ -1,0 +1,19 @@
+/* 
+<img
+  data-avatar="size:sm"
+  src="https://placekitten.com/100"
+  alt="cute kitten"
+/>
+*/
+
+[data-avatar~="size:sm"] {
+  --avatar--size: 3rem;
+}
+
+[data-avatar~="size:md"] {
+  --avatar--size: 4rem;
+}
+
+[data-avatar~="size:lg"] {
+  --avatar--size: 5rem;
+}

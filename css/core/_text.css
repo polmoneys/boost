@@ -47,6 +47,10 @@ p:has(span, b) {
   text-transform: uppercase;
 }
 
+.text-number {
+  font-variant-numeric: tabular-nums;
+}
+
 .xs {
   font-size: var(--font-size-0);
 }

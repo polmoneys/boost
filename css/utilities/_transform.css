@@ -2,3 +2,7 @@
   transform: var(--scale-up);
   transform-origin: var(--scale-up-origin);
 }
+
+.isometric {
+  transform: rotateX(60deg) rotateY(0deg) rotateZ(45deg);
+}

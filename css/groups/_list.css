@@ -3,6 +3,11 @@ ol.siblings-hover:hover > li:not(:hover) {
   opacity: var(--disabled);
 }
 
+.sibling-icon:not(.sibling-active) {
+  filter: grayscale(100%);
+  opacity: 0.4;
+}
+
 /* first of class selector */
 .sibling:not(.sibling ~ .sibling) {
   font-weight: 500;

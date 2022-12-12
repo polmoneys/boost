@@ -1,0 +1,12 @@
+/*  
+Good old friend  */
+
+nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+nav::before,
+nav::after {
+  content: "";
+}

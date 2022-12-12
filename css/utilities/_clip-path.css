@@ -8,6 +8,11 @@
   aspect-ratio: 1;
 }
 
+.semicircle {
+  border-top-left-radius: 100em;
+  border-top-right-radius: 100em;
+}
+
 /* 
   Shapes with 'colision detection'
 */
