@@ -1,7 +1,8 @@
 /*
   black(10);
 */
-export const black = (pc: number) => `rgba(0,0,0,${pc / 100})`;
+
+export const black = (percent: number) => `rgba(0,0,0,${percent / 100})`;
 
 /**
  * Utility to build a range of color shades out of an initial color
@@ -26,4 +27,29 @@ export function shadeColor(color: string, percent: number) {
       .toString(16)
       .slice(1)
   );
+}
+
+/**
+ * Utility to fill lines with gradients according to a value
+ * <li data-width="44"/>
+ * <li data-width="89"/>
+ * hint: quick horizonatal bar charts
+ */
+
+export function gradient(
+  selector: string = "li",
+  gradient: string = "90deg, #bf71ff 3%, #1cbfff, #6afff3 100%",
+  chart?: boolean
+) {
+  const lines = document.querySelectorAll(selector) as any;
+
+  for (const line of lines) {
+    const width = line.dataset.width;
+    const inverse = (100 / Number(width)) * 100;
+    line.style.backgroundImage = `linear-gradient(${gradient})`;
+    line.style.backgroundSize = inverse + "% 100%";
+    if (chart !== undefined) {
+      line.style.width = width + "%";
+    }
+  }
 }

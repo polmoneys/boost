@@ -22,3 +22,13 @@ export function validFileName(initial: string) {
   const specialCharacters = /[!$\[\]{}%\/\\"?&|~]+|[\.]{2,}]/;
   return !specialCharacters.test(initial);
 }
+
+/**
+ * Utility to remove (but keep) 'separators' from a string
+ *  const string = "Hello_party-people!";
+ * [ "Hello", "_", "party", "-", "people!" ]
+ */
+
+export function removeSeparators(string: string) {
+  return string.split(/([-_])/);
+}
