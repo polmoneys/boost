@@ -13,13 +13,17 @@
 }
 
 .fix-logo {
-  /* difference overlay multiply*/
   mix-blend-mode: darken;
+  /* difference overlay */
   filter: grayscale(100%) contrast(1%);
   &:hover {
     mix-blend-mode: normal;
     filter: none;
   }
+}
+
+.fix-white-bg {
+  mix-blend-mode: multiply;
 }
 
 .emoji-red-check {

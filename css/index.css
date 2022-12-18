@@ -31,10 +31,12 @@
 @import "../packages/Layers/dist/style.css";
 @import "../packages/Link/dist/style.css";
 @import "../packages/List/dist/style.css";
+@import "../packages/Move/dist/style.css";
 @import "../packages/Options/dist/style.css";
 @import "../packages/Pic/dist/style.css";
 @import "../packages/Popover/dist/style.css";
 @import "../packages/Radio/dist/style.css";
+@import "../packages/Range/dist/style.css";
 @import "../packages/ScrollUnit/dist/style.css";
 @import "../packages/Stat/dist/style.css";
 @import "../packages/Textarea/dist/style.css";

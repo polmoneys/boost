@@ -8,6 +8,10 @@ ol.siblings-hover:hover > li:not(:hover) {
   opacity: 0.4;
 }
 
+.sibling-end-comma:not(:last-of-type)::after {
+  content: ",";
+}
+
 /* first of class selector */
 .sibling:not(.sibling ~ .sibling) {
   font-weight: 500;
