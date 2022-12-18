@@ -54,8 +54,38 @@ function sortT(objectA, objectB, sorter) {
   };
   return sorter.isDescending ? result() * -1 : result();
 }
+const moveMutate = (arr, from, to) => {
+  arr.splice(to < 0 ? arr.length + to : to, 0, arr.splice(from, 1)[0]);
+};
+const arrayMove = (arr, from, to) => {
+  arr = arr.slice();
+  moveMutate(arr, from, to);
+  return arr;
+};
 const formatDate = (date, locale = "es-ES") => new Intl.DateTimeFormat(locale).format(new Date(date));
 const formatNumber = (num, locale) => new Intl.NumberFormat(locale, { minimumIntegerDigits: 2 }).format(num);
+function snap(points) {
+  if (typeof points === "number") {
+    return (v2) => Math.round(v2 / points) * points;
+  } else {
+    let i = 0;
+    const numPoints = points.length;
+    return (v2) => {
+      let lastDistance = Math.abs(points[0] - v2);
+      for (i = 1; i < numPoints; i++) {
+        const point = points[i];
+        const distance = Math.abs(point - v2);
+        if (distance === 0)
+          return point;
+        if (distance > lastDistance)
+          return points[i - 1];
+        if (i === numPoints - 1)
+          return point;
+        lastDistance = distance;
+      }
+    };
+  }
+}
 var react = { exports: {} };
 var react_production_min = {};
 /**
@@ -415,4 +445,4 @@ class Timer {
   }
 }
 const openUrl = (to) => window == null ? void 0 : window.open(to, "_blank");
-export { Timer, addProps, animate, arraySplit, filterT, formatDate, formatNumber, mergeRefs, openUrl, scrollToElement, sortT, timeline, truncateStartEnd, validFileName };
+export { Timer, addProps, animate, arrayMove, arraySplit, filterT, formatDate, formatNumber, mergeRefs, openUrl, scrollToElement, snap, sortT, timeline, truncateStartEnd, validFileName };

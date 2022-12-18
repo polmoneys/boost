@@ -1,8 +1,8 @@
 export { timeline, animate } from "./animate";
-export { arraySplit, sortT, filterT } from "./array";
+export { arraySplit, sortT, filterT, arrayMove } from "./array";
 export type { Sorter, Filter } from "./array";
 export { formatDate } from "./date";
-export { formatNumber } from "./number";
+export { formatNumber, snap } from "./number";
 export { mergeRefs, addProps } from "./react";
 export { scrollToElement } from "./scroll";
 export { truncateStartEnd, validFileName } from "./string";

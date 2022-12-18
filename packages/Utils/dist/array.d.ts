@@ -1,3 +1,6 @@
+export declare const isArr: (x: unknown) => boolean;
+export declare const compactArray: (x: Array<any>) => any[];
+export declare const unwrapArray: (x: unknown) => any;
 /**
  * Utility to split an array by a condition ()=>
  */

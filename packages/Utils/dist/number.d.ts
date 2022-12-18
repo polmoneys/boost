@@ -16,3 +16,7 @@ export declare const roundTo: (n: number, precision: number) => number;
  * Get 1fr
  */
 export declare function gridColumnWidth(): string | 0;
+/**
+ * Snap point to an Array<points>
+ */
+export declare function snap(points: any): (v: any) => any;
