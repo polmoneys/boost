@@ -152,8 +152,12 @@ header {
   }
 }
 
+.css-scroll-gallery-wrapper {
+  width: 100%;
+}
 .css-scroll-gallery {
   height: 400px;
+  width: 100%;
 }
 .css-scroll-gallery-item:not(:last-of-type) {
   margin-bottom: var(--gap-3);
@@ -185,4 +189,22 @@ header {
 .scale-up {
   transform: scale(1.3);
   transform-origin: left;
+}
+
+.drag-icon {
+  width: fit-content;
+  cursor: grab;
+  background-color: transparent;
+}
+.dragging {
+  opacity: 0.8;
+}
+.dropping {
+  opacity: 0.2;
+}
+.drop-area {
+  background-color: var(--accent-error);
+  width: 4em;
+  min-height: 4em;
+  border-radius: var(--border-radius);
 }

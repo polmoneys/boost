@@ -40,6 +40,9 @@ import {
   Textarea,
 } from "styled-react";
 
+import { Move } from "move-react";
+import { Range } from "range-react";
+import { Switch } from "switch-react";
 import { animate, timeline, openUrl, scrollToElement } from "boost-utils";
 import { useBinary, useInput, useSelection } from "hooks-react";
 import { VALIDATE_USERNAME } from "../../hooks/src/useInput";
@@ -56,6 +59,9 @@ import {
 } from "./utils/utils";
 import Skeletons from "./features/tutorial/components/Skeletons/Skeletons";
 import Products from "./features/shop/components/Products/Products";
+import Drag from "./features/shop/components/Drag/Drag";
+import useDrop from "./features/shop/components/Drag/useDrop";
+
 import { default as CardTutorial } from "./features/tutorial/components/Card/Card";
 
 // From CSS namespace
@@ -67,6 +73,7 @@ import pagemap from "./features/tutorial/components/Map/lib";
 import Pin from "./features/tutorial/components/Map/Pin";
 import Feed from "./features/shop/components/Feed/Feed";
 import Header from "./features/tutorial/components/FakeHeader/FakeHeader";
+import Reorder from "./features/tutorial/components/Reorder/Reorder";
 
 function App() {
   // console.log({ Tokens });
@@ -118,7 +125,7 @@ function App() {
   const { state: landscapeState, actions: landscapeActions } = useBinary("off");
   const { state: portraitState, actions: portraitActions } = useBinary("off");
   const { state: trayState, actions: trayActions } = useBinary("off");
-
+  const [rangeValue, setRangeValue] = useState(0);
   // Anims
   const spinRef = useRef(null);
   const spinRef2 = useRef(null);
@@ -714,7 +721,45 @@ function App() {
                   ))}
                 </Group.Column>
               </Stat.Panel>
-
+              <Stat.Panel
+                title="<Switch/>"
+                description="HTML input"
+                subtitle="Details"
+                actions={[
+                  {
+                    label: (
+                      <Fragment>
+                        <IconStar />
+                        <HelveticaNeueS>Snippet</HelveticaNeueS>
+                      </Fragment>
+                    ),
+                    action: () =>
+                      openUrl(
+                        "https://github.com/polmoneys/boost/blob/master/packages/Switch/get-started.md"
+                      ),
+                  },
+                  {
+                    label: (
+                      <Fragment>
+                        <IconGithub />
+                        <HelveticaNeueS>Source</HelveticaNeueS>
+                      </Fragment>
+                    ),
+                    action: () =>
+                      openUrl(
+                        "https://github.com/polmoneys/boost/blob/master/packages/Switch/src/Switch.tsx"
+                      ),
+                    className: "ml-auto",
+                  },
+                ]}
+              >
+                <Switch
+                  onChangeValue={(v: any) => console.log(v)}
+                  label="Joyful"
+                  id="test-switch"
+                  initial={false}
+                />
+              </Stat.Panel>
               <Stat.Panel
                 title="<Stat.Surface/>"
                 description="Playful x/y values for advanced users"
@@ -750,8 +795,56 @@ function App() {
               >
                 <Stat.Surface
                   initialValue={[30, 70]}
-                  onChange={(points: any) => console.log(points)}
+                  onChange={(points: any) =>
+                    points[0] !== 30 && points[1] !== 70 && console.log(points)
+                  }
                 />
+              </Stat.Panel>
+              <Stat.Panel
+                title="<Range/>"
+                description="HTML input range"
+                subtitle="Details"
+                actions={[
+                  {
+                    label: (
+                      <Fragment>
+                        <IconStar />
+                        <HelveticaNeueS>Snippet</HelveticaNeueS>
+                      </Fragment>
+                    ),
+                    action: () =>
+                      openUrl(
+                        "https://github.com/polmoneys/boost/blob/master/packages/Range/get-started.md"
+                      ),
+                  },
+                  {
+                    label: (
+                      <Fragment>
+                        <IconGithub />
+                        <HelveticaNeueS>Source</HelveticaNeueS>
+                      </Fragment>
+                    ),
+                    action: () =>
+                      openUrl(
+                        "https://github.com/polmoneys/boost/blob/master/packages/Range/src/Range.tsx"
+                      ),
+                    className: "ml-auto",
+                  },
+                ]}
+              >
+                <Group
+                  className="py $$$$"
+                  as="div"
+                  options={{
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                  }}
+                >
+                  <Range
+                    initial={rangeValue}
+                    onChangeValue={newValue => setRangeValue(newValue)}
+                  />
+                </Group>
               </Stat.Panel>
             </div>
           </Fence>
@@ -1520,7 +1613,9 @@ function App() {
                 {diskStorage
                   .reduce((prev, curr) => {
                     if (prev.length === 0) return [curr];
-                    const lastItem = prev.at(-1);
+                    // const lastItem = prev.at(-1);
+                    const lastItem = prev[prev.length - 1];
+
                     if (lastItem.color === curr.color) {
                       return [
                         ...prev.filter(
@@ -1600,6 +1695,28 @@ function App() {
             </Stat.Panel>
             <Skeletons />
             <Stat.Panel
+              title="<Move/>"
+              description="Drag and drop"
+              id="dnd-panel"
+              subtitle="Details"
+              actions={[
+                {
+                  label: (
+                    <Fragment>
+                      <IconGithub />
+                      <HelveticaNeueS>Source</HelveticaNeueS>
+                    </Fragment>
+                  ),
+                  action: () =>
+                    openUrl(
+                      "https://github.com/polmoneys/boost/blob/master/packages/Move/src/Move.tsx"
+                    ),
+                },
+              ]}
+            >
+              <Reorder />
+            </Stat.Panel>
+            {/* <Stat.Panel
               title="Pull To Refresh"
               description="mobile only"
               id="ptr-panel"
@@ -1621,7 +1738,7 @@ function App() {
             >
               <Feed />
             </Stat.Panel>
-            <Skeletons amount={2} />
+            <Skeletons amount={2} /> */}
           </Group.Column>
         </article>
 
@@ -1681,6 +1798,7 @@ function App() {
           <Group.Column as="div" gap="var(--gap-3)">
             <ScrollUnit
               classNames={{
+                group: "css-scroll-gallery-wrapper",
                 viewport: "css-scroll-gallery",
               }}
             >
@@ -2055,8 +2173,7 @@ function App() {
           >
             <Skeletons amount={3} />
           </Fence>
-        </article>
-        <article>
+
           <Group.Column
             as="div"
             gap="var(--gap-3)"
