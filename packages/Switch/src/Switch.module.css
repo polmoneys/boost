@@ -1,0 +1,58 @@
+.group {
+  width: fit-content;
+  display: flex;
+  gap: var(--gap-3);
+  align-items: center;
+}
+
+.group input {
+  --active-inner: #fff;
+  --border: #bbc1e1;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  height: 21px;
+  width: 38px;
+  border-radius: 11px;
+  outline: none;
+  cursor: pointer;
+  border: 1px solid var(--bc, var(--border));
+  position: relative;
+  background: var(--b, var(--white));
+  transition: background 0.3s, border-color 0.3s, box-shadow 0.2s;
+}
+
+.group input:after {
+  width: 38px;
+  border-radius: 11px;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  content: "";
+  display: block;
+  left: 0;
+  top: 0;
+  position: absolute;
+  transition: transform var(--d-t, 0.3s) var(--d-t-e, ease),
+    opacity var(--d-o, 0.2s);
+  left: 2px;
+  top: 2px;
+  background: var(--ab, var(--border));
+  transform: translateX(var(--x, 0));
+}
+.group input:checked {
+  --b: var(--accent);
+  --bc: var(--accent);
+  --d-o: 0.3s;
+  --d-t: 0.6s;
+  --d-t-e: cubic-bezier(0.2, 0.85, 0.32, 1.2);
+  --ab: var(--active-inner);
+  --x: 17px;
+}
+.group input:disabled:not(:checked):after {
+  opacity: 0.6;
+}
+
+.group input:focus {
+  outline: var(--border-width) solid var(--accent) !important;
+  outline-offset: var(--offset) !important;
+}
