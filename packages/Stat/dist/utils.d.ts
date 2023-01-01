@@ -12,3 +12,4 @@ export declare const Rectangle: ({ x, y, fill, width, height, }: {
     width?: string | undefined;
     height?: string | undefined;
 }) => JSX.Element;
+export declare function matchRefsToPoints(refs: any, boundary: any, spaceX: number, spaceY: number): Promise<Array<[number, number]>>;

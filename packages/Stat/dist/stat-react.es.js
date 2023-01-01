@@ -1,4 +1,4 @@
-import require$$0, { useCallback, forwardRef, Children, isValidElement, createElement, cloneElement, Fragment, useEffect, useLayoutEffect, useState, useRef, useReducer, createContext, useMemo, useContext } from "react";
+import require$$0, { useState, useCallback, useEffect, forwardRef, Children, isValidElement, createElement, cloneElement, Fragment, useLayoutEffect, useRef, useReducer, createContext, useMemo, useContext } from "react";
 import { Group as Group$1 } from "group-react";
 import { Button } from "button-react";
 import { HelveticaNeue } from "font-react";
@@ -123,6 +123,363 @@ const PanelTransparent = (props) => /* @__PURE__ */ jsx$1(Panel, {
     footer: "p $$"
   }
 });
+function constant(x2) {
+  return function constant2() {
+    return x2;
+  };
+}
+const pi = Math.PI, tau = 2 * pi, epsilon = 1e-6, tauEpsilon = tau - epsilon;
+function append(strings) {
+  this._ += strings[0];
+  for (let i = 1, n2 = strings.length; i < n2; ++i) {
+    this._ += arguments[i] + strings[i];
+  }
+}
+function appendRound(digits) {
+  let d = Math.floor(digits);
+  if (!(d >= 0))
+    throw new Error(`invalid digits: ${digits}`);
+  if (d > 15)
+    return append;
+  const k2 = 10 ** d;
+  return function(strings) {
+    this._ += strings[0];
+    for (let i = 1, n2 = strings.length; i < n2; ++i) {
+      this._ += Math.round(arguments[i] * k2) / k2 + strings[i];
+    }
+  };
+}
+class Path {
+  constructor(digits) {
+    this._x0 = this._y0 = this._x1 = this._y1 = null;
+    this._ = "";
+    this._append = digits == null ? append : appendRound(digits);
+  }
+  moveTo(x2, y2) {
+    this._append`M${this._x0 = this._x1 = +x2},${this._y0 = this._y1 = +y2}`;
+  }
+  closePath() {
+    if (this._x1 !== null) {
+      this._x1 = this._x0, this._y1 = this._y0;
+      this._append`Z`;
+    }
+  }
+  lineTo(x2, y2) {
+    this._append`L${this._x1 = +x2},${this._y1 = +y2}`;
+  }
+  quadraticCurveTo(x1, y1, x2, y2) {
+    this._append`Q${+x1},${+y1},${this._x1 = +x2},${this._y1 = +y2}`;
+  }
+  bezierCurveTo(x1, y1, x2, y2, x3, y3) {
+    this._append`C${+x1},${+y1},${+x2},${+y2},${this._x1 = +x3},${this._y1 = +y3}`;
+  }
+  arcTo(x1, y1, x2, y2, r) {
+    x1 = +x1, y1 = +y1, x2 = +x2, y2 = +y2, r = +r;
+    if (r < 0)
+      throw new Error(`negative radius: ${r}`);
+    let x0 = this._x1, y0 = this._y1, x21 = x2 - x1, y21 = y2 - y1, x01 = x0 - x1, y01 = y0 - y1, l01_2 = x01 * x01 + y01 * y01;
+    if (this._x1 === null) {
+      this._append`M${this._x1 = x1},${this._y1 = y1}`;
+    } else if (!(l01_2 > epsilon))
+      ;
+    else if (!(Math.abs(y01 * x21 - y21 * x01) > epsilon) || !r) {
+      this._append`L${this._x1 = x1},${this._y1 = y1}`;
+    } else {
+      let x20 = x2 - x0, y20 = y2 - y0, l21_2 = x21 * x21 + y21 * y21, l20_2 = x20 * x20 + y20 * y20, l21 = Math.sqrt(l21_2), l01 = Math.sqrt(l01_2), l2 = r * Math.tan((pi - Math.acos((l21_2 + l01_2 - l20_2) / (2 * l21 * l01))) / 2), t01 = l2 / l01, t21 = l2 / l21;
+      if (Math.abs(t01 - 1) > epsilon) {
+        this._append`L${x1 + t01 * x01},${y1 + t01 * y01}`;
+      }
+      this._append`A${r},${r},0,0,${+(y01 * x20 > x01 * y20)},${this._x1 = x1 + t21 * x21},${this._y1 = y1 + t21 * y21}`;
+    }
+  }
+  arc(x2, y2, r, a0, a1, ccw) {
+    x2 = +x2, y2 = +y2, r = +r, ccw = !!ccw;
+    if (r < 0)
+      throw new Error(`negative radius: ${r}`);
+    let dx = r * Math.cos(a0), dy = r * Math.sin(a0), x0 = x2 + dx, y0 = y2 + dy, cw = 1 ^ ccw, da = ccw ? a0 - a1 : a1 - a0;
+    if (this._x1 === null) {
+      this._append`M${x0},${y0}`;
+    } else if (Math.abs(this._x1 - x0) > epsilon || Math.abs(this._y1 - y0) > epsilon) {
+      this._append`L${x0},${y0}`;
+    }
+    if (!r)
+      return;
+    if (da < 0)
+      da = da % tau + tau;
+    if (da > tauEpsilon) {
+      this._append`A${r},${r},0,1,${cw},${x2 - dx},${y2 - dy}A${r},${r},0,1,${cw},${this._x1 = x0},${this._y1 = y0}`;
+    } else if (da > epsilon) {
+      this._append`A${r},${r},0,${+(da >= pi)},${cw},${this._x1 = x2 + r * Math.cos(a1)},${this._y1 = y2 + r * Math.sin(a1)}`;
+    }
+  }
+  rect(x2, y2, w, h) {
+    this._append`M${this._x0 = this._x1 = +x2},${this._y0 = this._y1 = +y2}h${w = +w}v${+h}h${-w}Z`;
+  }
+  toString() {
+    return this._;
+  }
+}
+function withPath(shape) {
+  let digits = 3;
+  shape.digits = function(_) {
+    if (!arguments.length)
+      return digits;
+    if (_ == null) {
+      digits = null;
+    } else {
+      const d = Math.floor(_);
+      if (!(d >= 0))
+        throw new RangeError(`invalid digits: ${_}`);
+      digits = d;
+    }
+    return shape;
+  };
+  return () => new Path(digits);
+}
+function array(x2) {
+  return typeof x2 === "object" && "length" in x2 ? x2 : Array.from(x2);
+}
+function Linear(context) {
+  this._context = context;
+}
+Linear.prototype = {
+  areaStart: function() {
+    this._line = 0;
+  },
+  areaEnd: function() {
+    this._line = NaN;
+  },
+  lineStart: function() {
+    this._point = 0;
+  },
+  lineEnd: function() {
+    if (this._line || this._line !== 0 && this._point === 1)
+      this._context.closePath();
+    this._line = 1 - this._line;
+  },
+  point: function(x2, y2) {
+    x2 = +x2, y2 = +y2;
+    switch (this._point) {
+      case 0:
+        this._point = 1;
+        this._line ? this._context.lineTo(x2, y2) : this._context.moveTo(x2, y2);
+        break;
+      case 1:
+        this._point = 2;
+      default:
+        this._context.lineTo(x2, y2);
+        break;
+    }
+  }
+};
+function curveLinear(context) {
+  return new Linear(context);
+}
+function x(p2) {
+  return p2[0];
+}
+function y(p2) {
+  return p2[1];
+}
+function line(x$1, y$1) {
+  var defined = constant(true), context = null, curve = curveLinear, output = null, path = withPath(line2);
+  x$1 = typeof x$1 === "function" ? x$1 : x$1 === void 0 ? x : constant(x$1);
+  y$1 = typeof y$1 === "function" ? y$1 : y$1 === void 0 ? y : constant(y$1);
+  function line2(data) {
+    var i, n2 = (data = array(data)).length, d, defined0 = false, buffer;
+    if (context == null)
+      output = curve(buffer = path());
+    for (i = 0; i <= n2; ++i) {
+      if (!(i < n2 && defined(d = data[i], i, data)) === defined0) {
+        if (defined0 = !defined0)
+          output.lineStart();
+        else
+          output.lineEnd();
+      }
+      if (defined0)
+        output.point(+x$1(d, i, data), +y$1(d, i, data));
+    }
+    if (buffer)
+      return output = null, buffer + "" || null;
+  }
+  line2.x = function(_) {
+    return arguments.length ? (x$1 = typeof _ === "function" ? _ : constant(+_), line2) : x$1;
+  };
+  line2.y = function(_) {
+    return arguments.length ? (y$1 = typeof _ === "function" ? _ : constant(+_), line2) : y$1;
+  };
+  line2.defined = function(_) {
+    return arguments.length ? (defined = typeof _ === "function" ? _ : constant(!!_), line2) : defined;
+  };
+  line2.curve = function(_) {
+    return arguments.length ? (curve = _, context != null && (output = curve(context)), line2) : curve;
+  };
+  line2.context = function(_) {
+    return arguments.length ? (_ == null ? context = output = null : output = curve(context = _), line2) : context;
+  };
+  return line2;
+}
+function point(that, x2, y2) {
+  that._context.bezierCurveTo(that._x1 + that._k * (that._x2 - that._x0), that._y1 + that._k * (that._y2 - that._y0), that._x2 + that._k * (that._x1 - x2), that._y2 + that._k * (that._y1 - y2), that._x2, that._y2);
+}
+function Cardinal(context, tension) {
+  this._context = context;
+  this._k = (1 - tension) / 6;
+}
+Cardinal.prototype = {
+  areaStart: function() {
+    this._line = 0;
+  },
+  areaEnd: function() {
+    this._line = NaN;
+  },
+  lineStart: function() {
+    this._x0 = this._x1 = this._x2 = this._y0 = this._y1 = this._y2 = NaN;
+    this._point = 0;
+  },
+  lineEnd: function() {
+    switch (this._point) {
+      case 2:
+        this._context.lineTo(this._x2, this._y2);
+        break;
+      case 3:
+        point(this, this._x1, this._y1);
+        break;
+    }
+    if (this._line || this._line !== 0 && this._point === 1)
+      this._context.closePath();
+    this._line = 1 - this._line;
+  },
+  point: function(x2, y2) {
+    x2 = +x2, y2 = +y2;
+    switch (this._point) {
+      case 0:
+        this._point = 1;
+        this._line ? this._context.lineTo(x2, y2) : this._context.moveTo(x2, y2);
+        break;
+      case 1:
+        this._point = 2;
+        this._x1 = x2, this._y1 = y2;
+        break;
+      case 2:
+        this._point = 3;
+      default:
+        point(this, x2, y2);
+        break;
+    }
+    this._x0 = this._x1, this._x1 = this._x2, this._x2 = x2;
+    this._y0 = this._y1, this._y1 = this._y2, this._y2 = y2;
+  }
+};
+var curveCardinal = function custom(tension) {
+  function cardinal(context) {
+    return new Cardinal(context, tension);
+  }
+  cardinal.tension = function(tension2) {
+    return custom(+tension2);
+  };
+  return cardinal;
+}(0);
+const Svg = ({
+  children,
+  height = "100%",
+  style
+}) => /* @__PURE__ */ jsx$1("svg", {
+  width: "100%",
+  height,
+  ...style !== void 0 && {
+    style
+  },
+  children
+});
+const Group = ({
+  translate,
+  children
+}) => /* @__PURE__ */ jsx$1("g", {
+  style: {
+    transform: translate
+  },
+  children
+});
+const Rectangle = ({
+  x: x2 = "0%",
+  y: y2 = "0%",
+  fill = "currentColor",
+  width = "10%",
+  height = "10%"
+}) => /* @__PURE__ */ jsx$1("rect", {
+  x: x2,
+  y: y2,
+  width,
+  height,
+  fill
+});
+function mapPoints(el, boundary, spaceX = 0, spaceY = 0) {
+  let rect;
+  if ("current" in el) {
+    rect = el.current.getBoundingClientRect();
+  } else {
+    rect = el.getBoundingClientRect();
+  }
+  const offsetWidth = Math.round(rect.width / 2);
+  const offsetHeight = Math.round(rect.height / 2);
+  return [Math.round(rect.left + offsetWidth - boundary.x) - spaceX, Math.round(rect.top + offsetHeight - boundary.y) - spaceY];
+}
+function matchRefsToPoints(refs, boundary, spaceX, spaceY) {
+  const points = refs.map((p2) => mapPoints(p2, boundary, spaceX, spaceY));
+  return new Promise((resolveIt) => resolveIt(points));
+}
+const table = "IO";
+const svg = "_74";
+var styles$3 = {
+  table,
+  svg
+};
+const Draw = (props) => {
+  const {
+    boundary,
+    refs,
+    fill = "yellow",
+    weigth = 10,
+    round = true,
+    x: x2 = 0,
+    y: y2 = 0,
+    variant = "line",
+    transforms = void 0
+  } = props;
+  const [path, setPath] = useState(null);
+  const drawSvg = useCallback(() => {
+    if (boundary === null)
+      return;
+    matchRefsToPoints(refs, boundary, x2, y2).then((points) => {
+      if (variant === "line") {
+        return line()([...points]);
+      } else {
+        return line().curve(curveCardinal)([...points]);
+      }
+    }).then((path2) => {
+      const p2 = path2;
+      setPath(p2);
+    });
+  }, [boundary, refs, x2, y2, variant]);
+  useEffect(() => {
+    drawSvg();
+  }, [boundary, drawSvg]);
+  return /* @__PURE__ */ jsx$1("svg", {
+    className: styles$3.svg,
+    style: {
+      transform: transforms ? transforms : void 0
+    },
+    children: path && /* @__PURE__ */ jsx$1("path", {
+      fill: "none",
+      stroke: fill,
+      strokeWidth: weigth,
+      strokeLinecap: round ? "round" : "square",
+      strokeLinejoin: round ? "round" : "miter",
+      d: path
+    })
+  });
+};
 function _extends() {
   _extends = Object.assign ? Object.assign.bind() : function(target) {
     for (var i = 1; i < arguments.length; i++) {
@@ -880,11 +1237,11 @@ const $57acba87d6e25586$var$ScrollAreaScrollbarImpl = /* @__PURE__ */ forwardRef
   const handleResize = $57acba87d6e25586$var$useDebounceCallback(onResize, 10);
   function handleDragScroll(event) {
     if (rectRef.current) {
-      const x = event.clientX - rectRef.current.left;
-      const y = event.clientY - rectRef.current.top;
+      const x2 = event.clientX - rectRef.current.left;
+      const y2 = event.clientY - rectRef.current.top;
       onDragScroll({
-        x,
-        y
+        x: x2,
+        y: y2
       });
     }
   }
@@ -1002,11 +1359,11 @@ const $57acba87d6e25586$var$ScrollAreaThumbImpl = /* @__PURE__ */ forwardRef((pr
     onPointerDownCapture: $e42e1063c40fb3ef$export$b9ecd428b558ff10(props.onPointerDownCapture, (event) => {
       const thumb2 = event.target;
       const thumbRect = thumb2.getBoundingClientRect();
-      const x = event.clientX - thumbRect.left;
-      const y = event.clientY - thumbRect.top;
+      const x2 = event.clientX - thumbRect.left;
+      const y2 = event.clientY - thumbRect.top;
       scrollbarContext.onThumbPointerDown({
-        x,
-        y
+        x: x2,
+        y: y2
       });
     }),
     onPointerUp: $e42e1063c40fb3ef$export$b9ecd428b558ff10(props.onPointerUp, scrollbarContext.onThumbPointerUp)
@@ -1183,7 +1540,7 @@ const viewport = "GD";
 const scrollbar = "_4Q";
 const thumb$1 = "_9B";
 const corner = "cz";
-var styles$3 = {
+var styles$2 = {
   group,
   viewport,
   scrollbar,
@@ -1230,8 +1587,8 @@ function ScrollUnit(props) {
     classNames,
     ...rest
   } = props;
-  const groupClassnames = [styles$3.group, classNames == null ? void 0 : classNames.group].filter(Boolean).join(" ");
-  const viewportClassnames = [styles$3.viewport, classNames == null ? void 0 : classNames.viewport].filter(Boolean).join(" ");
+  const groupClassnames = [styles$2.group, classNames == null ? void 0 : classNames.group].filter(Boolean).join(" ");
+  const viewportClassnames = [styles$2.viewport, classNames == null ? void 0 : classNames.viewport].filter(Boolean).join(" ");
   return /* @__PURE__ */ jsxs($57acba87d6e25586$export$be92b6f5f03c0fe9, {
     className: groupClassnames,
     type,
@@ -1241,32 +1598,28 @@ function ScrollUnit(props) {
       children
     }), /* @__PURE__ */ jsx($57acba87d6e25586$export$9a4e88b92edfce6b, {
       orientation: "vertical",
-      className: styles$3.scrollbar,
+      className: styles$2.scrollbar,
       children: /* @__PURE__ */ jsx($57acba87d6e25586$export$6521433ed15a34db, {
-        className: styles$3.thumb
+        className: styles$2.thumb
       })
     }), /* @__PURE__ */ jsx($57acba87d6e25586$export$9a4e88b92edfce6b, {
       orientation: "horizontal",
-      className: styles$3.scrollbar,
+      className: styles$2.scrollbar,
       children: /* @__PURE__ */ jsx($57acba87d6e25586$export$6521433ed15a34db, {
-        className: styles$3.thumb
+        className: styles$2.thumb
       })
     }), /* @__PURE__ */ jsx($57acba87d6e25586$export$ac61190d9fc311a9, {
-      className: styles$3.corner
+      className: styles$2.corner
     })]
   });
 }
-const table = "IO";
-var styles$2 = {
-  table
-};
 function Table(props) {
   const {
     label,
     th,
     tr,
     classNames = {
-      group: styles$2.table,
+      group: styles$3.table,
       viewport: "table-container"
     }
   } = props;
@@ -1388,40 +1741,6 @@ function Meter(props) {
     })]
   });
 }
-const Svg = ({
-  children,
-  height = "100%",
-  style
-}) => /* @__PURE__ */ jsx$1("svg", {
-  width: "100%",
-  height,
-  ...style !== void 0 && {
-    style
-  },
-  children
-});
-const Group = ({
-  translate,
-  children
-}) => /* @__PURE__ */ jsx$1("g", {
-  style: {
-    transform: translate
-  },
-  children
-});
-const Rectangle = ({
-  x = "0%",
-  y = "0%",
-  fill = "currentColor",
-  width = "10%",
-  height = "10%"
-}) => /* @__PURE__ */ jsx$1("rect", {
-  x,
-  y,
-  width,
-  height,
-  fill
-});
 function Periods(props) {
   var _a, _b, _c, _d;
   const {
@@ -1482,10 +1801,10 @@ const Surface = ({
     const {
       height,
       width,
-      x,
-      y
+      x: x2,
+      y: y2
     } = sliderContainer.current.getBoundingClientRect();
-    return [(mouseX - x) / width * 100, (mouseY - y) / height * 100];
+    return [(mouseX - x2) / width * 100, (mouseY - y2) / height * 100];
   };
   const updateValue = (mouseX, mouseY) => {
     const [newXValue, newYValue] = getValueFromPosition(mouseX, mouseY);
@@ -1545,6 +1864,7 @@ Stat.Meter = Meter;
 Stat.Surface = Surface;
 Stat.Table = Table;
 Stat.Steps = Steps;
+Stat.Draw = Draw;
 Stat.Panel = Panel;
 Stat.PanelTransparent = PanelTransparent;
 export { Stat };
