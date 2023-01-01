@@ -10,7 +10,7 @@ export { default as useList } from "./useList";
 export { default as useNewBrowserTab } from "./useNewBrowserTab";
 export { default as useNumber } from "./useNumber";
 export { default as usePullToRefresh } from "./usePullToRefresh";
-export { default as useResizeObserver } from "./useResizeObserver";
+export { default as useActionOutside } from "./useActionOutside";
 export { default as useSelection } from "./useSelection";
 export { default as useSet } from "./useSet";
 export { default as useStartTyping } from "./useStartTyping";

@@ -2922,36 +2922,22 @@ function usePullToRefresh(props) {
     isPulling: isPTR
   };
 }
-function hasResizeObserver() {
-  return typeof window.ResizeObserver !== "undefined";
-}
-function useResizeObserver(props) {
-  const { ref, onResize } = props;
+function useActionOutside(ref, handler) {
   useEffect(() => {
-    let element = ref == null ? void 0 : ref.current;
-    if (!element) {
-      return;
-    }
-    if (!hasResizeObserver()) {
-      window.addEventListener("resize", onResize, false);
-      return () => {
-        window.removeEventListener("resize", onResize, false);
-      };
-    } else {
-      const resizeObserverInstance = new window.ResizeObserver((entries) => {
-        if (!entries.length) {
-          return;
-        }
-        onResize();
-      });
-      resizeObserverInstance.observe(element);
-      return () => {
-        if (element) {
-          resizeObserverInstance.unobserve(element);
-        }
-      };
-    }
-  }, [onResize, ref]);
+    const listener = (event) => {
+      const el = ref == null ? void 0 : ref.current;
+      if (!el || el.contains(event.target)) {
+        return;
+      }
+      handler(event);
+    };
+    document.addEventListener(`mousedown`, listener);
+    document.addEventListener(`touchstart`, listener);
+    return () => {
+      document.removeEventListener(`mousedown`, listener);
+      document.removeEventListener(`touchstart`, listener);
+    };
+  }, [ref, handler]);
 }
 function useSelection(items) {
   const [mixedState, dispatchUpdate] = useState(items);
@@ -3076,4 +3062,4 @@ function useString(initialState = "") {
   }), [initialState]);
   return [state, handlers];
 }
-export { useBinary, useCache, useEvent, useFormFocusout, useImageSize, UseInput as useInput, useIsPortrait, useList, useMap, useNewBrowserTab, useNumber, usePullToRefresh, useResizeObserver, useSelection, useSet, useStartTyping, useString };
+export { useActionOutside, useBinary, useCache, useEvent, useFormFocusout, useImageSize, UseInput as useInput, useIsPortrait, useList, useMap, useNewBrowserTab, useNumber, usePullToRefresh, useSelection, useSet, useStartTyping, useString };
