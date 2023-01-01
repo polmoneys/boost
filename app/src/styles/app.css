@@ -208,3 +208,26 @@ header {
   min-height: 4em;
   border-radius: var(--border-radius);
 }
+
+/* Stat.Draw */
+
+.demo-party {
+  position: relative;
+  min-height: min(400px, 30vh);
+}
+
+.ref-1 {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+.ref-2 {
+  position: absolute;
+  top: 30%;
+  left: 40%;
+}
+.ref-3 {
+  position: absolute;
+  top: 60%;
+  left: 80%;
+}

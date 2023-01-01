@@ -74,6 +74,7 @@ import Pin from "./features/tutorial/components/Map/Pin";
 import Feed from "./features/shop/components/Feed/Feed";
 import Header from "./features/tutorial/components/FakeHeader/FakeHeader";
 import Reorder from "./features/tutorial/components/Reorder/Reorder";
+import Paint from "./features/shop/components/Paint/Paint";
 
 function App() {
   // console.log({ Tokens });
@@ -192,7 +193,6 @@ function App() {
       .then(() => {
         console.log("Timeline animation ends");
       });
-
   return (
     <Fragment>
       <h1 translate="no" className="visually-hidden">

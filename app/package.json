@@ -8,6 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@reach/rect": "^0.18.0",
     "@use-gesture/react": "^10.2.23",
     "button-react": "*",
     "card-react": "*",
@@ -22,6 +23,7 @@
     "layers-react": "*",
     "link-react": "*",
     "list-react": "*",
+    "move-react": "*",
     "options-react": "*",
     "pic-react": "*",
     "popover-react": "*",
@@ -40,7 +42,6 @@
     "textarea-react": "*",
     "track-react": "*",
     "unit-react": "*",
-    "move-react": "*",
     "yup": "^0.32.11"
   },
   "devDependencies": {
