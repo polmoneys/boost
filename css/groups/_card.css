@@ -1,0 +1,42 @@
+.card {
+  &:focus-within {
+  }
+}
+
+@supports selector(:has(*)) {
+  .card {
+    & h2:has(+ p) {
+    }
+
+    &:has(img) {
+    }
+
+    &:not(:has(img)) .card-content {
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
+    }
+
+    &:has(input:placeholder-shown) {
+    }
+
+    &:has(:valid) {
+    }
+    &:has(:invalid) {
+    }
+
+    &:has(:required) {
+    }
+    &:has(:optional) {
+    }
+
+    &:has(input:focus-visible) {
+    }
+
+    &:has(:checked) {
+    }
+
+    &:has(.close-icon) {
+      position: relative;
+    }
+  }
+}
