@@ -58,8 +58,6 @@ function Reorder() {
   const resetDrags = () => setDrags(initialDrags);
 
   useEffect(() => {
-    console.log("hei", state.length, drags.length);
-
     if (state.length === 3 && drags.length === 0) {
       resetDrags();
     }

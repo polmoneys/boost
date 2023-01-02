@@ -1,11 +1,13 @@
-import { Group } from "group-react";
-import { useResizeObserver } from "hooks-react";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { Shape } from "shape-react";
 import { Stat } from "stat-react";
 import { useRect } from "@reach/rect";
 
-function Paint() {
+interface Props {
+  variant: "line" | "curve";
+}
+function Paint(props: Props) {
+  const { variant } = props;
   const refA = useRef<HTMLDivElement | null>(null); // Point A
   const refB = useRef<HTMLDivElement | null>(null); // Point B
   const refC = useRef<HTMLDivElement | null>(null); // Point C
@@ -17,17 +19,17 @@ function Paint() {
   return (
     <div ref={maskRef} className="demo-party">
       <div className="ref-1" ref={refA}>
-        <Shape.Square size={100} />
+        <Shape.Square fill="var(--accent-error)" size={100} />
       </div>
       <div className="ref-2" ref={refB}>
-        <Shape.Square size={100} />
+        <Shape.Square fill="var(--accent-error)" size={100} />
       </div>
       <div className="ref-3" ref={refC}>
-        <Shape.Square size={100} />
+        <Shape.Square fill="var(--accent-error)" size={100} />
       </div>
       <Stat.Draw
         boundary={rect}
-        // variant="curve"
+        variant={variant}
         round
         refs={[refA, refB, refC]}
         weigth={10}
