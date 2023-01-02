@@ -7,4 +7,4 @@ export { mergeRefs, addProps } from "./react";
 export { scrollToElement } from "./scroll";
 export { truncateStartEnd, validFileName } from "./string";
 export { default as Timer } from "./Timer";
-export { openUrl } from "./url";
+export { openUrl, getUrlParams } from "./url";

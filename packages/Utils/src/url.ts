@@ -43,3 +43,27 @@ export const removeTrailingSlash = (uri: string) => {
 
   return uri;
 };
+
+/**
+ * Get params as in {url}?{params}
+ * e.g &theme=black&country=es,de
+ *
+ */
+
+export const getUrlParams = () => {
+  const queryParamsString = window.location.search.substr(1);
+
+  let queryParams = queryParamsString
+    .split("&")
+    .reduce((accumulator, singleQueryParam) => {
+      const [key, value] = singleQueryParam.split("=");
+      accumulator[key] = decodeURIComponent(value);
+      return accumulator;
+    }, {} as any);
+
+  for (const q in queryParams) {
+    if (q.trim() === "") delete queryParams[""];
+  }
+
+  return queryParams;
+};

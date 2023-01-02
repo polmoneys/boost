@@ -445,4 +445,17 @@ class Timer {
   }
 }
 const openUrl = (to) => window == null ? void 0 : window.open(to, "_blank");
-export { Timer, addProps, animate, arrayMove, arraySplit, filterT, formatDate, formatNumber, mergeRefs, openUrl, scrollToElement, snap, sortT, timeline, truncateStartEnd, validFileName };
+const getUrlParams = () => {
+  const queryParamsString = window.location.search.substr(1);
+  let queryParams = queryParamsString.split("&").reduce((accumulator, singleQueryParam) => {
+    const [key, value] = singleQueryParam.split("=");
+    accumulator[key] = decodeURIComponent(value);
+    return accumulator;
+  }, {});
+  for (const q2 in queryParams) {
+    if (q2.trim() === "")
+      delete queryParams[""];
+  }
+  return queryParams;
+};
+export { Timer, addProps, animate, arrayMove, arraySplit, filterT, formatDate, formatNumber, getUrlParams, mergeRefs, openUrl, scrollToElement, snap, sortT, timeline, truncateStartEnd, validFileName };

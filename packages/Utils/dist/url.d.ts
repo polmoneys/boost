@@ -18,3 +18,9 @@ export declare function getIdFromUri(uri: string): number;
  *
  */
 export declare const removeTrailingSlash: (uri: string) => string;
+/**
+ * Get params as in {url}?{params}
+ * e.g &theme=black&country=es,de
+ *
+ */
+export declare const getUrlParams: () => any;
