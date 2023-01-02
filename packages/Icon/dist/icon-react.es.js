@@ -75,7 +75,7 @@ function Icon(props) {
     disabled = false
   } = props;
   const {
-    outline,
+    border,
     backgroundColor
   } = useMemo(() => {
     const bg = variant === "solid" ? fill : "transparent";
@@ -85,13 +85,13 @@ function Icon(props) {
     if (variant !== void 0 && variant === "solid")
       strokeTheme = `${strokeWidth}px solid ${fill}`;
     return {
-      outline: strokeTheme,
+      border: strokeTheme,
       backgroundColor: bg
     };
   }, [variant]);
   const inlineStyles = {
     svg: {
-      outline,
+      border,
       backgroundColor,
       strokeWidth
     }
