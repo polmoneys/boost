@@ -36,4 +36,15 @@ function Card({
   );
 }
 
-export default Card;
+const CardTutorial = () => {
+  return (
+    <div className="resize">
+      <div className="sticky-grid" style={{ width: "100%" }}>
+        {[...Array(12)].map((k, v) => (
+          <Card key={v} featured={v === 3} sides={v + 3} />
+        ))}
+      </div>
+    </div>
+  );
+};
+export default CardTutorial;

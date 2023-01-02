@@ -26,11 +26,10 @@ import {
 import { openUrl } from "boost-utils";
 import { useBinary } from "hooks-react";
 // DEMO
-import { diskStorage, TABLE_DEMO, PINS } from "./utils/utils";
+import { TABLE_DEMO, PINS } from "./utils/utils";
 import Skeletons from "./features/tutorial/components/Skeletons/Skeletons";
 import Products from "./features/shop/components/Products/Products";
-
-import { default as CardTutorial } from "./features/tutorial/components/Card/Card";
+import CardTutorial from "./features/tutorial/components/Card/Card";
 
 // From CSS namespace
 import "../../css/dist/css.css";
@@ -40,15 +39,11 @@ import "./styles/app.css";
 import Header from "./features/tutorial/components/FakeHeader/FakeHeader";
 import pagemap from "./features/tutorial/components/Map/lib";
 import Pin from "./features/tutorial/components/Map/Pin";
-// Component demo
-import Reorder from "./features/tutorial/components/Reorder/Reorder";
-// Not published yet
-import Feed from "./features/shop/components/Feed/Feed";
-import Paint from "./features/shop/components/Paint/Paint";
 // pages
 import Forms from "./features/tutorial/pages/forms";
 import Groups from "./features/tutorial/pages/groups";
 import Periods from "./features/tutorial/pages/periods";
+import Random from "./features/tutorial/pages/random";
 
 function App() {
   const [mapStep, setMapStep] = useState(0);
@@ -77,11 +72,6 @@ function App() {
 
   // Panels demos
   const [tab, setTab] = useState(false);
-  const [partyType, setType] = useState<"line" | "curve">("line");
-
-  const changePartyType = () => {
-    setType(prevP => (prevP === "line" ? "curve" : "line"));
-  };
 
   const { state: landscapeState, actions: landscapeActions } = useBinary("off");
   const { state: portraitState, actions: portraitActions } = useBinary("off");
@@ -142,188 +132,7 @@ function App() {
         </article>
         <UI.Br />
         <article>
-          <Group.Column as="div" gap="var(--gap-3)">
-            <Skeletons amount={2} />
-
-            <Stat.Panel
-              title="<Stat.Meter/>"
-              description="Assign space to quantities"
-              subtitle="Details"
-              id="stat-meter-panel"
-              actions={[
-                {
-                  label: (
-                    <Fragment>
-                      <IconStar />
-                      <HelveticaNeueS>Snippet</HelveticaNeueS>
-                    </Fragment>
-                  ),
-                  action: () =>
-                    openUrl(
-                      "https://github.com/polmoneys/boost/blob/master/packages/Stat/get-started.md"
-                    ),
-                },
-              ]}
-            >
-              <Group.Column
-                as="ul"
-                options={{
-                  DANGEROUS: {
-                    marginBottom: "var(--gap-3)",
-                  },
-                }}
-              >
-                {diskStorage
-                  .reduce((prev, curr) => {
-                    if (prev.length === 0) return [curr];
-                    // const lastItem = prev.at(-1);
-                    const lastItem = prev[prev.length - 1];
-
-                    if (lastItem.color === curr.color) {
-                      return [
-                        ...prev.filter(
-                          (it: any) => it.color !== lastItem.color
-                        ),
-                        curr,
-                      ];
-                    } else {
-                      return [...prev, curr];
-                    }
-                  }, [] as any)
-                  .map((group: any, pos: number) => (
-                    <Group key={pos} as="li" options={{ alignItems: "center" }}>
-                      <Shape.Circle size={16} fill={group.color} />
-                      <HelveticaNeueS dangerousColor={group.color}>
-                        {group.label} {` ${group.amount}`}
-                      </HelveticaNeueS>
-                    </Group>
-                  ))}
-              </Group.Column>
-              <Stat.Meter
-                label=""
-                max={140}
-                value={140}
-                items={diskStorage}
-                height="10px"
-              />
-            </Stat.Panel>
-            <Skeletons />
-            <Stat.Panel
-              title="<Stat.Steps/>"
-              description="Display user flow status/progresss"
-              id="steps-panel"
-              subtitle="Details"
-              actions={[
-                {
-                  label: (
-                    <Fragment>
-                      <IconGithub />
-                      <HelveticaNeueS>Source</HelveticaNeueS>
-                    </Fragment>
-                  ),
-                  action: () =>
-                    openUrl(
-                      "https://github.com/polmoneys/boost/blob/master/packages/Stat/src/Steps.tsx"
-                    ),
-                },
-              ]}
-            >
-              <Stat.Steps
-                id="steps-test"
-                items={[
-                  {
-                    label: (
-                      <HelveticaNeueBold>Step 1 is very hard</HelveticaNeueBold>
-                    ),
-                    completed: true,
-                  },
-                  {
-                    label: (
-                      <HelveticaNeueBold>
-                        Step 2 is quite hard
-                      </HelveticaNeueBold>
-                    ),
-                    completed: true,
-                  },
-                  {
-                    label: (
-                      <HelveticaNeueBold>
-                        Step 3 might be hard
-                      </HelveticaNeueBold>
-                    ),
-                    completed: false,
-                  },
-                ]}
-              />
-            </Stat.Panel>
-            <Skeletons />
-            <Stat.Panel
-              title="<Move/>"
-              description="Drag and drop"
-              id="dnd-panel"
-              subtitle="Details"
-              actions={[
-                {
-                  label: (
-                    <Fragment>
-                      <IconGithub />
-                      <HelveticaNeueS>Source</HelveticaNeueS>
-                    </Fragment>
-                  ),
-                  action: () =>
-                    openUrl(
-                      "https://github.com/polmoneys/boost/blob/master/packages/Move/src/Move.tsx"
-                    ),
-                },
-              ]}
-            >
-              <Reorder />
-            </Stat.Panel>
-            {/* <Stat.Panel
-              title="Pull To Refresh"
-              description="mobile only"
-              id="ptr-panel"
-              subtitle="Details"
-              actions={[
-                {
-                  label: (
-                    <Fragment>
-                      <IconGithub />
-                      <HelveticaNeueS>Source</HelveticaNeueS>
-                    </Fragment>
-                  ),
-                  action: () =>
-                    openUrl(
-                      "https://github.com/polmoneys/boost/blob/master/packages/Stat/src/Steps.tsx"
-                    ),
-                },
-              ]}
-            >
-              <Feed />
-            </Stat.Panel>
-            <Skeletons amount={2} /> 
-            */}
-            <Skeletons amount={2} />
-            <Stat.Panel
-              title="Join React refs"
-              description="SVG line or curve"
-              id="party-panel"
-              subtitle="Details"
-              actions={[
-                {
-                  label: (
-                    <Fragment>
-                      <HelveticaNeueS>Change joiner </HelveticaNeueS>
-                    </Fragment>
-                  ),
-                  action: () => changePartyType(),
-                },
-              ]}
-            >
-              <Paint variant={partyType} />
-            </Stat.Panel>
-            <Skeletons amount={2} />
-          </Group.Column>
+          <Random />
         </article>
 
         <article className="full">
@@ -687,13 +496,7 @@ function App() {
           </div>
         </article>
         <article className="full">
-          <div className="resize">
-            <div className="sticky-grid" style={{ width: "100%" }}>
-              {[...Array(12)].map((k, v) => (
-                <CardTutorial key={v} featured={v === 3} sides={v + 3} />
-              ))}
-            </div>
-          </div>
+          <CardTutorial />
         </article>
         <article className="py $$$">
           <Fence
