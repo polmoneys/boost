@@ -65,7 +65,7 @@ const Draw = (props: Props) => {
 
   useEffect(() => {
     drawSvg();
-  }, [boundary, drawSvg]);
+  }, [boundary, drawSvg, variant]);
 
   return (
     <svg

@@ -464,7 +464,7 @@ const Draw = (props) => {
   }, [boundary, refs, x2, y2, variant]);
   useEffect(() => {
     drawSvg();
-  }, [boundary, drawSvg]);
+  }, [boundary, drawSvg, variant]);
   return /* @__PURE__ */ jsx$1("svg", {
     className: styles$3.svg,
     style: {
