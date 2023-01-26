@@ -1,3 +1,11 @@
+## useActionOutside
+
+Trigger a callback when user clicks outside an element. 
+
+## useAttachStylesheet
+
+It may be useful to attach a stylesheet to the DOM instead of making many atomic styles changes. 
+
 ## useBinary
 
 
@@ -36,7 +44,18 @@ return (
 </Fragment>
 )
 
+// alternative
+
+
+const [isOpen, toggleOpen] = useReducer((prevIsOpen) => !prevIsOpen, false);
+
+
 ```
+
+## useCache
+
+Wrap other hooks and save some computation. 
+
 
 ## useEvent 
 
@@ -97,6 +116,15 @@ return (
 ```
 
 
+## useImageSize
+
+Get image size.  
+
+## useImagesLoaded
+
+Callback when all images have loaded.   
+
+
 ## useInput
 
 
@@ -153,12 +181,21 @@ const isPortrait = useIsPortrait();
 
 ```
 
+## useList
+
+Crud an array of items. 
 
 ## useMap
 
 Use it to render and CRUD **collections**. Shape of entries should be ```[ string , any]```. 
 
+## useNewBrowserTab
 
+Open a new browser tab as Apple.com does for chat support. 
+
+## useNumber
+
+'Crud' a number. 
 
 ## usePullToRefresh
 
@@ -222,3 +259,18 @@ return (
 ## useSet
 
 Use it to render and CRUD unique strings like in a ```<TagInput/>```. 
+
+
+## useStartTyping
+
+On keydown focus input. 
+
+## useString
+
+'CRUD' a string.
+
+
+## useUrlParams (coming soon)
+
+Sync URL with app state with params. 
+

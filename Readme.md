@@ -133,8 +133,9 @@ Yarn workspaces template for React TS library & app powered by [vite](https://vi
 ### Roadmap 
 
 - [ ] improve export **types** & **css** from Packages && script after **yarn build** of a Package to trigger **yarn build** on ```css```folder
-- [X] un-gitignore **packages/Utils**
 - [ ] add sortable to **packages/Move**
+- [ ] add more hooks demos: **useUrlParams, useAttachStylesheet, useMenu...**
+- [ ] publish **packages/ArtDirection**
 
 ### Inspiration 💐
 
