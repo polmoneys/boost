@@ -21,6 +21,14 @@ interface Props extends AriaAttributes, AsProps {
   dangerousTransform?: string;
 }
 
+/*
+import Balancer, { Provider } from "react-wrap-balancer";
+  <h1><Balancer ratio={0.65}></Balancer></h1>
+  <Provider>
+    <App/>
+  </Provider>
+*/
+
 function Font(props: Props) {
   const {
     as,
