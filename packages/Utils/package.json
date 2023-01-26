@@ -24,5 +24,9 @@
       "import": "./dist/boost-utils.es.js",
       "require": "./dist/boost-utils.umd.js"
     }
+  },
+  "dependencies": {
+    "@types/ms": "^0.7.31",
+    "ms": "^2.1.3"
   }
 }
